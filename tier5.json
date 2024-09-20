@@ -1,0 +1,51 @@
+{
+    "Arizona State University" : {
+        "acc_rate" : 0.898,
+        "75_sat" : 1320,
+        "50_sat" : 1210,
+        "25_sat" : 1100,
+        "tags" : ["Large"]
+    },
+    "Oregon State University" : {
+        "acc_rate" : 0.825,
+        "75_sat" : 1320,
+        "50_sat" : 1200,
+        "25_sat" : 1080,
+        "tags" : ["Large"]
+    },
+    "Michigan State University" : {
+        "acc_rate" : 0.88,
+        "75_sat" : 1340,
+        "50_sat" : 1250,
+        "25_sat" : 1100,
+        "tags" : ["Large"]
+    },
+    "California State University, Los Angeles" : {
+        "acc_rate" : 0.88,
+        "75_sat" : 1060,
+        "50_sat" : 1000,
+        "25_sat" : 850,
+        "tags" : ["Large", "CSU System"]
+    },
+    "University of California, Merced" : {
+        "acc_rate" : 0.88,
+        "75_sat" : 1350,
+        "50_sat" : 1080,
+        "25_sat" : 1030,
+        "tags" : ["Large", "UC System"]
+    },
+    "Kent State University" : {
+        "acc_rate" : 0.88,
+        "75_sat" : 1210,
+        "50_sat" : 1140,
+        "25_sat" : 990,
+        "tags" : ["Large"] 
+    },
+    "Louisiana State University" : {
+        "acc_rate" : 0.76,
+        "75_sat" : 1310,
+        "50_sat" : 1230,
+        "25_sat" : 1140,
+        "tags" : ["Large"]
+    }
+}

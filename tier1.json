@@ -1,0 +1,121 @@
+{
+    "Harvard University" : {
+        "acc_rate" : 0.032,
+        "75_sat" : 1580,
+        "50_sat" : 1550,
+        "25_sat" : 1490,
+        "tags" : ["Ivy", "Medium", "Law", "Business"]
+    },
+    "Princeton University" : {
+        "acc_rate" : 0.057,
+        "75_sat" : 1580,
+        "50_sat" : 1540,
+        "25_sat" : 1490,
+        "tags" : ["Ivy", "Medium", "Law", "Business"]
+    },
+    "University of Pensylvania" : {
+        "acc_rate" : 0.065,
+        "75_sat" : 1570,
+        "50_sat" : 1540,
+        "25_sat" : 1500,
+        "tags" : ["Ivy", "Medium", "Law", "Business"]
+    },
+    "Yale University" : {
+        "acc_rate" : 0.046,
+        "75_sat" : 1580,
+        "50_sat" : 1540,
+        "25_sat" : 1500,
+        "tags" : ["Ivy", "Medium", "Law", "Business"]
+    },
+    "Brown University" : {
+        "acc_rate" : 0.051,
+        "75_sat" : 1580,
+        "50_sat" : 1540,
+        "25_sat" : 1490,
+        "tags" : ["Ivy", "Medium", "Law", "Business"]
+    },
+    "Columbia University" : {
+        "acc_rate" : 0.0385,
+        "75_sat" : 1580,
+        "50_sat" : 1530,
+        "25_sat" : 1490,
+        "tags" : ["Ivy", "Medium", "Law", "Business"]
+    },
+    "Cornell University" : {
+        "acc_rate" : 0.075,
+        "75_sat" : 1570,
+        "50_sat" : 1530,
+        "25_sat" : 1470,
+        "tags" : ["Ivy", "Large", "Law", "Business"]
+    },
+    "Dartmouth College" : {
+        "acc_rate" : 0.062,
+        "75_sat" : 1560,
+        "50_sat" : 1500,
+        "25_sat" : 1440,
+        "tags" : ["Ivy", "Small", "Business"]
+    },
+    "Stanford University" : {
+        "acc_rate" : 0.037,
+        "75_sat" : 1580,
+        "50_sat" : 1550,
+        "25_sat" : 1500,
+        "tags" : ["Ivy-Adjacent", "Large", "Business", "Institute of Technology"]
+    },
+    "California Institute of Technology" : {
+        "acc_rate" : 0.024,
+        "75_sat" : 1570,
+        "50_sat" : 1550,
+        "25_sat" : 1530,
+        "tags" : ["Ivy-Adjacent", "Small", "Institute of Technology"]
+    },
+    "Massachusetts Institute of Technology" : {
+        "acc_rate" : 0.04,
+        "75_sat" : 1580,
+        "50_sat" : 1560,
+        "25_sat" : 1530,
+        "tags" : ["Ivy-Adjacent", "Medium", "Institute of Technology", "Business"]
+    },
+    "Duke University" : {
+        "acc_rate" : 0.063,
+        "75_sat" : 1570,
+        "50_sat" : 1550,
+        "25_sat" : 1490,
+        "tags" : ["Ivy-Adjacent", "Medium", "Business"]
+    },
+    "Johns Hopkins University" : {
+        "acc_rate" : 0.073,
+        "75_sat" : 1570,
+        "50_sat" : 1550,
+        "25_sat" : 1520,
+        "tags" : ["Ivy-Adjacent", "Medium", "Medical"]
+    },
+    "University of Chicago" : {
+        "acc_rate" : 0.054,
+        "75_sat" : 1560,
+        "50_sat" : 1530,
+        "25_sat" : 1510,
+        "tags" : ["Ivy-Adjacent", "Medium", "Business"]
+    },
+    "Vanderblitz University" : {
+        "acc_rate" : 0.07,
+        "75_sat" : 1570,
+        "50_sat" : 1510,
+        "25_sat" : 1490,
+        "tags" : ["Ivy-Adjacent", "Medium", "Music"]
+    },
+    "Rice University" : {
+        "acc_rate" : 0.09,
+        "75_sat" : 1560,
+        "50_sat" : 1540,
+        "25_sat" : 1510,
+        "tags" : ["Ivy-Adjacent", "Medium"]
+    },
+    "Northwestern University" : {
+        "acc_rate" : 0.07,
+        "75_sat" : 1550,
+        "50_sat" : 1500,
+        "25_sat" : 1490,
+        "tags" : ["Ivy-Adjacent", "Large", "Business"]
+    }
+}

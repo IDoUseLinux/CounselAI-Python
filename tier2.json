@@ -1,0 +1,149 @@
+{
+    "University of California, Los Angeles" : {
+        "acc_rate" : 0.086,
+        "75_sat" : 1550,
+        "50_sat" : 1490,
+        "25_sat" : 1460,
+        "tags" : ["UC System", "Large", "Public Ivy", "Business", "Art", "Music", "Institute of Technology"]
+    },
+    "University of California, Berkeley" : {
+        "acc_rate" : 0.116,
+        "75_sat" : 1530,
+        "50_sat" : 1420,
+        "25_sat" : 1340,
+        "tags" : ["UC System", "Large", "Public Ivy", "Business", "Institute of Technology"]
+    },
+    "Georgetown University" : {
+        "acc_rate" : 0.12,
+        "75_sat" : 1540,
+        "50_sat" : 1460,
+        "25_sat" : 1410,
+        "tags" : ["Medium", "Law"]
+    },
+    "University of Southern California" : {
+        "acc_rate" : 0.12,
+        "75_sat" : 1520,
+        "50_sat" : 1440,
+        "25_sat" : 1330,
+        "tags" : ["Medium"]
+    },
+    "New York University" : {
+        "acc_rate" : 0.125,
+        "75_sat" : 1570,
+        "50_sat" : 1520,
+        "25_sat" : 1470,
+        "tags" : ["Large", "Business"]
+    },
+    "Carnegie Mellon University" : {
+        "acc_rate": 0.22,
+        "75_sat" : 1570,
+        "50_sat" : 1540,
+        "25_sat" : 1490,
+        "tags" : ["Medium", "Institute of Technology"]
+    },
+    "University of Notre Dame" : {
+        "acc_rate" : 0.13,
+        "75_sat" : 1550,
+        "50_sat" : 1510,
+        "25_sat" : 1450,
+        "tags" : ["Medium", "Catholic"]
+    },
+    "University of Michigan, Ann Harbor" : {
+        "acc_rate" : 0.18,
+        "75_sat" : 1530,
+        "50_sat" : 1440,
+        "25_sat" : 1350,
+        "tags" : ["Large"]
+    },
+    "Georgia Institute of Technology" : {
+        "acc_rate" : 0.17,
+        "75_sat" : 1510,
+        "50_sat" : 1420,
+        "25_sat" : 1330,
+        "tags" : ["Large", "Institute of Technology"]
+    },
+    "University of North Carolina, Chapel Hill" : {
+        "acc_rate" : 0.17,
+        "75_sat" : 1520,
+        "50_sat" : 1460,
+        "25_sat" : 1390,
+        "tags" : ["Large"]
+    },
+    "Emory University" : {
+        "acc_rate" : 0.11,
+        "75_sat" : 1540,
+        "50_sat" : 1510,
+        "25_sat" : 1470,
+        "tags" : ["Medium"]
+    },
+    "University of Virgina" : {
+        "acc_rate" : 0.19,
+        "75_sat" : 1540,
+        "50_sat" : 1470,
+        "25_sat" : 1400,
+        "tags" : ["Medium"]
+    },
+    "University of Washington, St Louis" : {
+        "acc_rate" : 0.11,
+        "75_sat" : 1570,
+        "50_sat" : 1540,
+        "25_sat" : 1500,
+        "tags" : ["Medium"]
+    },
+    "University of Florida" : {
+        "acc_rate" : 0.23,
+        "75_sat" : 1450,
+        "50_sat" : 1360,
+        "25_sat" : 1320,
+        "tags" : ["Large"]
+    },
+    "University of California, Irvine" : {
+        "acc_rate" : 0.21,
+        "75_sat" : 1440,
+        "50_sat" : 1310,
+        "25_sat" : 1180,
+        "tags" : ["UC System", "Large", "Public Ivy"]
+    },
+    "University of California, Santa Barbara" : {
+        "acc_rate" : 0.26,
+        "75_sat" : 1480,
+        "50_sat" : 1360,
+        "25_sat" : 1230,
+        "tags" : ["UC System", "Large", "Public Ivy"]
+    },
+    "Boston College" : {
+        "acc_rate" : 0.17,
+        "75_sat" : 1520,
+        "50_sat" : 1490,
+        "25_sat" : 1450,
+        "tags" : ["Medium"]
+    },
+    "Wake Forest University" : {
+        "acc_rate" : 0.21,
+        "75_sat" : 1500,
+        "50_sat" : 1460,
+        "25_sat" : 1410,
+        "tags" : ["Medium"]
+    },
+    "Tufts University" : {
+        "acc_rate" : 0.1,
+        "75_sat" : 1560,
+        "50_sat"  : 1520,
+        "25_sat" : 1470,
+        "tags" : ["Medium"]
+    },
+    "California Instute of the Arts" : {
+        "acc_rate" : 0.25,
+        "75_sat" : 1310,
+        "50_sat" : 1160,
+        "25_sat" : 1010,
+        "tags" : ["Small", "Art"]
+    },
+    "Rhode Island School of Design" : {
+        "acc_rate" : 0.19,
+        "75_sat" : 1490,
+        "50_sat" : 1420,
+        "25_sat" : 1350,
+        "tags" : ["Small", "Art"]
+    }
+}

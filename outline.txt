@@ -1,0 +1,59 @@
+Algorithm:
+A college's "score" is calculated via tier , rejection rate, noble prizes won and other information.
+
+US News Ranking is used for top 50 schools (Only national rankings are counted). This is not perfect but it allows us 
+to contextualize other information without scrapping a ton of data from other websites to determine our own ranking. 
+If they are not top 50, we will not subtrack anything.
+
+For example, Caltech's score would look something like this: (High tier example)
+
+  Is the multiplier      US News Ranking
+       |||                    |||
+(6-1) * 3 * 9.76 + 47/10 + (51-7)/10 = Score * 2
+|||||       ||||   ||
+is the tier ||||   is the amount of nobel prizes won
+    Is the rejection rate
+
+This would give a score of 77.75
+
+
+For example, UCSD's score would look something like this: (Medium tier example)
+
+(6-3) * 3 * 7.63 + 6/10 + (51-28)/10 = Score * 2
+
+This would give a score of 35.785
+
+
+For example, University of Hawaii's score would look something like this: (Lower tier example)
+
+(6-4) * 3 * 2.72 + 0/10 + 0 = Score * 2
+
+This would give a score of 8.16 
+
+
+The student score is calculated differently.
+
+It will be determined via APs courses & tests taken, GPA, Course challengingness, extracurriculars & other information.
+AP "scores" will be calculated with this equation:
+
+AP Strength * GPA in that class * AP Score / 10 (If only test, then use placeholder of 2 for GPA)
+
+If a person takes "hard" APs, such as AP Calc, Chem or Physics, does well in the class and gets a good GPA, they will get a nice boost to their score
+
+
+For example, a student with AP Calc (Strength 5), 4.0 GPA and a score of 5 on the AP exam:
+
+5 * 4 * 5 / 10  
+The student gets 10 added to their score
+
+
+For example, a student with AP CSP (Strength 3), 3.5 GPA, and a score of 4 on the AP exam:
+
+3 * 3.5 * 4 / 10 
+The student gets 4.2 added to their score
+
+
+For example, a student with AP Art (Strength 2), 4.0 GPA, and a score of 5 on the AP exam:
+
+2 * 4.0 * 5 / 10 
+The student gets 4 added to their score

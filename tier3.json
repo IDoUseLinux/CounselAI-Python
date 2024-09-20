@@ -1,0 +1,86 @@
+{ 
+    "University of California, Davis" : {
+        "acc_rate" : 0.37,
+        "75_sat" : 1410,
+        "50_sat" : 1280,
+        "25_sat" : 1150,
+        "tags" : ["UC System", "Large"]
+    },
+    "University of California, Santa Cruz" : {
+        "acc_rate" : 0.47,
+        "75_sat" : 1400,
+        "50_sat" : 1290,
+        "25_sat" : 1170,
+        "tags" : ["UC System", "Large"]
+    },
+    "University of Texas, Austin" : {
+        "acc_rate" : 0.31,
+        "75_sat" : 1470,
+        "50_sat" : 1360,
+        "25_sat" : 1240,
+        "tags" : ["Large"]
+    },
+    "Lehigh University" : {
+        "acc_rate" : 0.37,
+        "75_sat" : 1510,
+        "50_sat" : 1460,
+        "25_sat" : 1400,
+        "tags" : ["Medium"]
+    },
+    "California Polytechnic State University, San Louis Obispo" : {
+        "acc_rate" : 0.3,
+        "75_sat" : 1450,
+        "50_sat" : 1340,
+        "25_sat" : 1260,
+        "tags" : ["CSU System", "Large", "Institute of Technology"]
+    },
+    "University of Rochester" : {
+        "acc_rate" : 0.39,
+        "75_sat" : 1520,
+        "50_sat" : 1440,
+        "25_sat" : 1410,
+        "tags" : ["Medium"]
+    },
+    "Case Western Reserve University" : {
+        "acc_rate" : 0.27,
+        "75_sat" : 1520,
+        "50_sat" : 1470,
+        "25_sat" : 1410,
+        "tags" : ["Medium"]
+    },
+    "Florida State University" : {
+        "acc_rate" : 0.25,
+        "75_sat" : 1360,
+        "50_sat" : 1270,
+        "25_sat" : 1220,
+        "tags" : ["Large"]
+    },
+    "William & Mary University" : {
+        "acc_rate" : 0.33,
+        "75_sat" : 1520,
+        "50_sat" : 1420,
+        "25_sat" : 1380,
+        "tags" : ["Medium"]
+    },
+    "University of Wisconsin, Madison" : {
+        "acc_rate" : 0.49,
+        "75_sat" : 1500,
+        "50_sat" : 1400,
+        "25_sat" : 1370,
+        "tags" : ["Large"]
+    },
+    "University of Georgia" : {
+        "acc_rate" : 0.47,
+        "75_sat" : 1420,
+        "50_sat" : 1320,
+        "25_sat" : 1220,
+        "tags" : ["Large"]
+    },
+    "University of Maryland" : {
+        "acc_rate" : 0.45,
+        "75_sat" : 1510,
+        "50_sat" : 1380,
+        "25_sat" : 1370,
+        "tags" : ["Large"]
+    }
+}

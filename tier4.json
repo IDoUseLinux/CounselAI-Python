@@ -1,0 +1,65 @@
+{
+    "Purdue University" : {
+        "acc_rate" : 0.53,
+        "75_sat" : 1450,
+        "50_sat" : 1330,
+        "25_sat" : 1210,
+        "tags" : ["Large"]
+    },
+    "University of Hawaii, Manoa" : {
+        "acc_rate" : 0.728,
+        "75_sat" : 1270,
+        "50_sat" : 1180,
+        "25_sat" : 1070,
+        "tags" : ["Medium"]
+    },
+    "Virginia Tech" : {
+        "acc_rate" : 0.57,
+        "75_sat" : 1390,
+        "50_sat" : 1290,
+        "25_sat" : 1180,
+        "tags" : ["Large", "Institute of Technology"]
+    },
+    "DigiPen Institute of Technology" : {
+        "acc_rate" : 0.66,
+        "75_sat" : 1390,
+        "50_sat" : 1280,
+        "25_sat" : 1170,
+        "tags" : ["Small", "Institute of Technology"]
+    },
+    "Rochester Institute of Technology" : {
+        "acc_rate" : 0.672,
+        "75_sat" : 1430,
+        "50_sat" : 1350,
+        "25_sat" : 1280,
+        "tags" : ["Large", "Institute of Technology"]
+    },
+    "Rutgers University, New Brunswick" : {
+        "acc_rate" : 0.66,
+        "75_sat" : 1410,
+        "50_sat" : 1300,
+        "25_sat" : 1190,
+        "tags" : ["Large"]
+    },
+    "Louisiana State University" : {
+        "acc_rate" : 0.76,
+        "75_sat" : 1310,
+        "50_sat" : 1230,
+        "25_sat" : 1140,
+        "tags" : ["Large"]
+    },
+    "University of California, Riverside" : {
+        "acc_rate" : 0.69,
+        "75_sat" : 1330,
+        "50_sat" : 1230,
+        "25_sat" : 1130,
+        "tags" : ["Large", "UC System"]
+    },
+    "Ohio State University" : {
+        "acc_rate" : 0.53,
+        "75_sat" : 1430,
+        "50_sat" : 1340,
+        "25_sat" : 1270,
+        "tags" : ["Large"]
+    }
+}
