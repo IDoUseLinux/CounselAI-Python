@@ -4,18 +4,9 @@
 ## AP CSA, AP CSP, all language, US History, Literature and English, is considered to be a 3
 ## AP Art and other relatively bad APs are consdiered to be a 1
 class apClass :
-    APweight = 2
-
-    def __init__(self, score) :
+    def __init__(self, name, tier, apgrade, score) :
+        self.name = name
+        self.tier = tier
+        self.apgrade = apgrade
         self.score = score
-        self.apValue = score*self.APweight/10
-
-class APCSA(apClass) :
-    APweight = 3
-
-class APCalc(apClass) :
-    APweight = 5
-
-## AP Foreign Language is a "catch-all" phrase for AP Chinese, AP Japanese, AP Spanish, AP French, AP Latin, etc.
-class APForeignLanguage(apClass) :
-    APWeight = 3
+        self.apValue = (score+apgrade)*tier/20

@@ -1,6 +1,6 @@
 import customtkinter as CTk, requests, os
 import openai
-import score, colleges, extracurricular, honors, AP
+import score, clubs, awards, sports, AP
 from tkinter import messagebox
 
 with open("APIKEY.config") as api_key_file :
@@ -10,15 +10,13 @@ is_dev_version = True
 build_tag = "Alpha-1234"
 
 class app() :
-    CAREER_PATHS = ["Undecided", "STEM", "Art", "Music", "Business", "Law", "Medical", "Other"]
+    CAREER_PATHS = ["Undecided", "STEM", "Art", "Music", "Business", "Law", "Medical", "Sports", "Other"]
 
     AP_T1 = [
         "Calculus",
         "Physics",
         "Biology",
         "Chemistry",
-        "Research",
-        "Seminar"
     ]
 
     AP_T2 = [
@@ -39,7 +37,6 @@ class app() :
         "Latin",
         "Italian",
         "CSA",
-        "CSP",
         "World History",
         "European History",
         "Macroeconomics",
@@ -49,6 +46,9 @@ class app() :
     AP_T4 = [
         "Art History",
         "Music Theory",
+        "Research",
+        "Seminar"
+        "CSP",
     ]
 
     AP_T5 = [
@@ -57,6 +57,9 @@ class app() :
 
     ALL_APS = AP_T1 + AP_T2 + AP_T3 + AP_T4 + AP_T5
     ALL_APS.sort()
+
+    taken_APs = []
+    sat_score = 1050 ## Assume Nat. Avg.
 
     ## All screen objects, used for screen changing
     all_screen_obj = [] ## This is preparing me for memory management and screen management-- if an item isn't added to this list, it stays on the screen for ever.
@@ -154,14 +157,14 @@ class app() :
         self.name_tb.place(x=100, y=300)
         self.all_screen_obj.append(self.name_tb)
 
+        back_button = CTk.CTkButton(self.app, text="Back", font=self.text_font, fg_color=self.bg_color_light, bg_color=self.bg_color, hover_color=self.bg_color, border_width=0, command = self.intro_1st_slide, width=100, height=50)
+        back_button.place(x=150, y=400)
+        self.all_screen_obj.append(back_button)
+
         next_button = CTk.CTkButton(self.app, text="Next", font=self.text_font, fg_color=self.bg_color_light, bg_color=self.bg_color, hover_color=self.bg_color, border_width=0, command = self.intro_3rd_slide, width=100, height=50)
-        next_button.place(x=150, y=400)
+        next_button.place(x=350, y=400)
         self.all_screen_obj.append(next_button)
 
-        back_button = CTk.CTkButton(self.app, text="Back", font=self.text_font, fg_color=self.bg_color_light, bg_color=self.bg_color, hover_color=self.bg_color, border_width=0, command = self.intro_1st_slide, width=100, height=50)
-        back_button.place(x=350, y=400)
-        self.all_screen_obj.append(back_button)
-    
     def intro_3rd_slide(self,) :
         try :
             self.name = self.name_tb.get()
@@ -177,13 +180,13 @@ class app() :
         self.gpa_tb.place(x=100, y=300)
         self.all_screen_obj.append(self.gpa_tb)
 
-        next_button = CTk.CTkButton(self.app, text="Next", font=self.text_font, fg_color=self.bg_color_light, bg_color=self.bg_color, hover_color=self.bg_color, border_width=0, command=self.intro_4th_slide, width=100, height=50)
-        next_button.place(x=150, y=400)
-        self.all_screen_obj.append(next_button)
-
         back_button = CTk.CTkButton(self.app, text="Back", font=self.text_font, fg_color=self.bg_color_light, bg_color=self.bg_color, hover_color=self.bg_color, border_width=0, command=self.intro_2nd_slide, width=100, height=50)
-        back_button.place(x=350, y=400)
+        back_button.place(x=150, y=400)
         self.all_screen_obj.append(back_button)
+
+        next_button = CTk.CTkButton(self.app, text="Next", font=self.text_font, fg_color=self.bg_color_light, bg_color=self.bg_color, hover_color=self.bg_color, border_width=0, command=self.intro_4th_slide, width=100, height=50)
+        next_button.place(x=350, y=400)
+        self.all_screen_obj.append(next_button)
 
     def intro_4th_slide(self,) :
         try :
@@ -195,6 +198,8 @@ class app() :
         except (ValueError, AssertionError) :
             messagebox.showerror("Invalid GPA", "The GPA entered was invalid!")
             self.intro_3rd_slide()
+        except Exception : 
+            is_valid = True
         
         if is_valid :
             self.clearScreen()
@@ -221,25 +226,33 @@ class app() :
         ap_text.place(x=25, y=150)
         self.all_screen_obj.append(ap_text)
 
-        self.ap_db = CTk.CTkOptionMenu(self.app, bg_color=self.bg_color, fg_color=self.bg_color, values= ["_"] + self.ALL_APS, font=self.text_font)
+        self.ap_db = CTk.CTkOptionMenu(self.app, bg_color=self.bg_color, fg_color=self.bg_color, values= ["-"] + self.ALL_APS, font=self.text_font)
         self.ap_db.place(x=300, y=150)
         self.all_screen_obj.append(self.ap_db)
 
-        ap_grade_text = CTk.CTkLabel(self.app, bg_color=self.bg_color, fg_color=self.bg_color, text="Your grade in the class: ", font=self.text_font)
+        ap_grade_text = CTk.CTkLabel(self.app, bg_color=self.app_text_box_color, fg_color=self.bg_color, text="Your grade in the class: ", font=self.text_font)
         ap_grade_text.place(x=25, y=250)
         self.all_screen_obj.append(ap_grade_text)
 
-        self.ap_grade = CTk.CTkOptionMenu(self.app, bg_color=self.bg_color, fg_color=self.bg_color, values=["_", "A", "B", 'C', 'D/F'], font=self.text_font)
-        self.ap_grade.place(x=300, y=250)
+        self.ap_grade = CTk.CTkOptionMenu(self.app, bg_color=self.app_text_box_color, fg_color=self.bg_color, values=["-", "A", "B", 'C', 'D/F', "Test Only"], font=self.text_font)
+        self.ap_grade.place(x=400, y=250)
         self.all_screen_obj.append(self.ap_grade)
 
-        ap_test_grade_text = CTk.CTkLabel(self.app, bg_color=self.bg_color, fg_color=self.bg_color, text="Your score on the AP exam", font=self.text_font)
+        ap_test_grade_text = CTk.CTkLabel(self.app, bg_color=self.app_text_box_color, fg_color=self.bg_color, text="Your score on the AP exam", font=self.text_font)
         ap_test_grade_text.place(x=25, y=350)
         self.all_screen_obj.append(ap_test_grade_text)
 
-        self.ap_score = CTk.CTkOptionMenu(self.app, bg_color=self.bg_color, fg_color=self.bg_color, values=['_', '5','4','3','2','1'], font=self.text_font)
-        self.ap_score.place(x=300, y=350)
+        self.ap_score = CTk.CTkOptionMenu(self.app, bg_color=self.app_text_box_color, fg_color=self.bg_color, values=['-', '5','4','3','2','1'], font=self.text_font)
+        self.ap_score.place(x=400, y=350)
         self.all_screen_obj.append(self.ap_score)
+
+        back_button = CTk.CTkButton(self.app, text="Back", font=self.text_font, fg_color=self.bg_color_light, bg_color=self.bg_color, hover_color=self.bg_color, border_width=0, command=self.intro_4th_slide, width=100, height=50)
+        back_button.place(x=150, y=400)
+        self.all_screen_obj.append(back_button)
+
+        next_button = CTk.CTkButton(self.app, text="Next", font=self.text_font, fg_color=self.bg_color_light, bg_color=self.bg_color, hover_color=self.bg_color, border_width=0, command=self.intro_4th_slide_ap_selector_validator, width=100, height=50)
+        next_button.place(x=350, y=400)
+        self.all_screen_obj.append(next_button)
 
     def intro_4th_slide_ap_selector_validator(self,) :
         try :
@@ -247,13 +260,50 @@ class app() :
             ap_grade = self.ap_grade.get()
             ap_score = self.ap_score.get()
 
-            if ap_course == "_" or ap_grade == "_" or ap_score == "_" :
+            if ap_course == "-" or ap_grade == "-" or ap_score == "-" :
                 raise ValueError
+            
+            ap_score = int(ap_score)
 
-            self.intro_5th_slide()
-        except :
-            pass
-        
+            ## Messy code ahead!
+            if ap_grade == "A" :
+                ap_grade = 5
+            elif ap_grade == "B" :
+                ap_grade = 4
+            elif ap_grade == "C" :
+                ap_grade = 3
+            elif ap_grade == "D/F" :
+                ap_grade = 2
+            else :
+                ap_grade = 3
+
+            if ap_course in self.AP_T1 :
+                self.taken_APs.append(AP.apClass(ap_course, 5, ap_grade, ap_score))
+            elif ap_course in self.AP_T2 :
+                self.taken_APs.append(AP.apClass(ap_course, 4, ap_grade, ap_score))
+            elif ap_course in self.AP_T3 :
+                self.taken_APs.append(AP.apClass(ap_course, 3, ap_grade, ap_score))
+            elif ap_course in self.AP_T4 :
+                self.taken_APs.append(AP.apClass(ap_course, 2, ap_grade, ap_score))
+            else :
+                self.taken_APs.append(AP.apClass(ap_course, 1, ap_grade, ap_score))
+
+            self.clearScreen()
+
+            ap_text = CTk.CTkLabel(self.app, 600, 80, bg_color=self.bg_color, fg_color=self.bg_color, text="Have you taken any other APs?", font=self.header_font)
+            ap_text.place(x=0, y = 150)
+            self.all_screen_obj.append(ap_text)
+
+            yes_ap = CTk.CTkButton(self.app, 75, 30, font=self.button_font, text="Yes", command=self.intro_4th_slide_ap_selector, border_width=0, border_color=self.bg_color, bg_color=self.bg_color, fg_color=self.bg_color_light)
+            yes_ap.place(x=150, y=450)
+            self.all_screen_obj.append(yes_ap)
+
+            no_ap = CTk.CTkButton(self.app, 75, 30, font=self.button_font, text="No", command=self.intro_5th_slide, border_width=0, border_color=self.bg_color, bg_color=self.bg_color, fg_color=self.bg_color_light)
+            no_ap.place(x=375, y=450)
+            self.all_screen_obj.append(no_ap)
+
+        except Exception as err:
+            print(err)
 
     def intro_5th_slide(self,) :
         self.clearScreen()
@@ -262,18 +312,44 @@ class app() :
         self.all_screen_obj.append(sat_text)
 
         yes_sat = CTk.CTkButton(self.app, 75, 30, font=self.button_font, text="Yes", command=self.intro_5th_slide_sat_score, border_width=0, border_color=self.bg_color, bg_color=self.bg_color, fg_color=self.bg_color_light)
-        yes_sat.place(x=150, y=450)
+        yes_sat.place(x=150, y=400)
         self.all_screen_obj.append(yes_sat)
 
         no_sat = CTk.CTkButton(self.app, 75, 30, font=self.button_font, text="No", command=self.intro_5th_slide_psat, border_width=0, border_color=self.bg_color, bg_color=self.bg_color, fg_color=self.bg_color_light)
-        no_sat.place(x=375, y=450)
+        no_sat.place(x=375, y=400)
         self.all_screen_obj.append(no_sat)
+
+        back_button = CTk.CTkButton(self.app, text="Back", font=self.text_font, fg_color=self.bg_color_light, bg_color=self.bg_color, hover_color=self.bg_color, border_width=0, command=self.intro_4th_slide, width=100, height=50)
+        back_button.place(x=150, y=450)
+        self.all_screen_obj.append(back_button)
 
     def intro_5th_slide_sat_score(self,) :
         self.clearScreen()
+        sat_text = CTk.CTkLabel(self.app, 600, 80, bg_color=self.bg_color, fg_color=self.bg_color, text="What is your highest SAT score?", font=self.header_font)
+        sat_text.place(x=0, y = 150)
+        self.all_screen_obj.append(sat_text)
+
+        self.sat_tb = CTk.CTkEntry(self.app, placeholder_text="Your SAT score, 400-1600", width=400, height=60, font=self.text_font, text_color=self.app_text_color, bg_color=self.bg_color, fg_color=self.app_text_box_color, border_width=0)
+        self.sat_tb.place(x=100, y=300)
+        self.all_screen_obj.append(self.sat_tb)
+
+        back_button = CTk.CTkButton(self.app, text="Back", font=self.text_font, fg_color=self.bg_color_light, bg_color=self.bg_color, hover_color=self.bg_color, border_width=0, command=self.intro_5th_slide, width=100, height=50)
+        back_button.place(x=150, y=450)
+        self.all_screen_obj.append(back_button)
+
+        next_button = CTk.CTkButton(self.app, text="Next", font=self.text_font, fg_color=self.bg_color_light, bg_color=self.bg_color, hover_color=self.bg_color, border_width=0, command=self.intro_5th_slide_sat_score_validator, width=100, height=50)
+        next_button.place(x=350, y=450)
+        self.all_screen_obj.append(next_button)
 
     def intro_5th_slide_sat_score_validator(self,) :
-        self.clearScreen()
+        try :
+            self.sat_score = int(self.sat_tb.get())
+            assert(isinstance(self.sat_score/10, int) or (self.sat_score/10).is_integer())
+            assert(self.sat_score >= 400 and self.sat_score <= 1600)
+            self.intro_6th_slide()
+        except : 
+            messagebox.showerror("Invalid SAT Score", "Invalid SAT Score, SAT score range is from 400 to 1600.")
+        
     
     def intro_5th_slide_psat(self,) :
         self.clearScreen()
@@ -291,9 +367,47 @@ class app() :
 
     def intro_5th_slide_psat_score(self,) :
         self.clearScreen()
+        psat_text = CTk.CTkLabel(self.app, 600, 80, bg_color=self.bg_color, fg_color=self.bg_color, text="What is your most\nrecent PSAT score?", font=self.text_font)
+        psat_text.place(x=0, y = 150)
+        self.all_screen_obj.append(psat_text)
+
+        self.psat_tb = CTk.CTkEntry(self.app, placeholder_text="Your PSAT score", width=400, height=60, font=self.text_font, text_color=self.app_text_color, bg_color=self.bg_color, fg_color=self.app_text_box_color, border_width=0)
+        self.psat_tb.place(x=100, y=250)
+        self.all_screen_obj.append(self.psat_tb)
+
+        ap_text = CTk.CTkLabel(self.app, bg_color=self.bg_color, fg_color=self.bg_color, text="PSAT Version: ", font=self.text_font)
+        ap_text.place(x=150, y=350)
+        self.all_screen_obj.append(ap_text)
+
+        self.psat_dd = CTk.CTkOptionMenu(self.app, bg_color=self.bg_color, fg_color=self.bg_color, values= ["-", "8/9", "10/11"], font=self.text_font)
+        self.psat_dd.place(x=300, y=350)
+        self.all_screen_obj.append(self.psat_dd)
+
+        yes_psat = CTk.CTkButton(self.app, 75, 30, font=self.button_font, text="Back", command=self.intro_5th_slide_psat, border_width=0, border_color=self.bg_color, bg_color=self.bg_color, fg_color=self.bg_color_light)
+        yes_psat.place(x=150, y=450)
+        self.all_screen_obj.append(yes_psat)
+
+        no_psat = CTk.CTkButton(self.app, 75, 30, font=self.button_font, text="Next", command=self.intro_5th_slide_psat_score_validator, border_width=0, border_color=self.bg_color, bg_color=self.bg_color, fg_color=self.bg_color_light)
+        no_psat.place(x=375, y=450)
+        self.all_screen_obj.append(no_psat)
     
     def intro_5th_slide_psat_score_validator(self,) :
-        self.clearScreen()
+        try :
+            psat_score = int(self.psat_tb.get())
+            assert(isinstance(psat_score/10, int) or (psat_score/10).is_integer())
+            psat_version = self.psat_dd.get()
+            if psat_version == "-" :
+                raise AssertionError
+            elif psat_version == "8/9" :
+                psat_score += 160 ## Aprox for SAT conversion
+                assert(psat_score >= 400 and psat_score <= 1440)
+            else :
+                psat_score += 80 ## Aprox for SAT conversion
+                assert(psat_score >= 400 and psat_score <= 1440)
+            self.sat_score = psat_score
+            self.intro_6th_slide()
+        except : 
+            messagebox.showerror("Invalid SAT Score", "Invalid SAT Score, SAT score range is from 400 to 1600.")
 
     def intro_6th_slide(self,) :
         self.clearScreen()
@@ -311,9 +425,37 @@ class app() :
     
     def intro_6th_slide_act_score(self,) :
         self.clearScreen()
+
+        act_text = CTk.CTkLabel(self.app, 600, 80, bg_color=self.bg_color, fg_color=self.bg_color, text="What is your highest ACT score?", font=self.header_font)
+        act_text.place(x=0, y = 150)
+        self.all_screen_obj.append(act_text)
+
+        self.act_tb = CTk.CTkEntry(self.app, placeholder_text="Your ACT score, 1-36", width=400, height=60, font=self.text_font, text_color=self.app_text_color, bg_color=self.bg_color, fg_color=self.app_text_box_color, border_width=0)
+        self.act_tb.place(x=100, y=300)
+        self.all_screen_obj.append(self.act_tb)
+
+        back_button = CTk.CTkButton(self.app, text="Back", font=self.text_font, fg_color=self.bg_color_light, bg_color=self.bg_color, hover_color=self.bg_color, border_width=0, command=self.intro_6th_slide, width=100, height=50)
+        back_button.place(x=150, y=450)
+        self.all_screen_obj.append(back_button)
+
+        next_button = CTk.CTkButton(self.app, text="Next", font=self.text_font, fg_color=self.bg_color_light, bg_color=self.bg_color, hover_color=self.bg_color, border_width=0, command=self.intro_6th_slide_act_score_validator, width=100, height=50)
+        next_button.place(x=350, y=450)
+        self.all_screen_obj.append(next_button)
     
     def intro_6th_slide_act_score_validator(self,) :
-        self.clearScreen()
+        try :
+            act_score = int(self.act_tb.get())
+            assert(act_score >= 1 and act_score <= 36)
+
+            ## I came up with this algorithm myself, it is relatively accurate for score conversions
+            act_score = 35*act_score + 340
+
+            ## Janky but works
+            self.sat_score = act_score if act_score > self.sat_score else self.sat_score
+
+            self.intro_7th_slide()
+        except : 
+            messagebox.showerror("Invalid ACT Score", "Invalid ACT Score, ACT score range is from 1 to 36.")
     
     def intro_7th_slide(self,) :
         self.clearScreen()
