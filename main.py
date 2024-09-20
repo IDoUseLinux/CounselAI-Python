@@ -1,5 +1,5 @@
 import customtkinter as CTk, requests, os
-import openai
+import openai, json, requests
 import score, clubs, awards, sports, AP
 from tkinter import messagebox
 
@@ -58,8 +58,13 @@ class app() :
     ALL_APS = AP_T1 + AP_T2 + AP_T3 + AP_T4 + AP_T5
     ALL_APS.sort()
 
+    regions = ["Local/School", "State", "Regional", "National", "International"]
+
     taken_APs = []
-    sat_score = 1050 ## Assume Nat. Avg.
+    taken_clubs = []
+    taken_sports = []
+    awarded_awards = []
+    sat_score = 1050 ## Assume Nat. Avg. if no test
 
     ## All screen objects, used for screen changing
     all_screen_obj = [] ## This is preparing me for memory management and screen management-- if an item isn't added to this list, it stays on the screen for ever.
@@ -96,7 +101,7 @@ class app() :
 
     def __init__(self, app:CTk.CTk) :
         self.app = app
-        self.app.title("ConsulAI") 
+        self.app.title("CounselAI") 
         CTk.set_appearance_mode("dark")
         self.app.config(background=self.bg_color)
         self.app.geometry("600x600")
@@ -110,11 +115,13 @@ class app() :
         header = CTk.CTkFrame(self.app, width=600, height=75, fg_color=self.bg_color_light, bg_color=self.bg_color, corner_radius=0)
         header.place(x=0, y=0)
 
-        app_name = CTk.CTkLabel(header, text="ConsulAI", fg_color=self.bg_color_light, bg_color=self.bg_color_light, font=self.header_font)
+        app_name = CTk.CTkLabel(header, text="CounselAI", fg_color=self.bg_color_light, bg_color=self.bg_color_light, font=self.header_font)
         app_name.place(x=20, y=12) ## This places the text 50 px below the top and 51 px above the header border... >:-(
 
         settings_button = CTk.CTkButton(header, text="⚙️", font=self.header_font, fg_color=self.bg_color_light, hover_color=self.bg_color, border_width=0, command = lambda : self.director("SettingButton"), width=60, height=50)
         settings_button.place(x=525, y=12)
+
+        self.parse_unis()
 
         self.intro_1st_slide()
 
@@ -134,11 +141,11 @@ class app() :
     ## Questionaire code
     def intro_1st_slide(self,) : 
         self.clearScreen()
-        intro_text = CTk.CTkLabel(self.app, 600, 80, bg_color=self.bg_color, fg_color=self.bg_color, text="Welcome to ConsulAI!", font=self.header_font)
+        intro_text = CTk.CTkLabel(self.app, 600, 80, bg_color=self.bg_color, fg_color=self.bg_color, text="Welcome to CounselAI!", font=self.header_font)
         intro_text.place(x=0, y = 150)
         self.all_screen_obj.append(intro_text)
 
-        intro_text_2 = CTk.CTkLabel(self.app, 600, 75, bg_color=self.bg_color, fg_color=self.bg_color, text="A free AI-based college consuling application!", font=self.text_font)
+        intro_text_2 = CTk.CTkLabel(self.app, 600, 75, bg_color=self.bg_color, fg_color=self.bg_color, text="A free AI-based college counseling application!", font=self.text_font)
         intro_text_2.place(x=0, y = 225)
         self.all_screen_obj.append(intro_text_2)
 
@@ -181,11 +188,11 @@ class app() :
         self.all_screen_obj.append(self.gpa_tb)
 
         back_button = CTk.CTkButton(self.app, text="Back", font=self.text_font, fg_color=self.bg_color_light, bg_color=self.bg_color, hover_color=self.bg_color, border_width=0, command=self.intro_2nd_slide, width=100, height=50)
-        back_button.place(x=150, y=400)
+        back_button.place(x=150, y=450)
         self.all_screen_obj.append(back_button)
 
         next_button = CTk.CTkButton(self.app, text="Next", font=self.text_font, fg_color=self.bg_color_light, bg_color=self.bg_color, hover_color=self.bg_color, border_width=0, command=self.intro_4th_slide, width=100, height=50)
-        next_button.place(x=350, y=400)
+        next_button.place(x=350, y=450)
         self.all_screen_obj.append(next_button)
 
     def intro_4th_slide(self,) :
@@ -209,15 +216,15 @@ class app() :
             self.all_screen_obj.append(ap_text)
 
             yes_aps = CTk.CTkButton(self.app, 75, 30, font=self.text_font, text="Yes", command=self.intro_4th_slide_ap_selector, border_width=0, border_color=self.bg_color, bg_color=self.bg_color, fg_color=self.bg_color_light)
-            yes_aps.place(x=150, y=375)
+            yes_aps.place(x=150, y=400)
             self.all_screen_obj.append(yes_aps)
 
             no_aps = CTk.CTkButton(self.app, 75, 30, font=self.text_font, text="No", command=self.intro_5th_slide, border_width=0, border_color=self.bg_color, bg_color=self.bg_color, fg_color=self.bg_color_light)
-            no_aps.place(x=375, y=375)
+            no_aps.place(x=375, y=400)
             self.all_screen_obj.append(no_aps)
 
             back_button = CTk.CTkButton(self.app, text="Back", font=self.text_font, fg_color=self.bg_color_light, bg_color=self.bg_color, hover_color=self.bg_color, border_width=0, command = self.intro_3rd_slide, width=100, height=50)
-            back_button.place(x=250, y=450)
+            back_button.place(x=150, y=450)
             self.all_screen_obj.append(back_button)
 
     def intro_4th_slide_ap_selector(self) :
@@ -358,12 +365,16 @@ class app() :
         self.all_screen_obj.append(psat_text)
 
         yes_psat = CTk.CTkButton(self.app, 75, 30, font=self.button_font, text="Yes", command=self.intro_5th_slide_psat_score, border_width=0, border_color=self.bg_color, bg_color=self.bg_color, fg_color=self.bg_color_light)
-        yes_psat.place(x=150, y=450)
+        yes_psat.place(x=150, y=400)
         self.all_screen_obj.append(yes_psat)
 
         no_psat = CTk.CTkButton(self.app, 75, 30, font=self.button_font, text="No", command=self.intro_6th_slide, border_width=0, border_color=self.bg_color, bg_color=self.bg_color, fg_color=self.bg_color_light)
-        no_psat.place(x=375, y=450)
+        no_psat.place(x=375, y=400)
         self.all_screen_obj.append(no_psat)
+
+        back_button = CTk.CTkButton(self.app, text="Back", font=self.text_font, fg_color=self.bg_color_light, bg_color=self.bg_color, hover_color=self.bg_color, border_width=0, command=self.intro_5th_slide, width=100, height=50)
+        back_button.place(x=150, y=450)
+        self.all_screen_obj.append(back_button)
 
     def intro_5th_slide_psat_score(self,) :
         self.clearScreen()
@@ -416,12 +427,16 @@ class app() :
         self.all_screen_obj.append(act_text)
 
         yes_act = CTk.CTkButton(self.app, 75, 30, font=self.button_font, text="Yes", command=self.intro_6th_slide_act_score, border_width=0, border_color=self.bg_color, bg_color=self.bg_color, fg_color=self.bg_color_light)
-        yes_act.place(x=150, y=450)
+        yes_act.place(x=150, y=400)
         self.all_screen_obj.append(yes_act)
 
         no_act = CTk.CTkButton(self.app, 75, 30, font=self.button_font, text="No", command=self.intro_7th_slide, border_width=0, border_color=self.bg_color, bg_color=self.bg_color, fg_color=self.bg_color_light)
-        no_act.place(x=375, y=450)
+        no_act.place(x=375, y=400)
         self.all_screen_obj.append(no_act)
+
+        back_button = CTk.CTkButton(self.app, text="Back", font=self.text_font, fg_color=self.bg_color_light, bg_color=self.bg_color, hover_color=self.bg_color, border_width=0, command=self.intro_5th_slide, width=100, height=50)
+        back_button.place(x=150, y=450)
+        self.all_screen_obj.append(back_button)
     
     def intro_6th_slide_act_score(self,) :
         self.clearScreen()
@@ -459,23 +474,99 @@ class app() :
     
     def intro_7th_slide(self,) :
         self.clearScreen()
-        clubs_text = CTk.CTkLabel(self.app, 600, 80, bg_color=self.bg_color, fg_color=self.bg_color, text="Were you apart of any clubs?", font=self.header_font)
+        clubs_text = CTk.CTkLabel(self.app, 600, 80, bg_color=self.bg_color, fg_color=self.bg_color, text="Were you a part of any clubs?", font=self.header_font)
         clubs_text.place(x=0, y = 150)
         self.all_screen_obj.append(clubs_text)
 
         yes_clubs = CTk.CTkButton(self.app, 75, 30, font=self.button_font, text="Yes", command=self.intro_7th_slide_club_entry, border_width=0, border_color=self.bg_color, bg_color=self.bg_color, fg_color=self.bg_color_light)
-        yes_clubs.place(x=150, y=450)
+        yes_clubs.place(x=150, y=400)
         self.all_screen_obj.append(yes_clubs)
 
         no_clubs = CTk.CTkButton(self.app, 75, 30, font=self.button_font, text="No", command=self.intro_8th_slide, border_width=0, border_color=self.bg_color, bg_color=self.bg_color, fg_color=self.bg_color_light)
-        no_clubs.place(x=375, y=450)
+        no_clubs.place(x=375, y=400)
         self.all_screen_obj.append(no_clubs)
+
+        back_button = CTk.CTkButton(self.app, text="Back", font=self.text_font, fg_color=self.bg_color_light, bg_color=self.bg_color, hover_color=self.bg_color, border_width=0, command = self.intro_6th_slide, width=100, height=50)
+        back_button.place(x=250, y=450)
+        self.all_screen_obj.append(back_button)
 
     def intro_7th_slide_club_entry(self,) :
         self.clearScreen()
+        club_text = CTk.CTkLabel(self.app, bg_color=self.bg_color, fg_color=self.bg_color, text="Your Club name: ", font=self.text_font)
+        club_text.place(x=50, y=150)
+        self.all_screen_obj.append(club_text)
+
+        self.club_tb = CTk.CTkEntry(self.app, placeholder_text="Club name", width=300, height=60, font=self.text_font, text_color=self.app_text_color, bg_color=self.bg_color, fg_color=self.app_text_box_color, border_width=0)
+        self.club_tb.place(x=250, y=150)
+        self.all_screen_obj.append(self.club_tb)
+
+        club_text_p = CTk.CTkLabel(self.app, bg_color=self.bg_color, fg_color=self.bg_color, text="Club type", font=self.text_font)
+        club_text_p.place(x=50, y=250)
+        self.all_screen_obj.append(club_text_p)
+
+        self.club_purpose = CTk.CTkOptionMenu(self.app, bg_color=self.bg_color, fg_color=self.bg_color, values= ["-", "Academic", "Recreational", "Volunteering", "Other"], font=self.text_font)
+        self.club_purpose.place(x=300, y=250)
+        self.all_screen_obj.append(self.club_purpose)
+
+        club_role_text = CTk.CTkLabel(self.app, bg_color=self.bg_color, fg_color=self.bg_color, text="Club Role", font=self.text_font)
+        club_role_text.place(x=50, y=350)
+        self.all_screen_obj.append(club_role_text)
+
+        self.clube_role = CTk.CTkOptionMenu(self.app, bg_color=self.bg_color, fg_color=self.bg_color, values= ["-", "President", "Vice-president", "Other leadership role", "Member"], font=self.text_font)
+        self.clube_role.place(x=300, y=350)
+        self.all_screen_obj.append(self.clube_role)    
+
+        back_button = CTk.CTkButton(self.app, text="Back", font=self.text_font, fg_color=self.bg_color_light, bg_color=self.bg_color, hover_color=self.bg_color, border_width=0, command=self.intro_7th_slide, width=100, height=50)
+        back_button.place(x=150, y=450)
+        self.all_screen_obj.append(back_button)
+
+        next_button = CTk.CTkButton(self.app, text="Next", font=self.text_font, fg_color=self.bg_color_light, bg_color=self.bg_color, hover_color=self.bg_color, border_width=0, command=self.intro_7th_slide_club_entry_validator, width=100, height=50)
+        next_button.place(x=350, y=450)
+        self.all_screen_obj.append(next_button)
 
     def intro_7th_slide_club_entry_validator(self,) :
-        self.clearScreen()
+        try :
+            club_name = self.club_tb.get()
+            club_purpose = self.club_purpose.get()
+            club_role = self.clube_role.get()
+
+            assert(club_purpose != "-" and club_role != "-")
+            ## Janky but got no time to write clean solution
+            if club_purpose == "Academic" :
+                club_purpose = 3
+            elif club_purpose == "Volunteering" : 
+                club_purpose = 2
+            else :
+                club_purpose = 1
+
+            if club_role == "President" :
+                club_role = 3
+            elif club_role == "Vice-president" :
+                club_role = 2.5
+            elif club_role == "Other leadership role" :
+                club_role = 2
+            else :
+                club_role = 1
+
+            self.taken_clubs.append(clubs.clubs(club_name, club_purpose, club_role))
+
+            self.clearScreen()
+
+            clubs_text = CTk.CTkLabel(self.app, 600, 80, bg_color=self.bg_color, fg_color=self.bg_color, text="Were you a part of any other clubs?", font=self.header_font)
+            clubs_text.place(x=0, y = 150)
+            self.all_screen_obj.append(clubs_text)
+
+            yes_clubs = CTk.CTkButton(self.app, 75, 30, font=self.button_font, text="Yes", command=self.intro_7th_slide_club_entry, border_width=0, border_color=self.bg_color, bg_color=self.bg_color, fg_color=self.bg_color_light)
+            yes_clubs.place(x=150, y=400)
+            self.all_screen_obj.append(yes_clubs)
+
+            no_clubs = CTk.CTkButton(self.app, 75, 30, font=self.button_font, text="No", command=self.intro_8th_slide, border_width=0, border_color=self.bg_color, bg_color=self.bg_color, fg_color=self.bg_color_light)
+            no_clubs.place(x=375, y=400)
+            self.all_screen_obj.append(no_clubs)
+
+        except :
+            messagebox.showerror("Invalid Club Entry", "Invalid Club Entry!")
+            self.intro_7th_slide_club_entry()
 
     def intro_8th_slide(self,) :
         self.clearScreen()
@@ -484,67 +575,311 @@ class app() :
         self.all_screen_obj.append(sports_text)
 
         yes_sports = CTk.CTkButton(self.app, 75, 30, font=self.button_font, text="Yes", command=self.intro_8th_slide_sports_entry, border_width=0, border_color=self.bg_color, bg_color=self.bg_color, fg_color=self.bg_color_light)
-        yes_sports.place(x=150, y=450)
+        yes_sports.place(x=150, y=400)
         self.all_screen_obj.append(yes_sports)
 
-        no_sports = CTk.CTkButton(self.app, 75, 30, font=self.button_font, text="No", command=self.intro_9th_slide, border_width=0, border_color=self.bg_color, bg_color=self.bg_color, fg_color=self.bg_color_light)
-        no_sports.place(x=375, y=450)
+        ## TEMP LINK TO 10TH SLIDE
+        no_sports = CTk.CTkButton(self.app, 75, 30, font=self.button_font, text="No", command=self.intro_10th_slide, border_width=0, border_color=self.bg_color, bg_color=self.bg_color, fg_color=self.bg_color_light)
+        no_sports.place(x=375, y=400)
         self.all_screen_obj.append(no_sports)
+
+        back_button = CTk.CTkButton(self.app, text="Back", font=self.text_font, fg_color=self.bg_color_light, bg_color=self.bg_color, hover_color=self.bg_color, border_width=0, command=self.intro_7th_slide, width=100, height=50)
+        back_button.place(x=150, y=450)
+        self.all_screen_obj.append(back_button)
     
     def intro_8th_slide_sports_entry(self,) :
         self.clearScreen()
+
+        sports_text = CTk.CTkLabel(self.app, bg_color=self.bg_color, fg_color=self.bg_color, text="The Sports name: ", font=self.text_font)
+        sports_text.place(x=50, y=150)
+        self.all_screen_obj.append(sports_text)
+
+        self.sports_tb = CTk.CTkEntry(self.app, placeholder_text="Sports name", width=300, height=60, font=self.text_font, text_color=self.app_text_color, bg_color=self.bg_color, fg_color=self.app_text_box_color, border_width=0)
+        self.sports_tb.place(x=250, y=150)
+        self.all_screen_obj.append(self.sports_tb)
+
+        sports_role = CTk.CTkLabel(self.app, bg_color=self.bg_color, fg_color=self.bg_color, text="Sports role", font=self.text_font)
+        sports_role.place(x=50, y=250)
+        self.all_screen_obj.append(sports_role)
+
+        self.sports_role_dd = CTk.CTkOptionMenu(self.app, bg_color=self.bg_color, fg_color=self.bg_color, values=["-", "Captain/Leader", "Other leadership role", "Player"], font=self.text_font)
+        self.sports_role_dd.place(x=300, y=250)
+        self.all_screen_obj.append(self.sports_role_dd)
+
+        club_role_text = CTk.CTkLabel(self.app, bg_color=self.bg_color, fg_color=self.bg_color, text="How long have you participated\nin the sport (months)", font=self.text_font)
+        club_role_text.place(x=50, y=350)
+        self.all_screen_obj.append(club_role_text)
+
+        self.sports_length = CTk.CTkEntry(self.app, placeholder_text="(i, e. 5)", width=300, height=60, font=self.text_font, text_color=self.app_text_color, bg_color=self.bg_color, fg_color=self.app_text_box_color, border_width=0)
+        self.sports_length.place(x=250, y=350)
+        self.all_screen_obj.append(self.sports_length)
+
+        back_button = CTk.CTkButton(self.app, text="Back", font=self.text_font, fg_color=self.bg_color_light, bg_color=self.bg_color, hover_color=self.bg_color, border_width=0, command=self.intro_8th_slide, width=100, height=50)
+        back_button.place(x=150, y=450)
+        self.all_screen_obj.append(back_button)
+
+        next_button = CTk.CTkButton(self.app, text="Next", font=self.text_font, fg_color=self.bg_color_light, bg_color=self.bg_color, hover_color=self.bg_color, border_width=0, command=self.intro_8th_slide_sports_entry_validator, width=100, height=50)
+        next_button.place(x=350, y=450)
+        self.all_screen_obj.append(next_button)
     
     def intro_8th_slide_sports_entry_validator(self,) :
-        self.clearScreen()
+        try :
+            sports_name = self.sports_tb.get()
+            sports_role = self.sports_role_dd.get()
+            sports_length = int(self.sports_length.get()) ## This gives exception if not int so we can tell user that the data is wrong
+            assert(sports_role != "-")
+
+            if sports_role == "Captain/Leader" :
+                sports_role = 3
+            elif sports_role == "Other leadership role" :
+                sports_role = 2
+            else : 
+                sports_role = 1
+
+            self.taken_sports.append(sports.sports(sports_name, sports_role, sports_length))
+
+            self.clearScreen()
+
+            clubs_text = CTk.CTkLabel(self.app, 600, 80, bg_color=self.bg_color, fg_color=self.bg_color, text="Did you part take in\nany other sports?", font=self.header_font)
+            clubs_text.place(x=0, y = 150)
+            self.all_screen_obj.append(clubs_text)
+
+            yes_clubs = CTk.CTkButton(self.app, 75, 30, font=self.button_font, text="Yes", command=self.intro_8th_slide_sports_entry, border_width=0, border_color=self.bg_color, bg_color=self.bg_color, fg_color=self.bg_color_light)
+            yes_clubs.place(x=150, y=400)
+            self.all_screen_obj.append(yes_clubs)
+
+            ## TEMP redir to 10th slide instead of 9th
+            no_clubs = CTk.CTkButton(self.app, 75, 30, font=self.button_font, text="No", command=self.intro_10th_slide, border_width=0, border_color=self.bg_color, bg_color=self.bg_color, fg_color=self.bg_color_light)
+            no_clubs.place(x=375, y=400)
+            self.all_screen_obj.append(no_clubs)
+
+            back_button = CTk.CTkButton(self.app, text="Back", font=self.text_font, fg_color=self.bg_color_light, bg_color=self.bg_color, hover_color=self.bg_color, border_width=0, command=self.intro_7th_slide, width=100, height=50)
+            back_button.place(x=150, y=450)
+            self.all_screen_obj.append(back_button)
+
+        except : 
+            messagebox.showerror("Invalid Sports Entry", "Invalid Sports Entry!")
+            self.intro_8th_slide_sports_entry()
+
+    ## Too complicated to implement for hackathon, will implement for CAC instead
+    # def intro_9th_slide(self,) :
+    #     self.clearScreen()
+
+    #     challenge_text = CTk.CTkLabel(self.app, 600, 80, bg_color=self.bg_color, fg_color=self.bg_color, text="Have you participated in\nany challenges?", font=self.header_font)
+    #     challenge_text.place(x=0, y = 150)
+    #     self.all_screen_obj.append(challenge_text)
+
+    #     yes_challenges = CTk.CTkButton(self.app, 75, 30, font=self.button_font, text="Yes", command=self.intro_9th_slide_challenges_entry, border_width=0, border_color=self.bg_color, bg_color=self.bg_color, fg_color=self.bg_color_light)
+    #     yes_challenges.place(x=150, y=400)
+    #     self.all_screen_obj.append(yes_challenges)
+
+    #     no_challenges = CTk.CTkButton(self.app, 75, 30, font=self.button_font, text="No", command=self.intro_10th_slide, border_width=0, border_color=self.bg_color, bg_color=self.bg_color, fg_color=self.bg_color_light)
+    #     no_challenges.place(x=375, y=400)
+    #     self.all_screen_obj.append(no_challenges)
+
+    #     back_button = CTk.CTkButton(self.app, text="Back", font=self.text_font, fg_color=self.bg_color_light, bg_color=self.bg_color, hover_color=self.bg_color, border_width=0, command=self.intro_8th_slide, width=100, height=50)
+    #     back_button.place(x=150, y=450)
+    #     self.all_screen_obj.append(back_button)
+
+    # def intro_9th_slide_challenges_entry(self,) :
+    #     self.clearScreen()
+
+    #     challenge_text = CTk.CTkLabel(self.app, bg_color=self.bg_color, fg_color=self.bg_color, text="The challenge's name: ", font=self.text_font)
+    #     challenge_text.place(x=50, y=150)
+    #     self.all_screen_obj.append(challenge_text)
+
+    #     self.challenge_tb = CTk.CTkEntry(self.app, placeholder_text="Challenge name", width=300, height=60, font=self.text_font, text_color=self.app_text_color, bg_color=self.bg_color, fg_color=self.app_text_box_color, border_width=0)
+    #     self.challenge_tb.place(x=250, y=150)
+    #     self.all_screen_obj.append(self.challenge_tb)
+
+    #     challenge_level = CTk.CTkLabel(self.app, bg_color=self.bg_color, fg_color=self.bg_color, text="Challenge Level", font=self.text_font)
+    #     challenge_level.place(x=50, y=250)
+    #     self.all_screen_obj.append(challenge_level)
+
+    #     self.challenge_level_dd = CTk.CTkOptionMenu(self.app, bg_color=self.bg_color, fg_color=self.bg_color, values=self.regions, font=self.text_font)
+    #     self.challenge_level_dd.place(x=300, y=250)
+    #     self.all_screen_obj.append(self.challenge_level_dd)
+
+    #     back_button = CTk.CTkButton(self.app, text="Back", font=self.text_font, fg_color=self.bg_color_light, bg_color=self.bg_color, hover_color=self.bg_color, border_width=0, command=self.intro_9th_slide, width=100, height=50)
+    #     back_button.place(x=150, y=450)
+    #     self.all_screen_obj.append(back_button)
+
+    #     next_button = CTk.CTkButton(self.app, text="Next", font=self.text_font, fg_color=self.bg_color_light, bg_color=self.bg_color, hover_color=self.bg_color, border_width=0, command=self.intro_9th_slide_challenges_entry_validator, width=100, height=50)
+    #     next_button.place(x=350, y=450)
+    #     self.all_screen_obj.append(next_button)
+
     
-    def intro_9th_slide(self,) :
-        self.clearScreen()
-
-        challenge_text = CTk.CTkLabel(self.app, 600, 80, bg_color=self.bg_color, fg_color=self.bg_color, text="Have you participated in\nany challenges?", font=self.header_font)
-        challenge_text.place(x=0, y = 150)
-        self.all_screen_obj.append(challenge_text)
-
-        yes_challenges = CTk.CTkButton(self.app, 75, 30, font=self.button_font, text="Yes", command=self.intro_9th_slide_challenges_entry, border_width=0, border_color=self.bg_color, bg_color=self.bg_color, fg_color=self.bg_color_light)
-        yes_challenges.place(x=150, y=450)
-        self.all_screen_obj.append(yes_challenges)
-
-        no_challenges = CTk.CTkButton(self.app, 75, 30, font=self.button_font, text="No", command=self.intro_10th_slide, border_width=0, border_color=self.bg_color, bg_color=self.bg_color, fg_color=self.bg_color_light)
-        no_challenges.place(x=375, y=450)
-        self.all_screen_obj.append(no_challenges)
-
-    def intro_9th_slide_challenges_entry(self,) :
-        self.clearScreen()
-    
-    def intro_9th_slide_challenges_entry_validator(self,) :
-        self.clearScreen()
+    # def intro_9th_slide_challenges_entry_validator(self,) :
+    #     self.clearScreen()
 
     def intro_10th_slide(self,) :
         self.clearScreen()
 
-        awards_text = CTk.CTkLabel(self.app, 600, 80, bg_color=self.bg_color, fg_color=self.bg_color, text="Did you recieve any awards?", font=self.header_font)
+        awards_text = CTk.CTkLabel(self.app, 600, 80, bg_color=self.bg_color, fg_color=self.bg_color, text="Have you recieved any awards?", font=self.header_font)
         awards_text.place(x=0, y = 150)
         self.all_screen_obj.append(awards_text)
 
         yes_awards = CTk.CTkButton(self.app, 75, 30, font=self.button_font, text="Yes", command=self.intro_10th_slide_award_entry, border_width=0, border_color=self.bg_color, bg_color=self.bg_color, fg_color=self.bg_color_light)
-        yes_awards.place(x=150, y=450)
+        yes_awards.place(x=150, y=400)
         self.all_screen_obj.append(yes_awards)
 
         no_awards = CTk.CTkButton(self.app, 75, 30, font=self.button_font, text="No", command=self.generate_report, border_width=0, border_color=self.bg_color, bg_color=self.bg_color, fg_color=self.bg_color_light)
-        no_awards.place(x=375, y=450)
+        no_awards.place(x=375, y=400)
         self.all_screen_obj.append(no_awards)
+
+        ## TEMP LINK TO 8TH SLIDE
+        back_button = CTk.CTkButton(self.app, text="Back", font=self.text_font, fg_color=self.bg_color_light, bg_color=self.bg_color, hover_color=self.bg_color, border_width=0, command=self.intro_8th_slide, width=100, height=50)
+        back_button.place(x=150, y=450)
+        self.all_screen_obj.append(back_button)
 
     def intro_10th_slide_award_entry(self,) :
         self.clearScreen()
+
+        award_text = CTk.CTkLabel(self.app, bg_color=self.bg_color, fg_color=self.bg_color, text="The award's name: ", font=self.text_font)
+        award_text.place(x=50, y=150)
+        self.all_screen_obj.append(award_text)
+
+        self.award_tb = CTk.CTkEntry(self.app, placeholder_text="Award's name", width=300, height=60, font=self.text_font, text_color=self.app_text_color, bg_color=self.bg_color, fg_color=self.app_text_box_color, border_width=0)
+        self.award_tb.place(x=275, y=150)
+        self.all_screen_obj.append(self.award_tb)
+
+        award_region = CTk.CTkLabel(self.app, bg_color=self.bg_color, fg_color=self.bg_color, text="Award's Region: ", font=self.text_font)
+        award_region.place(x=50, y=250)
+        self.all_screen_obj.append(award_region)
+
+        self.award_dd = CTk.CTkOptionMenu(self.app, bg_color=self.bg_color, fg_color=self.bg_color, values= ["-"] + self.regions, font=self.text_font)
+        self.award_dd.place(x=300, y=350)
+        self.all_screen_obj.append(self.award_dd)
+
+        award_level_text = CTk.CTkLabel(self.app, bg_color=self.bg_color, fg_color=self.bg_color, text="Award's Level: ", font=self.text_font)
+        award_level_text.place(x=50, y=350)
+        self.all_screen_obj.append(award_level_text)
+
+        self.award_level = CTk.CTkOptionMenu(self.app, bg_color=self.bg_color, fg_color=self.bg_color, values= ["-", "Top 3", "Finalist", "Participant"] , font=self.text_font)
+        self.award_level.place(x=300, y=250)
+        self.all_screen_obj.append(self.award_level)
+
+        back_button = CTk.CTkButton(self.app, text="Back", font=self.text_font, fg_color=self.bg_color_light, bg_color=self.bg_color, hover_color=self.bg_color, border_width=0, command=self.intro_10th_slide, width=100, height=50)
+        back_button.place(x=150, y=450)
+        self.all_screen_obj.append(back_button)
+
+        next_button = CTk.CTkButton(self.app, text="Next", font=self.text_font, fg_color=self.bg_color_light, bg_color=self.bg_color, hover_color=self.bg_color, border_width=0, command=self.intro_10th_slide_award_entry_validator, width=100, height=50)
+        next_button.place(x=350, y=450)
+        self.all_screen_obj.append(next_button)
     
     def intro_10th_slide_award_entry_validator(self,) :
+        try :
+            award_name = self.award_tb.get()
+            award_region = self.award_dd.get()
+            award_level = self.award_level.get()
+            
+            assert(award_region != "-" and award_level != "-")
+
+            if award_region == "Local/School" :
+                award_region = 1
+            elif award_region == "State" :
+                award_region = 2
+            elif award_region == "Regional" :
+                award_region = 3
+            elif award_region == "National" :
+                award_region = 4
+            else :
+                award_region = 5
+            
+            if award_level == "Top 3" :
+                award_level = 3
+            elif award_level == "Finalist" :
+                award_level = 2
+            else :
+                award_level = 2
+            
+            self.awarded_awards.append(awards.awards(award_name, award_level, award_region))
+
+            clubs_text = CTk.CTkLabel(self.app, 600, 80, bg_color=self.bg_color, fg_color=self.bg_color, text="Have you recieved any\nother awards?", font=self.header_font)
+            clubs_text.place(x=0, y = 150)
+            self.all_screen_obj.append(clubs_text)
+
+            yes_clubs = CTk.CTkButton(self.app, 75, 30, font=self.button_font, text="Yes", command=self.intro_10th_slide_award_entry, border_width=0, border_color=self.bg_color, bg_color=self.bg_color, fg_color=self.bg_color_light)
+            yes_clubs.place(x=150, y=400)
+            self.all_screen_obj.append(yes_clubs)
+
+            ## TEMP redir to 10th slide instead of 9th
+            no_clubs = CTk.CTkButton(self.app, 75, 30, font=self.button_font, text="No", command=self.intro_11th_slide, border_width=0, border_color=self.bg_color, bg_color=self.bg_color, fg_color=self.bg_color_light)
+            no_clubs.place(x=375, y=400)
+            self.all_screen_obj.append(no_clubs)
+
+        except :
+            messagebox.showerror("Invalid Award Entry", "Invalid Award Entry!")
+            self.intro_10th_slide_award_entry()
+
+    def intro_11th_slide(self,) :
         self.clearScreen()
 
-    def intro_11_slide(self,) :
-        self.clearScreen()
+        career_text = CTk.CTkLabel(self.app, 600, 80, bg_color=self.bg_color, fg_color=self.bg_color, text="What career field would\nyou like to pursue", font=self.header_font)
+        career_text.place(x=0, y = 150)
+        self.all_screen_obj.append(career_text)
+
+        self.career_dd = CTk.CTkOptionMenu(self.app, bg_color=self.bg_color, fg_color=self.bg_color, values= ["-"] + self.CAREER_PATHS , font=self.header_font, width = 400)
+        self.career_dd.place(x=200, y=250)
+        self.all_screen_obj.append(self.career_dd)
+
+        back_button = CTk.CTkButton(self.app, text="Back", font=self.text_font, fg_color=self.bg_color_light, bg_color=self.bg_color, hover_color=self.bg_color, border_width=0, command=self.intro_10th_slide, width=100, height=50)
+        back_button.place(x=150, y=400)
+        self.all_screen_obj.append(back_button)
+
+        report = CTk.CTkButton(self.app, 75, 30, font=self.button_font, text="Generate Report", command=self.generate_report, border_width=0, border_color=self.bg_color, bg_color=self.bg_color, fg_color=self.bg_color_light)
+        report.place(x=150, y=400)
+        self.all_screen_obj.append(report)
 
     def generate_report(self,) :
-        self.clearScreen()
+        try :
+            career_path = self.career_dd.get()
+            assert (career_path != "-")
 
+        except :
+            messagebox.showerror("Invalid Career Path", "Invalid Career Path!")
+            self.intro_11th_slide()
+
+    def parse_unis(self, ) :
+        self.T1_UNIS = []
+        self.T2_UNIS = []
+        self.T3_UNIS = []
+        self.T4_UNIS = []
+        self.T5_UNIS = []
+
+        with open("tier1.json", 'r') as t1 :
+            tier1s = json.load(t1)
+
+            for i in tier1s :
+                (1-tier1s[i]["acc_rate"])*10*3*5
+
+        with open("tier2.json", 'r') as t2 :
+            tier2s = json.load(t2)
+
+            for i in tier2s :
+                (1-tier2s[i]["acc_rate"])*10*3*4
+
+        with open("tier3.json", 'r') as t3 :
+            tier3s = json.load(t3)
+
+            for i in tier3s :
+                (1-tier3s[i]["acc_rate"])*10*3*3
+            
+        with open("tier4.json", 'r') as t4 :
+            tier4s = json.load(t4)
+
+            for i in tier4s :
+                (1-tier4s[i]["acc_rate"])*10*3*2
+
+        with open("tier5.json", 'r') as t5 :
+            tier5s = json.load(t5)
+
+            for i in tier5s :
+                (1-tier5s[i]["acc_rate"])*10*3*1
+
+        self.ALL_UNIS = self.T1_UNIS + self.T2_UNIS + self.T3_UNIS + self.T4_UNIS + self.T5_UNIS
     
+    def sendOPENAICHAT(self, input) -> str :
+        pass
 
 var = app(CTk.CTk())

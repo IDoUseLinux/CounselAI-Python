@@ -4,14 +4,14 @@
         "75_sat" : 1550,
         "50_sat" : 1490,
         "25_sat" : 1460,
-        "tags" : ["UC System", "Large", "Public Ivy", "Business", "Art", "Music", "Institute of Technology"]
+        "tags" : ["UC System", "Large", "Public Ivy", "Business", "Art", "Music", "Tech"]
     },
     "University of California, Berkeley" : {
         "acc_rate" : 0.116,
         "75_sat" : 1530,
         "50_sat" : 1420,
         "25_sat" : 1340,
-        "tags" : ["UC System", "Large", "Public Ivy", "Business", "Institute of Technology"]
+        "tags" : ["UC System", "Large", "Public Ivy", "Business", "Tech"]
     },
     "Georgetown University" : {
         "acc_rate" : 0.12,
@@ -81,7 +81,7 @@
         "75_sat" : 1540,
         "50_sat" : 1470,
         "25_sat" : 1400,
-        "tags" : ["Medium"]
+        "tags" : ["Medium", "Public Ivy"]
     },
     "University of Washington, St Louis" : {
         "acc_rate" : 0.11,

@@ -1,4 +1,4 @@
-class sports :
+class clubs :
     def __init__(self, name, purpose, role) :
         self.name = name
         self.purpose = purpose

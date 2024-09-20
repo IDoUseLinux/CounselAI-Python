@@ -60,7 +60,7 @@
         "75_sat" : 1580,
         "50_sat" : 1550,
         "25_sat" : 1500,
-        "tags" : ["Ivy-Adjacent", "Large", "Business", "Institute of Technology"]
+        "tags" : ["Ivy-Adjacent", "Large", "Business", "Tech"]
     },
     "California Institute of Technology" : {
         "acc_rate" : 0.024,
@@ -109,7 +109,7 @@
         "75_sat" : 1560,
         "50_sat" : 1540,
         "25_sat" : 1510,
-        "tags" : ["Ivy-Adjacent", "Medium"]
+        "tags" : ["Ivy-Adjacent", "Medium", "Tech"]
     },
     "Northwestern University" : {
         "acc_rate" : 0.07,
