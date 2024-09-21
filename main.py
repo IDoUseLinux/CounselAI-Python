@@ -870,10 +870,7 @@ class app() :
             self.student_score += tempTotal
             
             print(self.student_score)
-            
-
-            CAREER_PATHS = ["Undecided", "STEM", "Art", "Music", "Business", "Law", "Medical", "Sports", "Other"]
-            
+                        
             self.clearScreen()
             if career_path == "STEM" :
                 tag = "Tech"
