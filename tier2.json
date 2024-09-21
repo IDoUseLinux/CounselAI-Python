@@ -4,7 +4,7 @@
         "75_sat" : 1550,
         "50_sat" : 1490,
         "25_sat" : 1460,
-        "tags" : ["UC System", "Large", "Public Ivy", "Business", "Art", "Music", "Tech"]
+        "tags" : ["UC System", "Large", "Public Ivy", "Business", "Art", "Music", "Tech", "Medical"]
     },
     "University of California, Berkeley" : {
         "acc_rate" : 0.116,
@@ -25,7 +25,7 @@
         "75_sat" : 1520,
         "50_sat" : 1440,
         "25_sat" : 1330,
-        "tags" : ["Medium"]
+        "tags" : ["Medium", "Sports"]
     },
     "New York University" : {
         "acc_rate" : 0.125,
@@ -39,7 +39,7 @@
         "75_sat" : 1570,
         "50_sat" : 1540,
         "25_sat" : 1490,
-        "tags" : ["Medium", "Institute of Technology"]
+        "tags" : ["Medium", "Tech"]
     },
     "University of Notre Dame" : {
         "acc_rate" : 0.13,
@@ -60,21 +60,21 @@
         "75_sat" : 1510,
         "50_sat" : 1420,
         "25_sat" : 1330,
-        "tags" : ["Large", "Institute of Technology"]
+        "tags" : ["Large", "Tech"]
     },
     "University of North Carolina, Chapel Hill" : {
         "acc_rate" : 0.17,
         "75_sat" : 1520,
         "50_sat" : 1460,
         "25_sat" : 1390,
-        "tags" : ["Large"]
+        "tags" : ["Large", "Sports"]
     },
     "Emory University" : {
         "acc_rate" : 0.11,
         "75_sat" : 1540,
         "50_sat" : 1510,
         "25_sat" : 1470,
-        "tags" : ["Medium"]
+        "tags" : ["Medium", "Medical"]
     },
     "University of Virgina" : {
         "acc_rate" : 0.19,
@@ -88,14 +88,14 @@
         "75_sat" : 1570,
         "50_sat" : 1540,
         "25_sat" : 1500,
-        "tags" : ["Medium"]
+        "tags" : ["Medium", "Medical"]
     },
     "University of Florida" : {
         "acc_rate" : 0.23,
         "75_sat" : 1450,
         "50_sat" : 1360,
         "25_sat" : 1320,
-        "tags" : ["Large"]
+        "tags" : ["Large", "Sports"]
     },
     "University of California, Irvine" : {
         "acc_rate" : 0.21,

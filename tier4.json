@@ -18,21 +18,21 @@
         "75_sat" : 1390,
         "50_sat" : 1290,
         "25_sat" : 1180,
-        "tags" : ["Large", "Institute of Technology"]
+        "tags" : ["Large", "Tech"]
     },
     "DigiPen Institute of Technology" : {
         "acc_rate" : 0.66,
         "75_sat" : 1390,
         "50_sat" : 1280,
         "25_sat" : 1170,
-        "tags" : ["Small", "Institute of Technology"]
+        "tags" : ["Small", "Tech"]
     },
     "Rochester Institute of Technology" : {
         "acc_rate" : 0.672,
         "75_sat" : 1430,
         "50_sat" : 1350,
         "25_sat" : 1280,
-        "tags" : ["Large", "Institute of Technology"]
+        "tags" : ["Large", "Tech"]
     },
     "Rutgers University, New Brunswick" : {
         "acc_rate" : 0.66,
@@ -60,6 +60,6 @@
         "75_sat" : 1430,
         "50_sat" : 1340,
         "25_sat" : 1270,
-        "tags" : ["Large"]
+        "tags" : ["Large", "Medical", "Sports"]
     }
 }

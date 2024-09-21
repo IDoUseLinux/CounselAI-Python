@@ -3,4 +3,4 @@ class awards :
         self.awardname = awardname
         self.awardlevel = awardlevel
         self.awardplace = awardplace
-        self.awardvalue = awardlevel*awardplace/2
+        self.awardValue = awardlevel*awardplace/2

@@ -4,7 +4,7 @@
         "75_sat" : 1580,
         "50_sat" : 1550,
         "25_sat" : 1490,
-        "tags" : ["Ivy", "Medium", "Law", "Business"]
+        "tags" : ["Ivy", "Medium", "Law", "Business", "Medical"]
     },
     "Princeton University" : {
         "acc_rate" : 0.057,
@@ -67,21 +67,21 @@
         "75_sat" : 1570,
         "50_sat" : 1550,
         "25_sat" : 1530,
-        "tags" : ["Ivy-Adjacent", "Small", "Institute of Technology"]
+        "tags" : ["Ivy-Adjacent", "Small", "Tech"]
     },
     "Massachusetts Institute of Technology" : {
         "acc_rate" : 0.04,
         "75_sat" : 1580,
         "50_sat" : 1560,
         "25_sat" : 1530,
-        "tags" : ["Ivy-Adjacent", "Medium", "Institute of Technology", "Business"]
+        "tags" : ["Ivy-Adjacent", "Medium", "Tech", "Business"]
     },
     "Duke University" : {
         "acc_rate" : 0.063,
         "75_sat" : 1570,
         "50_sat" : 1550,
         "25_sat" : 1490,
-        "tags" : ["Ivy-Adjacent", "Medium", "Business"]
+        "tags" : ["Ivy-Adjacent", "Medium", "Business", "Sports"]
     },
     "Johns Hopkins University" : {
         "acc_rate" : 0.073,

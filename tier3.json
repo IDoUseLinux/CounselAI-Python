@@ -32,7 +32,7 @@
         "75_sat" : 1450,
         "50_sat" : 1340,
         "25_sat" : 1260,
-        "tags" : ["CSU System", "Large", "Institute of Technology"]
+        "tags" : ["CSU System", "Large", "Tech"]
     },
     "University of Rochester" : {
         "acc_rate" : 0.39,
@@ -46,7 +46,7 @@
         "75_sat" : 1520,
         "50_sat" : 1470,
         "25_sat" : 1410,
-        "tags" : ["Medium"]
+        "tags" : ["Medium", "Medical"]
     },
     "Florida State University" : {
         "acc_rate" : 0.25,

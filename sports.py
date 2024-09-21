@@ -3,4 +3,4 @@ class sports :
         self.name = name
         self.position = position
         self.totalMonths = totalMonths
-        self.sportsValue = position * totalMonths
+        self.sportsValue = position * totalMonths / 4

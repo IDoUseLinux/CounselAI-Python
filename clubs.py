@@ -3,4 +3,4 @@ class clubs :
         self.name = name
         self.purpose = purpose
         self.role = role
-        self.clubvalue = purpose*role
+        self.clubValue = purpose*role/3

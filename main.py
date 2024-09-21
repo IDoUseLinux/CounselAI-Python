@@ -1,10 +1,18 @@
 import customtkinter as CTk, requests, os
-import openai, json, requests
-import score, clubs, awards, sports, AP
+import openai, json, requests, random, webbrowser
+import score, clubs, awards, sports, AP, universities
 from tkinter import messagebox
 
-with open("APIKEY.config") as api_key_file :
+## First expand, write in as many features into the code as possible
+## Then re-org, making the code-base actually redable and consolidating
+## bloated code into more optimal code and adding in quality of life 
+## changes.
+
+with open("APIKEY.config", 'r') as api_key_file :
     openai.api_key = api_key_file.read()
+
+with open("systemprompt.txt", 'r') as sp :
+    systemPrompt = sp.read()
 
 is_dev_version = True
 build_tag = "Alpha-1234"
@@ -23,6 +31,7 @@ class app() :
         "Pre-calculus",
         "Statistics",
         "Pyschology",
+        "US History",
     ]
 
     AP_T3 = [
@@ -47,8 +56,8 @@ class app() :
         "Art History",
         "Music Theory",
         "Research",
-        "Seminar"
-        "CSP",
+        "Seminar",
+        "CSP"
     ]
 
     AP_T5 = [
@@ -120,6 +129,10 @@ class app() :
 
         settings_button = CTk.CTkButton(header, text="⚙️", font=self.header_font, fg_color=self.bg_color_light, hover_color=self.bg_color, border_width=0, command = lambda : self.director("SettingButton"), width=60, height=50)
         settings_button.place(x=525, y=12)
+
+        self.chatHistory = [
+            {"role" : "system", "content" : systemPrompt}    
+        ]
 
         self.parse_unis()
 
@@ -301,11 +314,11 @@ class app() :
             ap_text.place(x=0, y = 150)
             self.all_screen_obj.append(ap_text)
 
-            yes_ap = CTk.CTkButton(self.app, 75, 30, font=self.button_font, text="Yes", command=self.intro_4th_slide_ap_selector, border_width=0, border_color=self.bg_color, bg_color=self.bg_color, fg_color=self.bg_color_light)
+            yes_ap = CTk.CTkButton(self.app, 75, 30, font=self.text_font, text="Yes", command=self.intro_4th_slide_ap_selector, border_width=0, border_color=self.bg_color, bg_color=self.bg_color, fg_color=self.bg_color_light)
             yes_ap.place(x=150, y=450)
             self.all_screen_obj.append(yes_ap)
 
-            no_ap = CTk.CTkButton(self.app, 75, 30, font=self.button_font, text="No", command=self.intro_5th_slide, border_width=0, border_color=self.bg_color, bg_color=self.bg_color, fg_color=self.bg_color_light)
+            no_ap = CTk.CTkButton(self.app, 75, 30, font=self.text_font, text="No", command=self.intro_5th_slide, border_width=0, border_color=self.bg_color, bg_color=self.bg_color, fg_color=self.bg_color_light)
             no_ap.place(x=375, y=450)
             self.all_screen_obj.append(no_ap)
 
@@ -318,11 +331,11 @@ class app() :
         sat_text.place(x=0, y = 150)
         self.all_screen_obj.append(sat_text)
 
-        yes_sat = CTk.CTkButton(self.app, 75, 30, font=self.button_font, text="Yes", command=self.intro_5th_slide_sat_score, border_width=0, border_color=self.bg_color, bg_color=self.bg_color, fg_color=self.bg_color_light)
+        yes_sat = CTk.CTkButton(self.app, 75, 30, font=self.text_font, text="Yes", command=self.intro_5th_slide_sat_score, border_width=0, border_color=self.bg_color, bg_color=self.bg_color, fg_color=self.bg_color_light)
         yes_sat.place(x=150, y=400)
         self.all_screen_obj.append(yes_sat)
 
-        no_sat = CTk.CTkButton(self.app, 75, 30, font=self.button_font, text="No", command=self.intro_5th_slide_psat, border_width=0, border_color=self.bg_color, bg_color=self.bg_color, fg_color=self.bg_color_light)
+        no_sat = CTk.CTkButton(self.app, 75, 30, font=self.text_font, text="No", command=self.intro_5th_slide_psat, border_width=0, border_color=self.bg_color, bg_color=self.bg_color, fg_color=self.bg_color_light)
         no_sat.place(x=375, y=400)
         self.all_screen_obj.append(no_sat)
 
@@ -364,11 +377,11 @@ class app() :
         psat_text.place(x=0, y = 150)
         self.all_screen_obj.append(psat_text)
 
-        yes_psat = CTk.CTkButton(self.app, 75, 30, font=self.button_font, text="Yes", command=self.intro_5th_slide_psat_score, border_width=0, border_color=self.bg_color, bg_color=self.bg_color, fg_color=self.bg_color_light)
+        yes_psat = CTk.CTkButton(self.app, 75, 30, font=self.text_font, text="Yes", command=self.intro_5th_slide_psat_score, border_width=0, border_color=self.bg_color, bg_color=self.bg_color, fg_color=self.bg_color_light)
         yes_psat.place(x=150, y=400)
         self.all_screen_obj.append(yes_psat)
 
-        no_psat = CTk.CTkButton(self.app, 75, 30, font=self.button_font, text="No", command=self.intro_6th_slide, border_width=0, border_color=self.bg_color, bg_color=self.bg_color, fg_color=self.bg_color_light)
+        no_psat = CTk.CTkButton(self.app, 75, 30, font=self.text_font, text="No", command=self.intro_6th_slide, border_width=0, border_color=self.bg_color, bg_color=self.bg_color, fg_color=self.bg_color_light)
         no_psat.place(x=375, y=400)
         self.all_screen_obj.append(no_psat)
 
@@ -394,11 +407,11 @@ class app() :
         self.psat_dd.place(x=300, y=350)
         self.all_screen_obj.append(self.psat_dd)
 
-        yes_psat = CTk.CTkButton(self.app, 75, 30, font=self.button_font, text="Back", command=self.intro_5th_slide_psat, border_width=0, border_color=self.bg_color, bg_color=self.bg_color, fg_color=self.bg_color_light)
+        yes_psat = CTk.CTkButton(self.app, 75, 30, font=self.text_font, text="Back", command=self.intro_5th_slide_psat, border_width=0, border_color=self.bg_color, bg_color=self.bg_color, fg_color=self.bg_color_light)
         yes_psat.place(x=150, y=450)
         self.all_screen_obj.append(yes_psat)
 
-        no_psat = CTk.CTkButton(self.app, 75, 30, font=self.button_font, text="Next", command=self.intro_5th_slide_psat_score_validator, border_width=0, border_color=self.bg_color, bg_color=self.bg_color, fg_color=self.bg_color_light)
+        no_psat = CTk.CTkButton(self.app, 75, 30, font=self.text_font, text="Next", command=self.intro_5th_slide_psat_score_validator, border_width=0, border_color=self.bg_color, bg_color=self.bg_color, fg_color=self.bg_color_light)
         no_psat.place(x=375, y=450)
         self.all_screen_obj.append(no_psat)
     
@@ -426,11 +439,11 @@ class app() :
         act_text.place(x=0, y = 150)
         self.all_screen_obj.append(act_text)
 
-        yes_act = CTk.CTkButton(self.app, 75, 30, font=self.button_font, text="Yes", command=self.intro_6th_slide_act_score, border_width=0, border_color=self.bg_color, bg_color=self.bg_color, fg_color=self.bg_color_light)
+        yes_act = CTk.CTkButton(self.app, 75, 30, font=self.text_font, text="Yes", command=self.intro_6th_slide_act_score, border_width=0, border_color=self.bg_color, bg_color=self.bg_color, fg_color=self.bg_color_light)
         yes_act.place(x=150, y=400)
         self.all_screen_obj.append(yes_act)
 
-        no_act = CTk.CTkButton(self.app, 75, 30, font=self.button_font, text="No", command=self.intro_7th_slide, border_width=0, border_color=self.bg_color, bg_color=self.bg_color, fg_color=self.bg_color_light)
+        no_act = CTk.CTkButton(self.app, 75, 30, font=self.text_font, text="No", command=self.intro_7th_slide, border_width=0, border_color=self.bg_color, bg_color=self.bg_color, fg_color=self.bg_color_light)
         no_act.place(x=375, y=400)
         self.all_screen_obj.append(no_act)
 
@@ -478,16 +491,16 @@ class app() :
         clubs_text.place(x=0, y = 150)
         self.all_screen_obj.append(clubs_text)
 
-        yes_clubs = CTk.CTkButton(self.app, 75, 30, font=self.button_font, text="Yes", command=self.intro_7th_slide_club_entry, border_width=0, border_color=self.bg_color, bg_color=self.bg_color, fg_color=self.bg_color_light)
+        yes_clubs = CTk.CTkButton(self.app, 75, 30, font=self.text_font, text="Yes", command=self.intro_7th_slide_club_entry, border_width=0, border_color=self.bg_color, bg_color=self.bg_color, fg_color=self.bg_color_light)
         yes_clubs.place(x=150, y=400)
         self.all_screen_obj.append(yes_clubs)
 
-        no_clubs = CTk.CTkButton(self.app, 75, 30, font=self.button_font, text="No", command=self.intro_8th_slide, border_width=0, border_color=self.bg_color, bg_color=self.bg_color, fg_color=self.bg_color_light)
+        no_clubs = CTk.CTkButton(self.app, 75, 30, font=self.text_font, text="No", command=self.intro_8th_slide, border_width=0, border_color=self.bg_color, bg_color=self.bg_color, fg_color=self.bg_color_light)
         no_clubs.place(x=375, y=400)
         self.all_screen_obj.append(no_clubs)
 
         back_button = CTk.CTkButton(self.app, text="Back", font=self.text_font, fg_color=self.bg_color_light, bg_color=self.bg_color, hover_color=self.bg_color, border_width=0, command = self.intro_6th_slide, width=100, height=50)
-        back_button.place(x=250, y=450)
+        back_button.place(x=150, y=450)
         self.all_screen_obj.append(back_button)
 
     def intro_7th_slide_club_entry(self,) :
@@ -556,11 +569,11 @@ class app() :
             clubs_text.place(x=0, y = 150)
             self.all_screen_obj.append(clubs_text)
 
-            yes_clubs = CTk.CTkButton(self.app, 75, 30, font=self.button_font, text="Yes", command=self.intro_7th_slide_club_entry, border_width=0, border_color=self.bg_color, bg_color=self.bg_color, fg_color=self.bg_color_light)
+            yes_clubs = CTk.CTkButton(self.app, 75, 30, font=self.text_font, text="Yes", command=self.intro_7th_slide_club_entry, border_width=0, border_color=self.bg_color, bg_color=self.bg_color, fg_color=self.bg_color_light)
             yes_clubs.place(x=150, y=400)
             self.all_screen_obj.append(yes_clubs)
 
-            no_clubs = CTk.CTkButton(self.app, 75, 30, font=self.button_font, text="No", command=self.intro_8th_slide, border_width=0, border_color=self.bg_color, bg_color=self.bg_color, fg_color=self.bg_color_light)
+            no_clubs = CTk.CTkButton(self.app, 75, 30, font=self.text_font, text="No", command=self.intro_8th_slide, border_width=0, border_color=self.bg_color, bg_color=self.bg_color, fg_color=self.bg_color_light)
             no_clubs.place(x=375, y=400)
             self.all_screen_obj.append(no_clubs)
 
@@ -574,12 +587,12 @@ class app() :
         sports_text.place(x=0, y = 150)
         self.all_screen_obj.append(sports_text)
 
-        yes_sports = CTk.CTkButton(self.app, 75, 30, font=self.button_font, text="Yes", command=self.intro_8th_slide_sports_entry, border_width=0, border_color=self.bg_color, bg_color=self.bg_color, fg_color=self.bg_color_light)
+        yes_sports = CTk.CTkButton(self.app, 75, 30, font=self.text_font, text="Yes", command=self.intro_8th_slide_sports_entry, border_width=0, border_color=self.bg_color, bg_color=self.bg_color, fg_color=self.bg_color_light)
         yes_sports.place(x=150, y=400)
         self.all_screen_obj.append(yes_sports)
 
         ## TEMP LINK TO 10TH SLIDE
-        no_sports = CTk.CTkButton(self.app, 75, 30, font=self.button_font, text="No", command=self.intro_10th_slide, border_width=0, border_color=self.bg_color, bg_color=self.bg_color, fg_color=self.bg_color_light)
+        no_sports = CTk.CTkButton(self.app, 75, 30, font=self.text_font, text="No", command=self.intro_10th_slide, border_width=0, border_color=self.bg_color, bg_color=self.bg_color, fg_color=self.bg_color_light)
         no_sports.place(x=375, y=400)
         self.all_screen_obj.append(no_sports)
 
@@ -606,7 +619,7 @@ class app() :
         self.sports_role_dd.place(x=300, y=250)
         self.all_screen_obj.append(self.sports_role_dd)
 
-        club_role_text = CTk.CTkLabel(self.app, bg_color=self.bg_color, fg_color=self.bg_color, text="How long have you participated\nin the sport (months)", font=self.text_font)
+        club_role_text = CTk.CTkLabel(self.app, bg_color=self.bg_color, fg_color=self.bg_color, text="Length of participation (Months)", font=self.text_font)
         club_role_text.place(x=50, y=350)
         self.all_screen_obj.append(club_role_text)
 
@@ -630,9 +643,9 @@ class app() :
             assert(sports_role != "-")
 
             if sports_role == "Captain/Leader" :
-                sports_role = 3
+                sports_role = 2.5
             elif sports_role == "Other leadership role" :
-                sports_role = 2
+                sports_role = 1.5
             else : 
                 sports_role = 1
 
@@ -644,12 +657,12 @@ class app() :
             clubs_text.place(x=0, y = 150)
             self.all_screen_obj.append(clubs_text)
 
-            yes_clubs = CTk.CTkButton(self.app, 75, 30, font=self.button_font, text="Yes", command=self.intro_8th_slide_sports_entry, border_width=0, border_color=self.bg_color, bg_color=self.bg_color, fg_color=self.bg_color_light)
+            yes_clubs = CTk.CTkButton(self.app, 75, 30, font=self.text_font, text="Yes", command=self.intro_8th_slide_sports_entry, border_width=0, border_color=self.bg_color, bg_color=self.bg_color, fg_color=self.bg_color_light)
             yes_clubs.place(x=150, y=400)
             self.all_screen_obj.append(yes_clubs)
 
             ## TEMP redir to 10th slide instead of 9th
-            no_clubs = CTk.CTkButton(self.app, 75, 30, font=self.button_font, text="No", command=self.intro_10th_slide, border_width=0, border_color=self.bg_color, bg_color=self.bg_color, fg_color=self.bg_color_light)
+            no_clubs = CTk.CTkButton(self.app, 75, 30, font=self.text_font, text="No", command=self.intro_10th_slide, border_width=0, border_color=self.bg_color, bg_color=self.bg_color, fg_color=self.bg_color_light)
             no_clubs.place(x=375, y=400)
             self.all_screen_obj.append(no_clubs)
 
@@ -669,11 +682,11 @@ class app() :
     #     challenge_text.place(x=0, y = 150)
     #     self.all_screen_obj.append(challenge_text)
 
-    #     yes_challenges = CTk.CTkButton(self.app, 75, 30, font=self.button_font, text="Yes", command=self.intro_9th_slide_challenges_entry, border_width=0, border_color=self.bg_color, bg_color=self.bg_color, fg_color=self.bg_color_light)
+    #     yes_challenges = CTk.CTkButton(self.app, 75, 30, font=self.text_font, text="Yes", command=self.intro_9th_slide_challenges_entry, border_width=0, border_color=self.bg_color, bg_color=self.bg_color, fg_color=self.bg_color_light)
     #     yes_challenges.place(x=150, y=400)
     #     self.all_screen_obj.append(yes_challenges)
 
-    #     no_challenges = CTk.CTkButton(self.app, 75, 30, font=self.button_font, text="No", command=self.intro_10th_slide, border_width=0, border_color=self.bg_color, bg_color=self.bg_color, fg_color=self.bg_color_light)
+    #     no_challenges = CTk.CTkButton(self.app, 75, 30, font=self.text_font, text="No", command=self.intro_10th_slide, border_width=0, border_color=self.bg_color, bg_color=self.bg_color, fg_color=self.bg_color_light)
     #     no_challenges.place(x=375, y=400)
     #     self.all_screen_obj.append(no_challenges)
 
@@ -719,11 +732,11 @@ class app() :
         awards_text.place(x=0, y = 150)
         self.all_screen_obj.append(awards_text)
 
-        yes_awards = CTk.CTkButton(self.app, 75, 30, font=self.button_font, text="Yes", command=self.intro_10th_slide_award_entry, border_width=0, border_color=self.bg_color, bg_color=self.bg_color, fg_color=self.bg_color_light)
+        yes_awards = CTk.CTkButton(self.app, 75, 30, font=self.text_font, text="Yes", command=self.intro_10th_slide_award_entry, border_width=0, border_color=self.bg_color, bg_color=self.bg_color, fg_color=self.bg_color_light)
         yes_awards.place(x=150, y=400)
         self.all_screen_obj.append(yes_awards)
 
-        no_awards = CTk.CTkButton(self.app, 75, 30, font=self.button_font, text="No", command=self.generate_report, border_width=0, border_color=self.bg_color, bg_color=self.bg_color, fg_color=self.bg_color_light)
+        no_awards = CTk.CTkButton(self.app, 75, 30, font=self.text_font, text="No", command=self.intro_11th_slide, border_width=0, border_color=self.bg_color, bg_color=self.bg_color, fg_color=self.bg_color_light)
         no_awards.place(x=375, y=400)
         self.all_screen_obj.append(no_awards)
 
@@ -748,7 +761,7 @@ class app() :
         self.all_screen_obj.append(award_region)
 
         self.award_dd = CTk.CTkOptionMenu(self.app, bg_color=self.bg_color, fg_color=self.bg_color, values= ["-"] + self.regions, font=self.text_font)
-        self.award_dd.place(x=300, y=350)
+        self.award_dd.place(x=300, y=250)
         self.all_screen_obj.append(self.award_dd)
 
         award_level_text = CTk.CTkLabel(self.app, bg_color=self.bg_color, fg_color=self.bg_color, text="Award's Level: ", font=self.text_font)
@@ -756,7 +769,7 @@ class app() :
         self.all_screen_obj.append(award_level_text)
 
         self.award_level = CTk.CTkOptionMenu(self.app, bg_color=self.bg_color, fg_color=self.bg_color, values= ["-", "Top 3", "Finalist", "Participant"] , font=self.text_font)
-        self.award_level.place(x=300, y=250)
+        self.award_level.place(x=300, y=350)
         self.all_screen_obj.append(self.award_level)
 
         back_button = CTk.CTkButton(self.app, text="Back", font=self.text_font, fg_color=self.bg_color_light, bg_color=self.bg_color, hover_color=self.bg_color, border_width=0, command=self.intro_10th_slide, width=100, height=50)
@@ -782,29 +795,31 @@ class app() :
             elif award_region == "Regional" :
                 award_region = 3
             elif award_region == "National" :
-                award_region = 4
-            else :
                 award_region = 5
+            else :
+                award_region = 7
             
             if award_level == "Top 3" :
-                award_level = 3
+                award_level = 5
             elif award_level == "Finalist" :
-                award_level = 2
+                award_level = 3
             else :
-                award_level = 2
-            
+                award_level = 1
+
+            self.clearScreen()
+
             self.awarded_awards.append(awards.awards(award_name, award_level, award_region))
 
             clubs_text = CTk.CTkLabel(self.app, 600, 80, bg_color=self.bg_color, fg_color=self.bg_color, text="Have you recieved any\nother awards?", font=self.header_font)
             clubs_text.place(x=0, y = 150)
             self.all_screen_obj.append(clubs_text)
 
-            yes_clubs = CTk.CTkButton(self.app, 75, 30, font=self.button_font, text="Yes", command=self.intro_10th_slide_award_entry, border_width=0, border_color=self.bg_color, bg_color=self.bg_color, fg_color=self.bg_color_light)
+            yes_clubs = CTk.CTkButton(self.app, 75, 30, font=self.text_font, text="Yes", command=self.intro_10th_slide_award_entry, border_width=0, border_color=self.bg_color, bg_color=self.bg_color, fg_color=self.bg_color_light)
             yes_clubs.place(x=150, y=400)
             self.all_screen_obj.append(yes_clubs)
 
             ## TEMP redir to 10th slide instead of 9th
-            no_clubs = CTk.CTkButton(self.app, 75, 30, font=self.button_font, text="No", command=self.intro_11th_slide, border_width=0, border_color=self.bg_color, bg_color=self.bg_color, fg_color=self.bg_color_light)
+            no_clubs = CTk.CTkButton(self.app, 75, 30, font=self.text_font, text="No", command=self.intro_11th_slide, border_width=0, border_color=self.bg_color, bg_color=self.bg_color, fg_color=self.bg_color_light)
             no_clubs.place(x=375, y=400)
             self.all_screen_obj.append(no_clubs)
 
@@ -819,16 +834,16 @@ class app() :
         career_text.place(x=0, y = 150)
         self.all_screen_obj.append(career_text)
 
-        self.career_dd = CTk.CTkOptionMenu(self.app, bg_color=self.bg_color, fg_color=self.bg_color, values= ["-"] + self.CAREER_PATHS , font=self.header_font, width = 400)
-        self.career_dd.place(x=200, y=250)
+        self.career_dd = CTk.CTkOptionMenu(self.app, bg_color=self.bg_color, fg_color=self.bg_color, values= ["-"] + self.CAREER_PATHS , font=self.header_font, width = 300)
+        self.career_dd.place(x=150, y=250)
         self.all_screen_obj.append(self.career_dd)
 
         back_button = CTk.CTkButton(self.app, text="Back", font=self.text_font, fg_color=self.bg_color_light, bg_color=self.bg_color, hover_color=self.bg_color, border_width=0, command=self.intro_10th_slide, width=100, height=50)
-        back_button.place(x=150, y=400)
+        back_button.place(x=150, y=450)
         self.all_screen_obj.append(back_button)
 
-        report = CTk.CTkButton(self.app, 75, 30, font=self.button_font, text="Generate Report", command=self.generate_report, border_width=0, border_color=self.bg_color, bg_color=self.bg_color, fg_color=self.bg_color_light)
-        report.place(x=150, y=400)
+        report = CTk.CTkButton(self.app, 75, 30, font=self.text_font, text="Generate Report", command=self.generate_report, border_width=0, border_color=self.bg_color, bg_color=self.bg_color, fg_color=self.bg_color_light)
+        report.place(x=350, y=450)
         self.all_screen_obj.append(report)
 
     def generate_report(self,) :
@@ -836,9 +851,128 @@ class app() :
             career_path = self.career_dd.get()
             assert (career_path != "-")
 
+            self.student_score = self.sat_score/50 + self.gpa*5
+            
+            ## Very dumb but it works so :shrug:
+            tempTotal = 0
+            for i in self.taken_APs :
+                tempTotal += i.apValue
+            
+            for i in self.taken_clubs :
+                tempTotal += i.clubValue
+            
+            for i in self.taken_sports :
+                tempTotal += i.sportsValue
+            
+            for i in self.awarded_awards :
+                tempTotal += i.awardValue
+
+            self.student_score += tempTotal
+
+            self.student_score = 76
+
+            print(self.student_score)
+            
+
+            CAREER_PATHS = ["Undecided", "STEM", "Art", "Music", "Business", "Law", "Medical", "Sports", "Other"]
+            
+            self.clearScreen()
+            if career_path == "STEM" :
+                tag = "Tech"
+            elif career_path == "Undecided" or career_path == "Other" :
+                tag = None
+            else :
+                tag = career_path
+            
+            recommend_unis = []
+            if self.student_score >= 75 :
+                for i in self.T1_UNIS :
+                    if tag in i.tags :
+                        recommend_unis.append(i)
+                if tag == "" :
+                    for i in range(3) :
+                        recommend_unis.append(random.choice(self.T1_UNIS))
+
+            if self.student_score >= 50 and self.student_score <= 90 :
+                for i in self.T2_UNIS :
+                    if tag in i.tags :
+                        recommend_unis.append(i)
+                if tag == "" :
+                    for i in range(3) :
+                        recommend_unis.append(random.choice(self.T2_UNIS))
+
+            if self.student_score >= 40 and self.student_score <= 80 :
+                for i in self.T3_UNIS :
+                    if tag in i.tags :
+                        recommend_unis.append(i)
+                if tag == "" :
+                    for i in range(3) :
+                        recommend_unis.append(random.choice(self.T3_UNIS))
+
+            if self.student_score >= 30 and self.student_score <= 55 :
+                for i in self.T4_UNIS :
+                    if tag in i.tags :
+                        recommend_unis.append(i)
+                if tag == "" :
+                    for i in range(3) :
+                        recommend_unis.append(random.choice(self.T4_UNIS))
+                        
+            if self.student_score <= 45 :
+                for i in self.T5_UNIS :
+                    if tag in i.tags :
+                        recommend_unis.append(i)
+                if tag == "" :
+                    for i in range(3) :
+                        recommend_unis.append(random.choice(self.T5_UNIS))
+            
+            
+            for i in recommend_unis :
+                print(i.name)
+
+            recommend_text = CTk.CTkLabel(self.app, bg_color=self.bg_color, fg_color=self.bg_color, text="Recommended Universities: ", font=self.text_font, width=600)
+            recommend_text.place(x=0, y=90)
+            self.all_screen_obj.append(recommend_text)
+
+            y_pos = 80
+            for i in range(5 if 5 <= len(recommend_unis) else len(recommend_unis)) : 
+                uni = random.choice(recommend_unis)
+                recommend_unis.remove(uni)
+
+                layer = CTk.CTkFrame(self.app, 600, 65, 0, 0, self.bg_color_light, self.bg_color_light)
+                layer.place(x=0, y=y_pos*i+140)
+
+                uni_text = CTk.CTkLabel(layer, bg_color=self.bg_color_light, fg_color=self.bg_color_light, text=uni.name, font=self.button_font)
+                uni_text.place(x=15, y=20)
+                self.all_screen_obj.append(uni_text)
+
+                uni_button = CTk.CTkButton(layer, 75, border_width=0, command=lambda : webbrowser.open(f"https://google.com/search?q={uni.name}"), text="More info", font=self.small_font)
+                uni_button.place(x=485, y=20)
+
+
+                self.all_screen_obj.append(layer)
+
+            ai_chat_button = CTk.CTkButton(self.app, 100, border_width=0, command=self.chat_with_ai, bg_color=self.bg_color_light, fg_color=self.bg_color_light, text="Chat with AI!", font=self.header_font)
+            ai_chat_button.place(x=250, y=550)
+            self.all_screen_obj.append(ai_chat_button)
+
         except :
             messagebox.showerror("Invalid Career Path", "Invalid Career Path!")
             self.intro_11th_slide()
+    
+    def chat_with_ai(self,) :
+        self.clearScreen()
+
+        ai_box = CTk.CTkScrollableFrame(self.app, 400, 300, 0, 0, self.app_text_box_color, self.app_text_box_color)
+        ai_box.place(100, 150)
+        self.all_screen_obj.append(ai_box)
+
+        ai_entry = CTk.CTkEntry(self.app, 340, 50, 0, 0, self.app_text_box_color, self.app_text_box_color, placeholder_text="Hello, World!")
+        ai_entry.place(x=100, y=550)
+        self.all_screen_obj.append(ai_entry)
+
+        send_button = CTk.CTkButton(self.app, 50, 50, 0, 0, command=self.sendMessage, bg_color=self.bg_color_light, fg_color=self.bg_color_light, text="Send", font=self.header_font)
+        send_button.place(x=350, y=550)
+        self.all_screen_obj.append(send_button)
 
     def parse_unis(self, ) :
         self.T1_UNIS = []
@@ -849,37 +983,58 @@ class app() :
 
         with open("tier1.json", 'r') as t1 :
             tier1s = json.load(t1)
-
+            
             for i in tier1s :
-                (1-tier1s[i]["acc_rate"])*10*3*5
+                ## Ugly but works
+                self.T1_UNIS.append(universities.university(i, tier1s[i]["acc_rate"], 5, tier1s[i]["75_sat"], tier1s[i]["50_sat"], tier1s[i]["25_sat"], tier1s[i]["tags"]))
 
         with open("tier2.json", 'r') as t2 :
             tier2s = json.load(t2)
 
             for i in tier2s :
-                (1-tier2s[i]["acc_rate"])*10*3*4
+                self.T2_UNIS.append(universities.university(i, tier2s[i]["acc_rate"], 4, tier2s[i]["75_sat"], tier2s[i]["50_sat"], tier2s[i]["25_sat"], tier2s[i]["tags"]))
 
         with open("tier3.json", 'r') as t3 :
             tier3s = json.load(t3)
 
             for i in tier3s :
-                (1-tier3s[i]["acc_rate"])*10*3*3
+                self.T3_UNIS.append(universities.university(i, tier3s[i]["acc_rate"], 3, tier3s[i]["75_sat"], tier3s[i]["50_sat"], tier3s[i]["25_sat"], tier3s[i]["tags"]))
             
         with open("tier4.json", 'r') as t4 :
             tier4s = json.load(t4)
 
             for i in tier4s :
-                (1-tier4s[i]["acc_rate"])*10*3*2
+                self.T4_UNIS.append(universities.university(i, tier4s[i]["acc_rate"], 2, tier4s[i]["75_sat"], tier4s[i]["50_sat"], tier4s[i]["25_sat"], tier4s[i]["tags"]))
 
         with open("tier5.json", 'r') as t5 :
             tier5s = json.load(t5)
 
             for i in tier5s :
-                (1-tier5s[i]["acc_rate"])*10*3*1
+                self.T5_UNIS.append(universities.university(i, tier5s[i]["acc_rate"], 1, tier5s[i]["75_sat"], tier5s[i]["50_sat"], tier5s[i]["25_sat"], tier5s[i]["tags"]))
 
+        ## Also a bit janky but also works
         self.ALL_UNIS = self.T1_UNIS + self.T2_UNIS + self.T3_UNIS + self.T4_UNIS + self.T5_UNIS
-    
-    def sendOPENAICHAT(self, input) -> str :
+
+
+    def sendMessage(self) :
         pass
+
+    def sendOPENAIMessage(self, user_input) -> str :
+        try :
+            self.chatHistory.append({"role" : "user", "content" : user_input})
+
+            response = openai.chat.completions.create(
+                model="gpt-4o",
+                messages=self.chatHistory,
+                max_tokens=250,
+                n=1,
+                stop=None,
+                temperature=0.7
+            )
+
+            return response["choices"][0]["message"]["content"]
+        except Exception as e :
+            return f"An error occurred: {str(e)}"
+
 
 var = app(CTk.CTk())
