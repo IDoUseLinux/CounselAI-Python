@@ -961,7 +961,7 @@ class app() :
         self.ai_box.place(x=100, y=150)
         ## Deleting ai_box requires for basically everything else to be deleted
 
-        self.ai_entry = CTk.CTkEntry(self.app, 340, 50, 0, 0, self.app_text_box_color, self.app_text_box_color, placeholder_text="Hello, World!")
+        self.ai_entry = CTk.CTkEntry(self.app, 340, 50, 0, 0, self.app_text_box_color, self.app_text_box_color, placeholder_text="Hello, World!", font=self.header_font)
         self.ai_entry.place(x=100, y=550)
         self.all_screen_obj.append(self.ai_entry)
 
@@ -1044,7 +1044,7 @@ class app() :
                 temperature=0.7
             )
 
-            return response["choices"][0]["message"]["content"]
+            return response.choices[0].message.content
         except Exception as e :
             return f"An error occurred: {str(e)}"
 
