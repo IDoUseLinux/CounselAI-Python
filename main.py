@@ -958,7 +958,7 @@ class app() :
     def chat_with_ai(self,) :
         self.clearScreen()
         
-        self.ai_box = CTk.CTkScrollableFrame(self.app, 400, 300, 0, 0, self.app_text_box_color, self.app_text_box_color)
+        self.ai_box = CTk.CTkFrame(self.app, 400, 300, 0, 0, self.app_text_box_color, self.app_text_box_color)
         self.ai_box.place(x=100, y=150)
         ## Deleting ai_box requires for basically everything else to be deleted
 
@@ -1022,13 +1022,13 @@ class app() :
         user_message = CTk.CTkLabel(self.ai_box, bg_color=self.bg_color_light, fg_color=self.bg_color_light, text=user_input, font=self.text_font)
         user_message.place(x=15, y=self.current_y_ai)
         self.all_screen_obj.append(user_message)
-        self.current_y_ai += int(len(user_input)/2) + 10
+        self.current_y_ai += int(len(user_input)/2) + 35
 
         ai_response = self.sendOPENAIMessage(user_input)
         print(ai_response)
         ai_message = CTk.CTkLabel(self.ai_box, bg_color=self.bg_color_light, fg_color=self.bg_color_light, text=ai_response, font=self.text_font)
         ai_message.place(x=15, y=self.current_y_ai)
-        self.current_y_ai += int(len(ai_response)/2) + 10
+        self.current_y_ai += int(len(ai_response)/2) + 35
 
 
 
