@@ -868,9 +868,7 @@ class app() :
                 tempTotal += i.awardValue
 
             self.student_score += tempTotal
-
-            self.student_score = 76
-
+            
             print(self.student_score)
             
 
@@ -961,18 +959,20 @@ class app() :
     
     def chat_with_ai(self,) :
         self.clearScreen()
+        
+        self.ai_box = CTk.CTkScrollableFrame(self.app, 400, 300, 0, 0, self.app_text_box_color, self.app_text_box_color)
+        self.ai_box.place(x=100, y=150)
+        ## Deleting ai_box requires for basically everything else to be deleted
 
-        ai_box = CTk.CTkScrollableFrame(self.app, 400, 300, 0, 0, self.app_text_box_color, self.app_text_box_color)
-        ai_box.place(100, 150)
-        self.all_screen_obj.append(ai_box)
-
-        ai_entry = CTk.CTkEntry(self.app, 340, 50, 0, 0, self.app_text_box_color, self.app_text_box_color, placeholder_text="Hello, World!")
-        ai_entry.place(x=100, y=550)
-        self.all_screen_obj.append(ai_entry)
+        self.ai_entry = CTk.CTkEntry(self.app, 340, 50, 0, 0, self.app_text_box_color, self.app_text_box_color, placeholder_text="Hello, World!")
+        self.ai_entry.place(x=100, y=550)
+        self.all_screen_obj.append(self.ai_entry)
 
         send_button = CTk.CTkButton(self.app, 50, 50, 0, 0, command=self.sendMessage, bg_color=self.bg_color_light, fg_color=self.bg_color_light, text="Send", font=self.header_font)
         send_button.place(x=350, y=550)
         self.all_screen_obj.append(send_button)
+
+        self.current_y_ai = 15
 
     def parse_unis(self, ) :
         self.T1_UNIS = []
@@ -1017,16 +1017,31 @@ class app() :
 
 
     def sendMessage(self) :
-        pass
+        user_input = self.ai_entry.get()
+        self.ai_entry.delete(0, CTk.END)
+        print(user_input)
+
+        user_message = CTk.CTkLabel(self.ai_box, bg_color=self.bg_color_light, fg_color=self.bg_color_light, text=user_input, font=self.text_font)
+        user_message.place(x=15, y=self.current_y_ai)
+        self.all_screen_obj.append(user_message)
+        self.current_y_ai += int(len(user_input)/2) + 10
+
+        ai_response = self.sendOPENAIMessage(user_input)
+        print(ai_response)
+        ai_message = CTk.CTkLabel(self.ai_box, bg_color=self.bg_color_light, fg_color=self.bg_color_light, text=ai_response, font=self.text_font)
+        ai_message.place(x=15, y=self.current_y_ai)
+        self.current_y_ai += int(len(ai_response)/2) + 10
+
+
 
     def sendOPENAIMessage(self, user_input) -> str :
         try :
             self.chatHistory.append({"role" : "user", "content" : user_input})
 
             response = openai.chat.completions.create(
-                model="gpt-4o",
+                model="gpt-3.5-turbo",
                 messages=self.chatHistory,
-                max_tokens=250,
+                max_tokens=300,
                 n=1,
                 stop=None,
                 temperature=0.7
