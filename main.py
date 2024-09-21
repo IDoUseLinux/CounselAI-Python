@@ -104,6 +104,7 @@ class app() :
     ## S = 15
     large_font = ("Segoe UI", 50) ## Segoe is a nice font
     header_font = ("Segoe UI", 35)
+    medium_font = ("Segoe UI", 30)
     text_font = ("Segoe UI", 25)
     button_font = ("Segoe UI", 20)
     small_font = ("Segoe UI", 15)
@@ -961,7 +962,7 @@ class app() :
         self.ai_box.place(x=100, y=150)
         ## Deleting ai_box requires for basically everything else to be deleted
 
-        self.ai_entry = CTk.CTkEntry(self.app, 340, 50, 0, 0, self.app_text_box_color, self.app_text_box_color, placeholder_text="Hello, World!", font=self.header_font)
+        self.ai_entry = CTk.CTkEntry(self.app, 340, 50, 0, 0, self.app_text_box_color, self.app_text_box_color, placeholder_text="Hello, World!", font=self.medium_font)
         self.ai_entry.place(x=100, y=550)
         self.all_screen_obj.append(self.ai_entry)
 
@@ -1036,7 +1037,7 @@ class app() :
             self.chatHistory.append({"role" : "user", "content" : user_input})
 
             response = openai.chat.completions.create(
-                model="gpt-3.5-turbo",
+                model="gpt-4o",
                 messages=self.chatHistory,
                 max_tokens=300,
                 n=1,
