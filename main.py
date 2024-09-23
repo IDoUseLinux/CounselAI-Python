@@ -1013,7 +1013,6 @@ class app() :
         ## Also a bit janky but also works
         self.ALL_UNIS = self.T1_UNIS + self.T2_UNIS + self.T3_UNIS + self.T4_UNIS + self.T5_UNIS
 
-
     def sendMessage(self) :
         user_input = self.ai_entry.get()
         self.ai_entry.delete(0, CTk.END)
@@ -1029,8 +1028,6 @@ class app() :
         ai_message = CTk.CTkLabel(self.ai_box, bg_color=self.bg_color_light, fg_color=self.bg_color_light, text=ai_response, font=self.text_font)
         ai_message.place(x=15, y=self.current_y_ai)
         self.current_y_ai += int(len(ai_response)/2) + 35
-
-
 
     def sendOPENAIMessage(self, user_input) -> str :
         try :
@@ -1048,6 +1045,5 @@ class app() :
             return response.choices[0].message.content
         except Exception as e :
             return f"An error occurred: {str(e)}"
-
 
 var = app(CTk.CTk())
