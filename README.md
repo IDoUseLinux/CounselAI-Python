@@ -1,2 +1,2 @@
 # CounselAI-Python
-A submission to the Honolulu Tech Week Hackathon &amp; the Congressional App Challenge
+A submission to the Honolulu Tech Week Hackathon, the 2024 Congressional App Challenge, and the National STEM Festival
