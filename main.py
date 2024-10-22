@@ -552,7 +552,7 @@ class app() :
             if club_purpose == "Academic" :
                 club_purpose = 3
             elif club_purpose == "Volunteering" : 
-                club_purpose = 2
+                club_purpose = 2.5
             else :
                 club_purpose = 1
 
@@ -861,7 +861,7 @@ class app() :
             tempTotal = 0
             for i in self.taken_APs :
                 tempTotal += i.apValue
-            
+
             for i in self.taken_clubs :
                 tempTotal += i.clubValue
             
@@ -871,7 +871,7 @@ class app() :
             for i in self.awarded_awards :
                 tempTotal += i.awardValue
 
-            self.student_score += tempTotal/1.5
+            self.student_score += tempTotal
             
             print(self.student_score)
                         
@@ -984,6 +984,7 @@ class app() :
             for i in tier1s :
                 ## Ugly but works
                 self.T1_UNIS.append(universities.university(i, tier1s[i]["acc_rate"], 5, tier1s[i]["75_sat"], tier1s[i]["50_sat"], tier1s[i]["25_sat"], tier1s[i]["tags"]))
+                print(self.T1_UNIS[len(self.T1_UNIS)-1].universityDifficulty)
 
         with open("tier2.json", 'r') as t2 :
             tier2s = json.load(t2)
@@ -1008,6 +1009,7 @@ class app() :
 
             for i in tier5s :
                 self.T5_UNIS.append(universities.university(i, tier5s[i]["acc_rate"], 1, tier5s[i]["75_sat"], tier5s[i]["50_sat"], tier5s[i]["25_sat"], tier5s[i]["tags"]))
+                print(self.T5_UNIS[len(self.T5_UNIS)-1].universityDifficulty)
 
         ## Also a bit janky but also works
         self.ALL_UNIS = self.T1_UNIS + self.T2_UNIS + self.T3_UNIS + self.T4_UNIS + self.T5_UNIS
