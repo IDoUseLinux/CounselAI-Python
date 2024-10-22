@@ -855,7 +855,7 @@ class app() :
             career_path = self.career_dd.get()
             assert (career_path != "-")
 
-            self.student_score = self.sat_score/50 + self.gpa*5
+            self.student_score = self.sat_score/50 + self.gpa*4.5
             
             ## Very dumb but it works so :shrug:
             tempTotal = 0
@@ -871,7 +871,7 @@ class app() :
             for i in self.awarded_awards :
                 tempTotal += i.awardValue
 
-            self.student_score += tempTotal
+            self.student_score += tempTotal/1.5
             
             print(self.student_score)
                         
@@ -951,7 +951,7 @@ class app() :
                 self.all_screen_obj.append(layer)
 
         except :
-            messagebox.showerror("Invalid Career Path", "Invalid Career Path!")
+            messagebox.showerror("Invalid Career Field", "Invalid Career Field!")
             self.intro_11th_slide()
     
     def chat_with_ai(self,) :

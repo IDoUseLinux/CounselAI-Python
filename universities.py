@@ -9,4 +9,4 @@ class university :
         self.sat25 = sat25
         self.tags = tags
 
-        self.universityDifficulty = (1-self.acc_rate)*10*tier+sat50/40
+        self.universityDifficulty = (1-self.acc_rate)*10 + tier*40 +sat50/40 + 10 ## Technically acc_rate is reject rate
