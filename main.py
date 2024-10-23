@@ -120,7 +120,11 @@ class app() :
         self.app_hieght = 800
 
         app.resizable(False, False)
-        
+
+        self.chatHistory = [
+            {"role" : "system", "content" : systemPrompt}    
+        ]
+
         ## Spawns screen constants...
         header = CTk.CTkFrame(self.app, width=600, height=75, fg_color=self.bg_color_light, bg_color=self.bg_color, corner_radius=0)
         header.place(x=0, y=0)
@@ -131,9 +135,8 @@ class app() :
         settings_button = CTk.CTkButton(header, text="⚙️", font=self.header_font, fg_color=self.bg_color_light, hover_color=self.bg_color, border_width=0, command = lambda : self.director("SettingButton"), width=60, height=50)
         settings_button.place(x=525, y=12)
 
-        self.chatHistory = [
-            {"role" : "system", "content" : systemPrompt}    
-        ]
+        ai_chat_button = CTk.CTkButton(self.app, 100, border_width=0, command=self.chat_with_ai, bg_color=self.bg_color_light, fg_color=self.bg_color_light, text="Chat with AI!", font=self.header_font)
+        ai_chat_button.place(x=200, y=550)
 
         self.parse_unis()
 
@@ -164,7 +167,7 @@ class app() :
         self.all_screen_obj.append(intro_text_2)
 
         next_button = CTk.CTkButton(self.app, text="Next", font=self.text_font, fg_color=self.bg_color_light, bg_color=self.bg_color, hover_color=self.bg_color, border_width=0, command=self.intro_2nd_slide, width=100, height=50)
-        next_button.place(x=150, y=400)
+        next_button.place(x=350, y=450)
         self.all_screen_obj.append(next_button)
 
     def intro_2nd_slide(self,) :
@@ -179,11 +182,11 @@ class app() :
         self.all_screen_obj.append(self.name_tb)
 
         back_button = CTk.CTkButton(self.app, text="Back", font=self.text_font, fg_color=self.bg_color_light, bg_color=self.bg_color, hover_color=self.bg_color, border_width=0, command = self.intro_1st_slide, width=100, height=50)
-        back_button.place(x=150, y=400)
+        back_button.place(x=150, y=450)
         self.all_screen_obj.append(back_button)
 
         next_button = CTk.CTkButton(self.app, text="Next", font=self.text_font, fg_color=self.bg_color_light, bg_color=self.bg_color, hover_color=self.bg_color, border_width=0, command = self.intro_3rd_slide, width=100, height=50)
-        next_button.place(x=350, y=400)
+        next_button.place(x=350, y=450)
         self.all_screen_obj.append(next_button)
 
     def intro_3rd_slide(self,) :
@@ -268,11 +271,11 @@ class app() :
         self.all_screen_obj.append(self.ap_score)
 
         back_button = CTk.CTkButton(self.app, text="Back", font=self.text_font, fg_color=self.bg_color_light, bg_color=self.bg_color, hover_color=self.bg_color, border_width=0, command=self.intro_4th_slide, width=100, height=50)
-        back_button.place(x=150, y=400)
+        back_button.place(x=150, y=450)
         self.all_screen_obj.append(back_button)
 
         next_button = CTk.CTkButton(self.app, text="Next", font=self.text_font, fg_color=self.bg_color_light, bg_color=self.bg_color, hover_color=self.bg_color, border_width=0, command=self.intro_4th_slide_ap_selector_validator, width=100, height=50)
-        next_button.place(x=350, y=400)
+        next_button.place(x=350, y=450)
         self.all_screen_obj.append(next_button)
 
     def intro_4th_slide_ap_selector_validator(self,) :
@@ -549,7 +552,7 @@ class app() :
             if club_purpose == "Academic" :
                 club_purpose = 3
             elif club_purpose == "Volunteering" : 
-                club_purpose = 2
+                club_purpose = 2.5
             else :
                 club_purpose = 1
 
@@ -852,13 +855,13 @@ class app() :
             career_path = self.career_dd.get()
             assert (career_path != "-")
 
-            self.student_score = self.sat_score/50 + self.gpa*5
+            self.student_score = self.sat_score/50 + self.gpa*4.5
             
             ## Very dumb but it works so :shrug:
             tempTotal = 0
             for i in self.taken_APs :
                 tempTotal += i.apValue
-            
+
             for i in self.taken_clubs :
                 tempTotal += i.clubValue
             
@@ -941,18 +944,14 @@ class app() :
                 uni_text.place(x=15, y=20)
                 self.all_screen_obj.append(uni_text)
 
-                uni_button = CTk.CTkButton(layer, 75, border_width=0, command=lambda : webbrowser.open(f"https://google.com/search?q={uni.name}"), text="More info", font=self.small_font)
+                uni_button = CTk.CTkButton(layer, 75, border_width=0, command=lambda university = uni.name: self.spawn_university_information_window(university), text="More info", font=self.small_font)
                 uni_button.place(x=485, y=20)
 
 
                 self.all_screen_obj.append(layer)
 
-            ai_chat_button = CTk.CTkButton(self.app, 100, border_width=0, command=self.chat_with_ai, bg_color=self.bg_color_light, fg_color=self.bg_color_light, text="Chat with AI!", font=self.header_font)
-            ai_chat_button.place(x=250, y=550)
-            self.all_screen_obj.append(ai_chat_button)
-
         except :
-            messagebox.showerror("Invalid Career Path", "Invalid Career Path!")
+            messagebox.showerror("Invalid Career Field", "Invalid Career Field!")
             self.intro_11th_slide()
     
     def chat_with_ai(self,) :
@@ -985,6 +984,7 @@ class app() :
             for i in tier1s :
                 ## Ugly but works
                 self.T1_UNIS.append(universities.university(i, tier1s[i]["acc_rate"], 5, tier1s[i]["75_sat"], tier1s[i]["50_sat"], tier1s[i]["25_sat"], tier1s[i]["tags"]))
+                print(self.T1_UNIS[len(self.T1_UNIS)-1].universityDifficulty)
 
         with open("tier2.json", 'r') as t2 :
             tier2s = json.load(t2)
@@ -1009,10 +1009,10 @@ class app() :
 
             for i in tier5s :
                 self.T5_UNIS.append(universities.university(i, tier5s[i]["acc_rate"], 1, tier5s[i]["75_sat"], tier5s[i]["50_sat"], tier5s[i]["25_sat"], tier5s[i]["tags"]))
+                print(self.T5_UNIS[len(self.T5_UNIS)-1].universityDifficulty)
 
         ## Also a bit janky but also works
         self.ALL_UNIS = self.T1_UNIS + self.T2_UNIS + self.T3_UNIS + self.T4_UNIS + self.T5_UNIS
-
 
     def sendMessage(self) :
         user_input = self.ai_entry.get()
@@ -1030,8 +1030,6 @@ class app() :
         ai_message.place(x=15, y=self.current_y_ai)
         self.current_y_ai += int(len(ai_response)/2) + 35
 
-
-
     def sendOPENAIMessage(self, user_input) -> str :
         try :
             self.chatHistory.append({"role" : "user", "content" : user_input})
@@ -1048,6 +1046,52 @@ class app() :
             return response.choices[0].message.content
         except Exception as e :
             return f"An error occurred: {str(e)}"
+    
+    def spawn_university_information_window(self, university_name) :
+        temp_chat = [{"role" : "system", "content" : systemPrompt + ". Please do not use lists and keep the reponse in a paragraph."}] ## Janky but works
+        temp_chat.append({"role" : "user", "content" : "Generate a short description of " + university_name + ". But be sure to include some tips for how to get in."})
+        
+        try :
+            response = openai.chat.completions.create(
+                model="gpt-4o",
+                messages=temp_chat,
+                max_tokens=300,
+                n=1,
+                stop=None,
+                temperature=0.7
+            )
 
+            uni_description = response.choices[0].message.content
+            print(uni_description)
+        except Exception as e :
+            messagebox.showerror("Error!", f"An error occurred: {str(e)}")
+
+        ## Programming crimes
+        uni_description = list(uni_description)
+
+        space_count = 0
+    
+        for i in range(len(uni_description)):
+            if uni_description[i] == " ":
+                space_count += 1
+                if space_count % 6 == 0:
+                    uni_description[i] = "\n" ## Very janky method of line seperation. 
+                    i = i-1 ## to deal with the fact that we technically added an additional character.
+        uni_description = "".join(uni_description)
+
+        uni_description_window = CTk.CTkToplevel(self.app,)
+        uni_description_window.config(bg=self.bg_color)
+        uni_description_window.geometry("600x600")
+        uni_description_window.title("About " + university_name)
+
+        header = CTk.CTkFrame(uni_description_window, 600, 75, 0, 0, self.bg_color_light, self.bg_color_light, )
+        header.place(x=0, y=0)
+
+        uni_name_header = CTk.CTkLabel(header, text=university_name, width=360, height=50, font=self.medium_font, text_color=self.app_text_color, bg_color=self.bg_color_light, fg_color=self.bg_color_light, )
+        uni_name_header.place(x=20, y=15)
+
+        uni_text = CTk.CTkLabel(uni_description_window, 600, 80, bg_color=self.bg_color, fg_color=self.bg_color, text=uni_description, font=self.button_font)
+        uni_text.place(x=0, y = 100)
+        
 
 var = app(CTk.CTk())
