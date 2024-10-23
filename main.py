@@ -135,8 +135,8 @@ class app() :
         settings_button = CTk.CTkButton(header, text="⚙️", font=self.header_font, fg_color=self.bg_color_light, hover_color=self.bg_color, border_width=0, command = lambda : self.director("SettingButton"), width=60, height=50)
         settings_button.place(x=525, y=12)
 
-        ai_chat_button = CTk.CTkButton(self.app, 100, border_width=0, command=self.chat_with_ai, bg_color=self.bg_color_light, fg_color=self.bg_color_light, text="Chat with AI!", font=self.header_font)
-        ai_chat_button.place(x=200, y=550)
+        self.ai_chat_button = CTk.CTkButton(self.app, 100, border_width=0, command=self.chat_with_ai, bg_color=self.bg_color_light, fg_color=self.bg_color_light, text="Chat with AI!", font=self.header_font)
+        self.ai_chat_button.place(x=200, y=550)
 
         self.parse_unis()
 
@@ -957,17 +957,14 @@ class app() :
     
     def chat_with_ai(self,) :
         self.clearScreen()
-        
-        self.ai_box = CTk.CTkScrollableFrame(self.app, 400, 300, 0, 0, self.app_text_box_color, self.app_text_box_color)
-        self.ai_box.place(x=100, y=150)
-        ## Deleting ai_box requires for basically everything else to be deleted
+        self.ai_chat_button.destroy()
 
-        self.ai_entry = CTk.CTkEntry(self.app, 340, 50, 0, 0, self.app_text_box_color, self.app_text_box_color, placeholder_text="Hello, World!", font=self.medium_font)
-        self.ai_entry.place(x=100, y=550)
+        self.ai_entry = CTk.CTkEntry(self.app, 400, 50, 0, 0, self.app_text_box_color, self.app_text_box_color, placeholder_text="Hello, World!", font=self.medium_font)
+        self.ai_entry.place(x=50, y=550)
         self.all_screen_obj.append(self.ai_entry)
 
         send_button = CTk.CTkButton(self.app, 50, 50, 0, 0, command=self.sendMessage, bg_color=self.bg_color_light, fg_color=self.bg_color_light, text="Send", font=self.header_font)
-        send_button.place(x=350, y=550)
+        send_button.place(x=450, y=550)
         self.all_screen_obj.append(send_button)
 
         self.current_y_ai = 15
@@ -1020,16 +1017,24 @@ class app() :
         self.ai_entry.delete(0, CTk.END)
         print(user_input)
 
-        user_message = CTk.CTkLabel(self.ai_box, bg_color=self.bg_color_light, fg_color=self.bg_color_light, text=user_input, font=self.text_font)
-        user_message.place(x=15, y=self.current_y_ai)
-        self.all_screen_obj.append(user_message)
-        self.current_y_ai += int(len(user_input)/2) + 35
-
         ai_response = self.sendOPENAIMessage(user_input)
+
+        ## Programming crimes
+        ai_response = list(ai_response)
+
+        space_count = 0
+    
+        for i in range(len(ai_response)):
+            if ai_response[i] == " ":
+                space_count += 1
+                if space_count % 6 == 0:
+                    ai_response[i] = "\n" ## Very janky method of line seperation. 
+                    i = i-1 ## to deal with the fact that we technically added an additional character.
+        ai_response = "".join(ai_response)
+
         print(ai_response)
-        ai_message = CTk.CTkLabel(self.ai_box, bg_color=self.bg_color_light, fg_color=self.bg_color_light, text=ai_response, font=self.text_font)
-        ai_message.place(x=15, y=self.current_y_ai)
-        self.current_y_ai += int(len(ai_response)/2) + 35
+        ai_message = CTk.CTkLabel(self.app, 500, 400, bg_color=self.bg_color, fg_color=self.bg_color, text=ai_response, font=self.text_font)
+        ai_message.place(x=25, y=100)
 
     def sendOPENAIMessage(self, user_input) -> str :
         try :
