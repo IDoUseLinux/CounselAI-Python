@@ -4,7 +4,7 @@ import score, clubs, awards, sports, AP, universities
 from tkinter import messagebox
 
 ## First expand, write in as many features into the code as possible
-## Then re-org, making the code-base actually redable and consolidating
+## Then re-org, making the code-base actually readable and consolidating
 ## bloated code into more optimal code and adding in quality of life 
 ## changes.
 
@@ -958,7 +958,7 @@ class app() :
     def chat_with_ai(self,) :
         self.clearScreen()
         
-        self.ai_box = CTk.CTkFrame(self.app, 400, 300, 0, 0, self.app_text_box_color, self.app_text_box_color)
+        self.ai_box = CTk.CTkScrollableFrame(self.app, 400, 300, 0, 0, self.app_text_box_color, self.app_text_box_color)
         self.ai_box.place(x=100, y=150)
         ## Deleting ai_box requires for basically everything else to be deleted
 
