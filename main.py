@@ -623,7 +623,7 @@ class app() :
         self.sports_role_dd.place(x=300, y=250)
         self.all_screen_obj.append(self.sports_role_dd)
 
-        club_role_text = CTk.CTkLabel(self.app, bg_color=self.bg_color, fg_color=self.bg_color, text="Length of participation (Months)", font=self.text_font)
+        club_role_text = CTk.CTkLabel(self.app, bg_color=self.bg_color, fg_color=self.bg_color, text="Length of\nthe sport\n(Months)", font=self.text_font)
         club_role_text.place(x=50, y=350)
         self.all_screen_obj.append(club_role_text)
 
@@ -640,7 +640,7 @@ class app() :
         self.all_screen_obj.append(next_button)
     
     def intro_8th_slide_sports_entry_validator(self,) :
-        try :
+        #try :
             sports_name = self.sports_tb.get()
             sports_role = self.sports_role_dd.get()
             sports_length = int(self.sports_length.get()) ## This gives exception if not int so we can tell user that the data is wrong
@@ -674,9 +674,10 @@ class app() :
             back_button.place(x=150, y=450)
             self.all_screen_obj.append(back_button)
 
-        except : 
-            messagebox.showerror("Invalid Sports Entry", "Invalid Sports Entry!")
-            self.intro_8th_slide_sports_entry()
+        #except Exception as err:
+            #print(err) 
+            #messagebox.showerror("Invalid Sports Entry", "Invalid Sports Entry!")
+            #self.intro_8th_slide_sports_entry()
 
     ## Too complicated to implement for hackathon, will implement for CAC instead
     # def intro_9th_slide(self,) :
