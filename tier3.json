@@ -63,7 +63,7 @@
         "tags" : ["Medium"]
     },
     "University of Wisconsin, Madison" : {
-        "acc_rate" : 0.49,
+        "acc_rate" : 0.43,
         "75_sat" : 1500,
         "50_sat" : 1400,
         "25_sat" : 1370,
@@ -82,5 +82,26 @@
         "50_sat" : 1380,
         "25_sat" : 1370,
         "tags" : ["Large"]
+    },
+    "Southwestern University" : {
+        "acc_rate" : 0.39,
+        "75_sat" : 1320,
+        "50_sat" : 1240,
+        "25_sat" : 1180,
+        "tags" : ["Small", "Art"]
+    },
+    "University of Pittsburgh" : {
+        "acc_rate" : 0.49,
+        "75_sat" : 1450,
+        "50_sat" : 1360,
+        "25_sat" : 1270,
+        "tags" : ["Large", "Medical", "Engineering"]
+    },
+    "Landmark College" : {
+        "acc_rate" : 0.45,
+        "75_sat" : 1210,
+        "50_sat" : 1070,
+        "25_sat" : 930, 
+        "tags" : ["Small"]
     }
 }

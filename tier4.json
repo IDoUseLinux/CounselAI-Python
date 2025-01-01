@@ -61,5 +61,19 @@
         "50_sat" : 1340,
         "25_sat" : 1270,
         "tags" : ["Large", "Medical", "Sports"]
+    },
+    "University of Massachusetts, Amherst" : {
+        "acc_rate" : 0.58,
+        "75_sat" : 1460,
+        "50_sat" : 1360,
+        "25_sat" : 1310,
+        "tags" : ["Large"]
+    },
+    "Southeastern University" : {
+        "acc_rate" : 0.74,
+        "75_sat" : 1210,
+        "50_sat" : 1100,
+        "25_sat" : 1010,
+        "tags" : ["Medium", "Christian"]
     }
 }

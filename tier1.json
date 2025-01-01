@@ -4,7 +4,7 @@
         "75_sat" : 1580,
         "50_sat" : 1550,
         "25_sat" : 1490,
-        "tags" : ["Ivy", "Medium", "Law", "Business", "Medical"]
+        "tags" : ["Ivy", "LaRge", "Law", "Business", "Medical"]
     },
     "Princeton University" : {
         "acc_rate" : 0.057,
@@ -117,5 +117,26 @@
         "50_sat" : 1500,
         "25_sat" : 1490,
         "tags" : ["Ivy-Adjacent", "Large", "Business"]
+    },
+    "Colby College" : {
+        "acc_rate" : 0.08,
+        "75_sat" : 1530,
+        "50_sat" : 1470,
+        "25_sat" : 1450,
+        "tags" : ["Ivy-Adjacent", "Small", "Art"]
+    },
+    "University of California, Berkeley" : {
+        "acc_rate" : 0.11,
+        "75_sat" : 1530,
+        "50_sat" : 1420,
+        "25_sat" : 1340,
+        "tags" : ["Ivy-Adjacent", "UC System", "Large", "Public Ivy", "Business", "Tech", "Law"]
+    }, 
+    "New York University" : {
+        "acc_rate" : 0.09,
+        "75_sat" : 1570,
+        "50_sat" : 1520,
+        "25_sat" : 1470,
+        "tags" : ["Ivy-Adjacent", "Large", "Business", "Medical"]
     }
 }

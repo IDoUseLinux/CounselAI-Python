@@ -31,7 +31,6 @@ class app() :
         "Pre-calculus",
         "Statistics",
         "Pyschology",
-        "US History",
     ]
 
     AP_T3 = [
@@ -50,6 +49,7 @@ class app() :
         "European History",
         "Macroeconomics",
         "Microeconomics",
+        "US History",
     ]
 
     AP_T4 = [
@@ -368,7 +368,7 @@ class app() :
     def intro_5th_slide_sat_score_validator(self,) :
         try :
             self.sat_score = int(self.sat_tb.get())
-            assert(isinstance(self.sat_score/10, int) or (self.sat_score/10).is_integer())
+            assert(isinstance(self.sat_score/10, int))# or (self.sat_score/10).is_integer())
             assert(self.sat_score >= 400 and self.sat_score <= 1600)
             self.intro_6th_slide()
         except : 
@@ -794,20 +794,20 @@ class app() :
             assert(award_region != "-" and award_level != "-")
 
             if award_region == "Local/School" :
-                award_region = 1
+                award_region = 0.75
             elif award_region == "State" :
-                award_region = 2
+                award_region = 1.5
             elif award_region == "Regional" :
                 award_region = 3
             elif award_region == "National" :
                 award_region = 5
             else :
-                award_region = 7
+                award_region = 6
             
             if award_level == "Top 3" :
-                award_level = 5
+                award_level = 4
             elif award_level == "Finalist" :
-                award_level = 3
+                award_level = 2
             else :
                 award_level = 1
 
@@ -856,7 +856,7 @@ class app() :
             career_path = self.career_dd.get()
             assert (career_path != "-")
 
-            self.student_score = self.sat_score/50 + self.gpa*4.5
+            self.student_score = self.sat_score/75 + self.gpa*8
             
             ## Very dumb but it works so :shrug:
             tempTotal = 0
@@ -877,7 +877,7 @@ class app() :
             print(self.student_score)
                         
             self.clearScreen()
-            if career_path == "STEM" :
+            if career_path == "STEM" : ## TODO: Change this later into things for tech, chem, and other sciences
                 tag = "Tech"
             elif career_path == "Undecided" or career_path == "Other" :
                 tag = None
@@ -885,7 +885,7 @@ class app() :
                 tag = career_path
             
             recommend_unis = []
-            if self.student_score >= 75 :
+            if self.student_score >= 65 :
                 for i in self.T1_UNIS :
                     if tag in i.tags :
                         recommend_unis.append(i)
@@ -893,7 +893,7 @@ class app() :
                     for i in range(3) :
                         recommend_unis.append(random.choice(self.T1_UNIS))
 
-            if self.student_score >= 50 and self.student_score <= 90 :
+            if self.student_score >= 50 and self.student_score <= 80 :
                 for i in self.T2_UNIS :
                     if tag in i.tags :
                         recommend_unis.append(i)
@@ -901,7 +901,7 @@ class app() :
                     for i in range(3) :
                         recommend_unis.append(random.choice(self.T2_UNIS))
 
-            if self.student_score >= 40 and self.student_score <= 80 :
+            if self.student_score >= 40 and self.student_score <= 70 :
                 for i in self.T3_UNIS :
                     if tag in i.tags :
                         recommend_unis.append(i)
@@ -909,7 +909,7 @@ class app() :
                     for i in range(3) :
                         recommend_unis.append(random.choice(self.T3_UNIS))
 
-            if self.student_score >= 30 and self.student_score <= 55 :
+            if self.student_score >= 30 and self.student_score <= 50 :
                 for i in self.T4_UNIS :
                     if tag in i.tags :
                         recommend_unis.append(i)
@@ -917,14 +917,13 @@ class app() :
                     for i in range(3) :
                         recommend_unis.append(random.choice(self.T4_UNIS))
                         
-            if self.student_score <= 45 :
+            if self.student_score <= 40 :
                 for i in self.T5_UNIS :
                     if tag in i.tags :
                         recommend_unis.append(i)
                 if tag == "" :
                     for i in range(3) :
                         recommend_unis.append(random.choice(self.T5_UNIS))
-            
             
             for i in recommend_unis :
                 print(i.name)

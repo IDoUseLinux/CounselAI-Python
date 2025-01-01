@@ -4,7 +4,7 @@
         "75_sat" : 1320,
         "50_sat" : 1210,
         "25_sat" : 1100,
-        "tags" : ["Large"]
+        "tags" : ["Large", "Sports"]
     },
     "Oregon State University" : {
         "acc_rate" : 0.825,
@@ -47,5 +47,12 @@
         "50_sat" : 1230,
         "25_sat" : 1140,
         "tags" : ["Large", "Sports"]
+    },
+    "University of Colorado Boulder" : {
+        "acc_rate" : 0.81,
+        "75_sat" : 1380,
+        "50_sat" : 1250,
+        "25_sat" : 1160,
+        "tags" : ["Large", "Engineering"]
     }
 }
