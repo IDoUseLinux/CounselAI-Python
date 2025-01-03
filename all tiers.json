@@ -1,0 +1,675 @@
+{
+    "Date Generated": "2025-01-02 16:50:12 Hawaiian Standard Time",
+    "Harvard University": {
+        "acc_rate": 0.032,
+        "75_sat": 1580,
+        "50_sat": 1550,
+        "25_sat": 1490,
+        "tags": [
+            "Ivy",
+            "Medium",
+            "Law",
+            "Business",
+            "Medical"
+        ]
+    },
+    "Princeton University": {
+        "acc_rate": 0.057,
+        "75_sat": 1580,
+        "50_sat": 1540,
+        "25_sat": 1490,
+        "tags": [
+            "Ivy",
+            "Medium",
+            "Law",
+            "Business"
+        ]
+    },
+    "University of Pensylvania": {
+        "acc_rate": 0.065,
+        "75_sat": 1570,
+        "50_sat": 1540,
+        "25_sat": 1500,
+        "tags": [
+            "Ivy",
+            "Medium",
+            "Law",
+            "Business"
+        ]
+    },
+    "Yale University": {
+        "acc_rate": 0.046,
+        "75_sat": 1580,
+        "50_sat": 1540,
+        "25_sat": 1500,
+        "tags": [
+            "Ivy",
+            "Medium",
+            "Law",
+            "Business"
+        ]
+    },
+    "Brown University": {
+        "acc_rate": 0.051,
+        "75_sat": 1580,
+        "50_sat": 1540,
+        "25_sat": 1490,
+        "tags": [
+            "Ivy",
+            "Medium",
+            "Law",
+            "Business"
+        ]
+    },
+    "Columbia University": {
+        "acc_rate": 0.0385,
+        "75_sat": 1580,
+        "50_sat": 1530,
+        "25_sat": 1490,
+        "tags": [
+            "Ivy",
+            "Medium",
+            "Law",
+            "Business"
+        ]
+    },
+    "Cornell University": {
+        "acc_rate": 0.075,
+        "75_sat": 1570,
+        "50_sat": 1530,
+        "25_sat": 1470,
+        "tags": [
+            "Ivy",
+            "Large",
+            "Law",
+            "Business"
+        ]
+    },
+    "Dartmouth College": {
+        "acc_rate": 0.062,
+        "75_sat": 1560,
+        "50_sat": 1500,
+        "25_sat": 1440,
+        "tags": [
+            "Ivy",
+            "Small",
+            "Business"
+        ]
+    },
+    "Stanford University": {
+        "acc_rate": 0.037,
+        "75_sat": 1580,
+        "50_sat": 1550,
+        "25_sat": 1500,
+        "tags": [
+            "Ivy-Adjacent",
+            "Large",
+            "Business",
+            "Tech"
+        ]
+    },
+    "California Institute of Technology": {
+        "acc_rate": 0.024,
+        "75_sat": 1570,
+        "50_sat": 1550,
+        "25_sat": 1530,
+        "tags": [
+            "Ivy-Adjacent",
+            "Small",
+            "Tech"
+        ]
+    },
+    "Massachusetts Institute of Technology": {
+        "acc_rate": 0.04,
+        "75_sat": 1580,
+        "50_sat": 1560,
+        "25_sat": 1530,
+        "tags": [
+            "Ivy-Adjacent",
+            "Medium",
+            "Tech",
+            "Business"
+        ]
+    },
+    "Duke University": {
+        "acc_rate": 0.063,
+        "75_sat": 1570,
+        "50_sat": 1550,
+        "25_sat": 1490,
+        "tags": [
+            "Ivy-Adjacent",
+            "Medium",
+            "Business",
+            "Sports"
+        ]
+    },
+    "Johns Hopkins University": {
+        "acc_rate": 0.073,
+        "75_sat": 1570,
+        "50_sat": 1550,
+        "25_sat": 1520,
+        "tags": [
+            "Ivy-Adjacent",
+            "Medium",
+            "Medical"
+        ]
+    },
+    "University of Chicago": {
+        "acc_rate": 0.054,
+        "75_sat": 1560,
+        "50_sat": 1530,
+        "25_sat": 1510,
+        "tags": [
+            "Ivy-Adjacent",
+            "Medium",
+            "Business"
+        ]
+    },
+    "Vanderblitz University": {
+        "acc_rate": 0.07,
+        "75_sat": 1570,
+        "50_sat": 1510,
+        "25_sat": 1490,
+        "tags": [
+            "Ivy-Adjacent",
+            "Medium",
+            "Music"
+        ]
+    },
+    "Rice University": {
+        "acc_rate": 0.09,
+        "75_sat": 1560,
+        "50_sat": 1540,
+        "25_sat": 1510,
+        "tags": [
+            "Ivy-Adjacent",
+            "Medium",
+            "Tech"
+        ]
+    },
+    "Northwestern University": {
+        "acc_rate": 0.07,
+        "75_sat": 1550,
+        "50_sat": 1500,
+        "25_sat": 1490,
+        "tags": [
+            "Ivy-Adjacent",
+            "Large",
+            "Business"
+        ]
+    },
+    "University of California, Los Angeles": {
+        "acc_rate": 0.086,
+        "75_sat": 1550,
+        "50_sat": 1490,
+        "25_sat": 1460,
+        "tags": [
+            "UC System",
+            "Large",
+            "Public Ivy",
+            "Business",
+            "Art",
+            "Music",
+            "Tech",
+            "Medical"
+        ]
+    },
+    "University of California, Berkeley": {
+        "acc_rate": 0.116,
+        "75_sat": 1530,
+        "50_sat": 1420,
+        "25_sat": 1340,
+        "tags": [
+            "UC System",
+            "Large",
+            "Public Ivy",
+            "Business",
+            "Tech"
+        ]
+    },
+    "Georgetown University": {
+        "acc_rate": 0.12,
+        "75_sat": 1540,
+        "50_sat": 1460,
+        "25_sat": 1410,
+        "tags": [
+            "Medium",
+            "Law"
+        ]
+    },
+    "University of Southern California": {
+        "acc_rate": 0.12,
+        "75_sat": 1520,
+        "50_sat": 1440,
+        "25_sat": 1330,
+        "tags": [
+            "Medium",
+            "Sports"
+        ]
+    },
+    "New York University": {
+        "acc_rate": 0.125,
+        "75_sat": 1570,
+        "50_sat": 1520,
+        "25_sat": 1470,
+        "tags": [
+            "Large",
+            "Business"
+        ]
+    },
+    "Carnegie Mellon University": {
+        "acc_rate": 0.11,
+        "75_sat": 1570,
+        "50_sat": 1540,
+        "25_sat": 1490,
+        "tags": [
+            "Medium",
+            "Tech"
+        ]
+    },
+    "University of Notre Dame": {
+        "acc_rate": 0.13,
+        "75_sat": 1550,
+        "50_sat": 1510,
+        "25_sat": 1450,
+        "tags": [
+            "Medium",
+            "Catholic"
+        ]
+    },
+    "University of Michigan, Ann Harbor": {
+        "acc_rate": 0.18,
+        "75_sat": 1530,
+        "50_sat": 1440,
+        "25_sat": 1350,
+        "tags": [
+            "Large"
+        ]
+    },
+    "Georgia Institute of Technology": {
+        "acc_rate": 0.17,
+        "75_sat": 1510,
+        "50_sat": 1420,
+        "25_sat": 1330,
+        "tags": [
+            "Large",
+            "Tech"
+        ]
+    },
+    "University of North Carolina, Chapel Hill": {
+        "acc_rate": 0.17,
+        "75_sat": 1520,
+        "50_sat": 1460,
+        "25_sat": 1390,
+        "tags": [
+            "Large",
+            "Sports"
+        ]
+    },
+    "Emory University": {
+        "acc_rate": 0.11,
+        "75_sat": 1540,
+        "50_sat": 1510,
+        "25_sat": 1470,
+        "tags": [
+            "Medium",
+            "Medical"
+        ]
+    },
+    "University of Virgina": {
+        "acc_rate": 0.19,
+        "75_sat": 1540,
+        "50_sat": 1470,
+        "25_sat": 1400,
+        "tags": [
+            "Medium",
+            "Public Ivy"
+        ]
+    },
+    "University of Washington, St Louis": {
+        "acc_rate": 0.11,
+        "75_sat": 1570,
+        "50_sat": 1540,
+        "25_sat": 1500,
+        "tags": [
+            "Medium",
+            "Medical"
+        ]
+    },
+    "University of Florida": {
+        "acc_rate": 0.23,
+        "75_sat": 1450,
+        "50_sat": 1360,
+        "25_sat": 1320,
+        "tags": [
+            "Large",
+            "Sports"
+        ]
+    },
+    "University of California, Irvine": {
+        "acc_rate": 0.21,
+        "75_sat": 1440,
+        "50_sat": 1310,
+        "25_sat": 1180,
+        "tags": [
+            "UC System",
+            "Large",
+            "Public Ivy"
+        ]
+    },
+    "University of California, Santa Barbara": {
+        "acc_rate": 0.26,
+        "75_sat": 1480,
+        "50_sat": 1360,
+        "25_sat": 1230,
+        "tags": [
+            "UC System",
+            "Large",
+            "Public Ivy"
+        ]
+    },
+    "Boston College": {
+        "acc_rate": 0.17,
+        "75_sat": 1520,
+        "50_sat": 1490,
+        "25_sat": 1450,
+        "tags": [
+            "Medium"
+        ]
+    },
+    "Wake Forest University": {
+        "acc_rate": 0.21,
+        "75_sat": 1500,
+        "50_sat": 1460,
+        "25_sat": 1410,
+        "tags": [
+            "Medium"
+        ]
+    },
+    "Tufts University": {
+        "acc_rate": 0.1,
+        "75_sat": 1560,
+        "50_sat": 1520,
+        "25_sat": 1470,
+        "tags": [
+            "Medium"
+        ]
+    },
+    "California Instute of the Arts": {
+        "acc_rate": 0.25,
+        "75_sat": 1310,
+        "50_sat": 1160,
+        "25_sat": 1010,
+        "tags": [
+            "Small",
+            "Art"
+        ]
+    },
+    "Rhode Island School of Design": {
+        "acc_rate": 0.19,
+        "75_sat": 1490,
+        "50_sat": 1420,
+        "25_sat": 1350,
+        "tags": [
+            "Small",
+            "Art"
+        ]
+    },
+    "University of California, Davis": {
+        "acc_rate": 0.37,
+        "75_sat": 1410,
+        "50_sat": 1280,
+        "25_sat": 1150,
+        "tags": [
+            "UC System",
+            "Large"
+        ]
+    },
+    "University of California, Santa Cruz": {
+        "acc_rate": 0.47,
+        "75_sat": 1400,
+        "50_sat": 1290,
+        "25_sat": 1170,
+        "tags": [
+            "UC System",
+            "Large"
+        ]
+    },
+    "University of Texas, Austin": {
+        "acc_rate": 0.31,
+        "75_sat": 1470,
+        "50_sat": 1360,
+        "25_sat": 1240,
+        "tags": [
+            "Large"
+        ]
+    },
+    "Lehigh University": {
+        "acc_rate": 0.37,
+        "75_sat": 1510,
+        "50_sat": 1460,
+        "25_sat": 1400,
+        "tags": [
+            "Medium"
+        ]
+    },
+    "California Polytechnic State University, San Louis Obispo": {
+        "acc_rate": 0.3,
+        "75_sat": 1450,
+        "50_sat": 1340,
+        "25_sat": 1260,
+        "tags": [
+            "CSU System",
+            "Large",
+            "Tech"
+        ]
+    },
+    "University of Rochester": {
+        "acc_rate": 0.39,
+        "75_sat": 1520,
+        "50_sat": 1440,
+        "25_sat": 1410,
+        "tags": [
+            "Medium"
+        ]
+    },
+    "Case Western Reserve University": {
+        "acc_rate": 0.27,
+        "75_sat": 1520,
+        "50_sat": 1470,
+        "25_sat": 1410,
+        "tags": [
+            "Medium",
+            "Medical"
+        ]
+    },
+    "Florida State University": {
+        "acc_rate": 0.25,
+        "75_sat": 1360,
+        "50_sat": 1270,
+        "25_sat": 1220,
+        "tags": [
+            "Large"
+        ]
+    },
+    "William & Mary University": {
+        "acc_rate": 0.33,
+        "75_sat": 1520,
+        "50_sat": 1420,
+        "25_sat": 1380,
+        "tags": [
+            "Medium"
+        ]
+    },
+    "University of Wisconsin, Madison": {
+        "acc_rate": 0.49,
+        "75_sat": 1500,
+        "50_sat": 1400,
+        "25_sat": 1370,
+        "tags": [
+            "Large"
+        ]
+    },
+    "University of Georgia": {
+        "acc_rate": 0.47,
+        "75_sat": 1420,
+        "50_sat": 1320,
+        "25_sat": 1220,
+        "tags": [
+            "Large"
+        ]
+    },
+    "University of Maryland": {
+        "acc_rate": 0.45,
+        "75_sat": 1510,
+        "50_sat": 1380,
+        "25_sat": 1370,
+        "tags": [
+            "Large"
+        ]
+    },
+    "Purdue University": {
+        "acc_rate": 0.53,
+        "75_sat": 1450,
+        "50_sat": 1330,
+        "25_sat": 1210,
+        "tags": [
+            "Large"
+        ]
+    },
+    "University of Hawaii, Manoa": {
+        "acc_rate": 0.728,
+        "75_sat": 1270,
+        "50_sat": 1180,
+        "25_sat": 1070,
+        "tags": [
+            "Medium"
+        ]
+    },
+    "Virginia Tech": {
+        "acc_rate": 0.57,
+        "75_sat": 1390,
+        "50_sat": 1290,
+        "25_sat": 1180,
+        "tags": [
+            "Large",
+            "Tech"
+        ]
+    },
+    "DigiPen Institute of Technology": {
+        "acc_rate": 0.66,
+        "75_sat": 1390,
+        "50_sat": 1280,
+        "25_sat": 1170,
+        "tags": [
+            "Small",
+            "Tech"
+        ]
+    },
+    "Rochester Institute of Technology": {
+        "acc_rate": 0.672,
+        "75_sat": 1430,
+        "50_sat": 1350,
+        "25_sat": 1280,
+        "tags": [
+            "Large",
+            "Tech"
+        ]
+    },
+    "Rutgers University, New Brunswick": {
+        "acc_rate": 0.66,
+        "75_sat": 1410,
+        "50_sat": 1300,
+        "25_sat": 1190,
+        "tags": [
+            "Large"
+        ]
+    },
+    "Louisiana State University": {
+        "acc_rate": 0.76,
+        "75_sat": 1310,
+        "50_sat": 1230,
+        "25_sat": 1140,
+        "tags": [
+            "Large",
+            "Sports"
+        ]
+    },
+    "University of California, Riverside": {
+        "acc_rate": 0.69,
+        "75_sat": 1330,
+        "50_sat": 1230,
+        "25_sat": 1130,
+        "tags": [
+            "Large",
+            "UC System"
+        ]
+    },
+    "Ohio State University": {
+        "acc_rate": 0.53,
+        "75_sat": 1430,
+        "50_sat": 1340,
+        "25_sat": 1270,
+        "tags": [
+            "Large",
+            "Medical",
+            "Sports"
+        ]
+    },
+    "Arizona State University": {
+        "acc_rate": 0.898,
+        "75_sat": 1320,
+        "50_sat": 1210,
+        "25_sat": 1100,
+        "tags": [
+            "Large"
+        ]
+    },
+    "Oregon State University": {
+        "acc_rate": 0.825,
+        "75_sat": 1320,
+        "50_sat": 1200,
+        "25_sat": 1080,
+        "tags": [
+            "Large"
+        ]
+    },
+    "Michigan State University": {
+        "acc_rate": 0.88,
+        "75_sat": 1340,
+        "50_sat": 1250,
+        "25_sat": 1100,
+        "tags": [
+            "Large"
+        ]
+    },
+    "California State University, Los Angeles": {
+        "acc_rate": 0.88,
+        "75_sat": 1060,
+        "50_sat": 1000,
+        "25_sat": 850,
+        "tags": [
+            "Large",
+            "CSU System"
+        ]
+    },
+    "University of California, Merced": {
+        "acc_rate": 0.88,
+        "75_sat": 1350,
+        "50_sat": 1080,
+        "25_sat": 1030,
+        "tags": [
+            "Large",
+            "UC System"
+        ]
+    },
+    "Kent State University": {
+        "acc_rate": 0.88,
+        "75_sat": 1210,
+        "50_sat": 1140,
+        "25_sat": 990,
+        "tags": [
+            "Large"
+        ]
+    }
+}
