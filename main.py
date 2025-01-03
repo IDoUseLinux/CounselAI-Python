@@ -21,8 +21,10 @@ class app() :
     CAREER_PATHS = ["Undecided", "STEM", "Art", "Music", "Business", "Law", "Medical", "Sports", "Other"]
 
     AP_T1 = [
-        "Calculus",
-        "Physics",
+        "Calculus AB",
+        "Calculus BC",
+        "Physics 1",
+        "Physics C",
         "Biology",
         "Chemistry",
     ]
@@ -33,6 +35,7 @@ class app() :
         "Pyschology",
     ]
 
+    ## Most APs belong in here. They are generally not that hard but they can definitely be of use.
     AP_T3 = [
         "English Language",
         "English Literature",
@@ -57,11 +60,11 @@ class app() :
         "Music Theory",
         "Research",
         "Seminar",
-        "CSP"
+        "CSP",
     ]
 
     AP_T5 = [
-        "Art & Design",
+        "Art & Design", ## Actual joke of an AP here...
     ]
 
     ALL_APS = AP_T1 + AP_T2 + AP_T3 + AP_T4 + AP_T5
@@ -1060,10 +1063,10 @@ class app() :
             response = openai.chat.completions.create(
                 model="gpt-4o",
                 messages=temp_chat,
-                max_tokens=300,
+                max_tokens=250,
                 n=1,
                 stop=None,
-                temperature=0.7
+                temperature=0.75, ## Using higher temperatures leads to more predictable results, but it does help it remain more consistent
             )
 
             uni_description = response.choices[0].message.content
@@ -1097,6 +1100,5 @@ class app() :
 
         uni_text = CTk.CTkLabel(uni_description_window, 600, 80, bg_color=self.bg_color, fg_color=self.bg_color, text=uni_description, font=self.button_font)
         uni_text.place(x=0, y = 100)
-        
 
 var = app(CTk.CTk())
