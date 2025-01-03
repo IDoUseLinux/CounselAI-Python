@@ -60,7 +60,7 @@
         "75_sat" : 1430,
         "50_sat" : 1340,
         "25_sat" : 1270,
-        "tags" : ["Large", "Medical", "Sports"]
+        "tags" : ["Large", "Medicine", "Sports"]
     },
     "University of Massachusetts, Amherst" : {
         "acc_rate" : 0.58,

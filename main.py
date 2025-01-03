@@ -18,7 +18,7 @@ is_dev_version = True
 build_tag = "Alpha-1234"
 
 class app() :
-    CAREER_PATHS = ["Undecided", "STEM", "Art", "Music", "Business", "Law", "Medical", "Sports", "Other"]
+    CAREER_PATHS = ["Undecided", "Tech", "Engineering", "Art", "Music", "Business", "Law", "Medicine", "Sports", "Other"]
 
     AP_T1 = [
         "Calculus AB",
@@ -859,7 +859,7 @@ class app() :
             career_path = self.career_dd.get()
             assert (career_path != "-")
 
-            self.student_score = self.sat_score/75 + self.gpa*8
+            self.student_score = self.sat_score/60 + self.gpa*8
             
             ## Very dumb but it works so :shrug:
             tempTotal = 0

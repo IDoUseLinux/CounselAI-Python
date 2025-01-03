@@ -4,7 +4,7 @@
         "75_sat" : 1580,
         "50_sat" : 1550,
         "25_sat" : 1490,
-        "tags" : ["Ivy", "LaRge", "Law", "Business", "Medical"]
+        "tags" : ["Ivy", "LaRge", "Law", "Business", "Medicine"]
     },
     "Princeton University" : {
         "acc_rate" : 0.057,
@@ -88,7 +88,7 @@
         "75_sat" : 1570,
         "50_sat" : 1550,
         "25_sat" : 1520,
-        "tags" : ["Ivy-Adjacent", "Medium", "Medical"]
+        "tags" : ["Ivy-Adjacent", "Medium", "Medicine"]
     },
     "University of Chicago" : {
         "acc_rate" : 0.054,
@@ -130,13 +130,13 @@
         "75_sat" : 1530,
         "50_sat" : 1420,
         "25_sat" : 1340,
-        "tags" : ["Ivy-Adjacent", "UC System", "Large", "Public Ivy", "Business", "Tech", "Law"]
+        "tags" : ["Ivy-Adjacent", "UC System", "Large", "Public Ivy", "Business", "Tech", "Law", "Engineering"]
     }, 
     "New York University" : {
         "acc_rate" : 0.09,
         "75_sat" : 1570,
         "50_sat" : 1520,
         "25_sat" : 1470,
-        "tags" : ["Ivy-Adjacent", "Large", "Business", "Medical"]
+        "tags" : ["Ivy-Adjacent", "Large", "Business", "Medicine"]
     }
 }

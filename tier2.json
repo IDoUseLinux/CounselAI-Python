@@ -4,21 +4,21 @@
         "75_sat" : 1550,
         "50_sat" : 1490,
         "25_sat" : 1460,
-        "tags" : ["UC System", "Large", "Public Ivy", "Business", "Art", "Music", "Tech", "Medical", "Sports", "Law"]
+        "tags" : ["UC System", "Large", "Public Ivy", "Business", "Art", "Music", "Tech", "Medicine", "Sports", "Law"]
     },
     "Georgetown University" : {
         "acc_rate" : 0.12,
         "75_sat" : 1540,
         "50_sat" : 1460,
         "25_sat" : 1410,
-        "tags" : ["Medium", "Law"]
+        "tags" : ["Medium", "Law", "Medicine"]
     },
     "University of Southern California" : {
         "acc_rate" : 0.12,
         "75_sat" : 1520,
         "50_sat" : 1440,
         "25_sat" : 1330,
-        "tags" : ["Medium", "Sports", "STEM"]
+        "tags" : ["Medium", "Sports", "Tech", "Engineering", "Medicine"]
     },
     "Carnegie Mellon University" : {
         "acc_rate": 0.11,
@@ -60,7 +60,7 @@
         "75_sat" : 1540,
         "50_sat" : 1510,
         "25_sat" : 1470,
-        "tags" : ["Medium", "Medical"]
+        "tags" : ["Medium", "Medicine"]
     },
     "University of Virgina" : {
         "acc_rate" : 0.19,
@@ -74,7 +74,7 @@
         "75_sat" : 1570,
         "50_sat" : 1540,
         "25_sat" : 1500,
-        "tags" : ["Medium", "Medical"]
+        "tags" : ["Medium", "Medicine"]
     },
     "University of Florida" : {
         "acc_rate" : 0.23,
@@ -131,5 +131,12 @@
         "50_sat" : 1420,
         "25_sat" : 1350,
         "tags" : ["Small", "Art"]
+    },
+    "University of California, San Diego" : {
+        "acc_rate" : 0.268,
+        "75_sat" : 1520,
+        "50_sat" : 1410,
+        "25_sat" : 1300,
+        "tags" : ["UC System", "Large", "Public Ivy", "Engineering"] 
     }
 }
