@@ -1,5 +1,5 @@
 {
-    "Date Generated": "2025-01-02 16:50:12 Hawaiian Standard Time",
+    "Date Generated": "2025-01-02 17:07:07 Hawaiian Standard Time",
     "Harvard University": {
         "acc_rate": 0.032,
         "75_sat": 1580,
@@ -7,7 +7,7 @@
         "25_sat": 1490,
         "tags": [
             "Ivy",
-            "Medium",
+            "LaRge",
             "Law",
             "Business",
             "Medical"
@@ -198,8 +198,46 @@
             "Business"
         ]
     },
+    "Colby College": {
+        "acc_rate": 0.08,
+        "75_sat": 1530,
+        "50_sat": 1470,
+        "25_sat": 1450,
+        "tags": [
+            "Ivy-Adjacent",
+            "Small",
+            "Art"
+        ]
+    },
+    "University of California, Berkeley": {
+        "acc_rate": 0.11,
+        "75_sat": 1530,
+        "50_sat": 1420,
+        "25_sat": 1340,
+        "tags": [
+            "Ivy-Adjacent",
+            "UC System",
+            "Large",
+            "Public Ivy",
+            "Business",
+            "Tech",
+            "Law"
+        ]
+    },
+    "New York University": {
+        "acc_rate": 0.09,
+        "75_sat": 1570,
+        "50_sat": 1520,
+        "25_sat": 1470,
+        "tags": [
+            "Ivy-Adjacent",
+            "Large",
+            "Business",
+            "Medical"
+        ]
+    },
     "University of California, Los Angeles": {
-        "acc_rate": 0.086,
+        "acc_rate": 0.09,
         "75_sat": 1550,
         "50_sat": 1490,
         "25_sat": 1460,
@@ -211,20 +249,9 @@
             "Art",
             "Music",
             "Tech",
-            "Medical"
-        ]
-    },
-    "University of California, Berkeley": {
-        "acc_rate": 0.116,
-        "75_sat": 1530,
-        "50_sat": 1420,
-        "25_sat": 1340,
-        "tags": [
-            "UC System",
-            "Large",
-            "Public Ivy",
-            "Business",
-            "Tech"
+            "Medical",
+            "Sports",
+            "Law"
         ]
     },
     "Georgetown University": {
@@ -244,17 +271,8 @@
         "25_sat": 1330,
         "tags": [
             "Medium",
-            "Sports"
-        ]
-    },
-    "New York University": {
-        "acc_rate": 0.125,
-        "75_sat": 1570,
-        "50_sat": 1520,
-        "25_sat": 1470,
-        "tags": [
-            "Large",
-            "Business"
+            "Sports",
+            "STEM"
         ]
     },
     "Carnegie Mellon University": {
@@ -392,7 +410,8 @@
         "50_sat": 1520,
         "25_sat": 1470,
         "tags": [
-            "Medium"
+            "Medium",
+            "Art"
         ]
     },
     "California Instute of the Arts": {
@@ -502,7 +521,7 @@
         ]
     },
     "University of Wisconsin, Madison": {
-        "acc_rate": 0.49,
+        "acc_rate": 0.43,
         "75_sat": 1500,
         "50_sat": 1400,
         "25_sat": 1370,
@@ -526,6 +545,36 @@
         "25_sat": 1370,
         "tags": [
             "Large"
+        ]
+    },
+    "Southwestern University": {
+        "acc_rate": 0.39,
+        "75_sat": 1320,
+        "50_sat": 1240,
+        "25_sat": 1180,
+        "tags": [
+            "Small",
+            "Art"
+        ]
+    },
+    "University of Pittsburgh": {
+        "acc_rate": 0.49,
+        "75_sat": 1450,
+        "50_sat": 1360,
+        "25_sat": 1270,
+        "tags": [
+            "Large",
+            "Medical",
+            "Engineering"
+        ]
+    },
+    "Landmark College": {
+        "acc_rate": 0.45,
+        "75_sat": 1210,
+        "50_sat": 1070,
+        "25_sat": 930,
+        "tags": [
+            "Small"
         ]
     },
     "Purdue University": {
@@ -616,13 +665,33 @@
             "Sports"
         ]
     },
+    "University of Massachusetts, Amherst": {
+        "acc_rate": 0.58,
+        "75_sat": 1460,
+        "50_sat": 1360,
+        "25_sat": 1310,
+        "tags": [
+            "Large"
+        ]
+    },
+    "Southeastern University": {
+        "acc_rate": 0.74,
+        "75_sat": 1210,
+        "50_sat": 1100,
+        "25_sat": 1010,
+        "tags": [
+            "Medium",
+            "Christian"
+        ]
+    },
     "Arizona State University": {
         "acc_rate": 0.898,
         "75_sat": 1320,
         "50_sat": 1210,
         "25_sat": 1100,
         "tags": [
-            "Large"
+            "Large",
+            "Sports"
         ]
     },
     "Oregon State University": {
@@ -670,6 +739,16 @@
         "25_sat": 990,
         "tags": [
             "Large"
+        ]
+    },
+    "University of Colorado Boulder": {
+        "acc_rate": 0.81,
+        "75_sat": 1380,
+        "50_sat": 1250,
+        "25_sat": 1160,
+        "tags": [
+            "Large",
+            "Engineering"
         ]
     }
 }
