@@ -13,7 +13,7 @@
         "25_sat" : 1490,
         "tags" : ["Ivy", "Medium", "Law", "Business"]
     },
-    "University of Pensylvania" : {
+    "University of Pennsylvania" : {
         "acc_rate" : 0.065,
         "75_sat" : 1570,
         "50_sat" : 1540,
@@ -49,7 +49,7 @@
         "tags" : ["Ivy", "Large", "Law", "Business"]
     },
     "Dartmouth College" : {
-        "acc_rate" : 0.062,
+        "acc_rate" : 0.064,
         "75_sat" : 1560,
         "50_sat" : 1500,
         "25_sat" : 1440,
@@ -102,7 +102,7 @@
         "75_sat" : 1570,
         "50_sat" : 1510,
         "25_sat" : 1490,
-        "tags" : ["Ivy-Adjacent", "Medium", "Music"]
+        "tags" : ["Ivy-Adjacent", "Medium", "Music", "Medicine"]
     },
     "Rice University" : {
         "acc_rate" : 0.09,
@@ -137,6 +137,6 @@
         "75_sat" : 1570,
         "50_sat" : 1520,
         "25_sat" : 1470,
-        "tags" : ["Ivy-Adjacent", "Large", "Business", "Medicine"]
+        "tags" : ["Ivy-Adjacent", "Large", "Business", "Medicine", "Engineering"]
     }
 }

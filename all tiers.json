@@ -1,5 +1,5 @@
 {
-    "Date Generated": "2025-01-02 17:07:07 Hawaiian Standard Time",
+    "Date Generated": "2025-01-03 14:12:54 Hawaiian Standard Time",
     "Harvard University": {
         "acc_rate": 0.032,
         "75_sat": 1580,
@@ -10,7 +10,7 @@
             "LaRge",
             "Law",
             "Business",
-            "Medical"
+            "Medicine"
         ]
     },
     "Princeton University": {
@@ -25,7 +25,7 @@
             "Business"
         ]
     },
-    "University of Pensylvania": {
+    "University of Pennsylvania": {
         "acc_rate": 0.065,
         "75_sat": 1570,
         "50_sat": 1540,
@@ -151,7 +151,7 @@
         "tags": [
             "Ivy-Adjacent",
             "Medium",
-            "Medical"
+            "Medicine"
         ]
     },
     "University of Chicago": {
@@ -221,7 +221,8 @@
             "Public Ivy",
             "Business",
             "Tech",
-            "Law"
+            "Law",
+            "Engineering"
         ]
     },
     "New York University": {
@@ -233,7 +234,7 @@
             "Ivy-Adjacent",
             "Large",
             "Business",
-            "Medical"
+            "Medicine"
         ]
     },
     "University of California, Los Angeles": {
@@ -249,7 +250,7 @@
             "Art",
             "Music",
             "Tech",
-            "Medical",
+            "Medicine",
             "Sports",
             "Law"
         ]
@@ -261,7 +262,8 @@
         "25_sat": 1410,
         "tags": [
             "Medium",
-            "Law"
+            "Law",
+            "Medicine"
         ]
     },
     "University of Southern California": {
@@ -272,7 +274,9 @@
         "tags": [
             "Medium",
             "Sports",
-            "STEM"
+            "Tech",
+            "Engineering",
+            "Medicine"
         ]
     },
     "Carnegie Mellon University": {
@@ -331,7 +335,7 @@
         "25_sat": 1470,
         "tags": [
             "Medium",
-            "Medical"
+            "Medicine"
         ]
     },
     "University of Virgina": {
@@ -351,7 +355,7 @@
         "25_sat": 1500,
         "tags": [
             "Medium",
-            "Medical"
+            "Medicine"
         ]
     },
     "University of Florida": {
@@ -434,6 +438,18 @@
             "Art"
         ]
     },
+    "University of California, San Diego": {
+        "acc_rate": 0.268,
+        "75_sat": 1520,
+        "50_sat": 1410,
+        "25_sat": 1300,
+        "tags": [
+            "UC System",
+            "Large",
+            "Public Ivy",
+            "Engineering"
+        ]
+    },
     "University of California, Davis": {
         "acc_rate": 0.37,
         "75_sat": 1410,
@@ -499,7 +515,7 @@
         "25_sat": 1410,
         "tags": [
             "Medium",
-            "Medical"
+            "Medicine"
         ]
     },
     "Florida State University": {
@@ -564,7 +580,7 @@
         "25_sat": 1270,
         "tags": [
             "Large",
-            "Medical",
+            "Medicine",
             "Engineering"
         ]
     },
@@ -661,7 +677,7 @@
         "25_sat": 1270,
         "tags": [
             "Large",
-            "Medical",
+            "Medicine",
             "Sports"
         ]
     },

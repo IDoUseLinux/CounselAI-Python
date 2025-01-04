@@ -24,7 +24,9 @@ class app() :
         "Calculus AB",
         "Calculus BC",
         "Physics 1",
-        "Physics C",
+        "Physics 2",
+        "Physics C (E and M)",
+        "Physics C (Mechanics)"
         "Biology",
         "Chemistry",
     ]
@@ -39,10 +41,11 @@ class app() :
     AP_T3 = [
         "English Language",
         "English Literature",
-        "Government & Politics",
+        "US Government & Politics",
         "Environmental Science",
         "Chinese",
-        "Spanish",
+        "Spanish Language",
+        "Spanish Literature",
         "French",
         "Japanese",
         "Latin",
@@ -61,10 +64,13 @@ class app() :
         "Research",
         "Seminar",
         "CSP",
+        "Comp. Gov. & Politics"
     ]
 
     AP_T5 = [
-        "Art & Design", ## Actual joke of an AP here...
+        "Art & Design (2D & 3D)", ## Actual joke of an AP here...
+        "Drawing"
+
     ]
 
     ALL_APS = AP_T1 + AP_T2 + AP_T3 + AP_T4 + AP_T5
@@ -371,7 +377,7 @@ class app() :
     def intro_5th_slide_sat_score_validator(self,) :
         try :
             self.sat_score = int(self.sat_tb.get())
-            assert(isinstance(self.sat_score/10, int))# or (self.sat_score/10).is_integer())
+            assert((self.sat_score/10).is_integer())
             assert(self.sat_score >= 400 and self.sat_score <= 1600)
             self.intro_6th_slide()
         except : 
@@ -556,7 +562,7 @@ class app() :
                 club_purpose = 3
             elif club_purpose == "Volunteering" : 
                 club_purpose = 2.5
-            else :
+            else : ## Recreational counts as other as not realy boost
                 club_purpose = 1
 
             if club_role == "President" :
@@ -650,9 +656,9 @@ class app() :
             assert(sports_role != "-")
 
             if sports_role == "Captain/Leader" :
-                sports_role = 2.5
+                sports_role = 2
             elif sports_role == "Other leadership role" :
-                sports_role = 1.5
+                sports_role = 1.25
             else : 
                 sports_role = 1
 
