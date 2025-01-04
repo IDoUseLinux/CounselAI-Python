@@ -103,5 +103,19 @@
         "50_sat" : 1070,
         "25_sat" : 930, 
         "tags" : ["Small"]
+    },
+    "University of South Florida" : {
+        "acc_rate" : 0.41,
+        "75_sat" : 1370,
+        "50_sat" : 1300,
+        "25_sat" : 1240,
+        "tags" : ["Large", "Medicine", "Tech", "Engineering"]
+    },
+    "San Diego State University" : {
+        "acc_rate" : 0.39,
+        "75_sat" : 1340,
+        "50_sat" : 1220,
+        "25_sat" : 1130,
+        "tags" : ["Large", "CSU System", "Sports"]
     }
 }

@@ -75,5 +75,19 @@
         "50_sat" : 1100,
         "25_sat" : 1010,
         "tags" : ["Medium", "Christian"]
+    },
+    "University of San Francisco" : {
+        "acc_rate" : 0.51,
+        "75_sat" : 1370,
+        "50_sat" : 1300,
+        "25_sat" : 1240,
+        "tags" : ["Medium", "Sports"]
+    },
+    "University of South Carolina" : {
+        "acc_rate" : 0.64,
+        "75_sat" : 1370, 
+        "50_sat" : 1280,
+        "25_sat" : 1190,
+        "tags" : ["Large", "Business", "Tech"]
     }
 }

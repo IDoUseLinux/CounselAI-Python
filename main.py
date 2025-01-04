@@ -21,12 +21,10 @@ class app() :
     CAREER_PATHS = ["Undecided", "Tech", "Engineering", "Art", "Music", "Business", "Law", "Medicine", "Sports", "Other"]
 
     AP_T1 = [
-        "Calculus AB",
-        "Calculus BC",
+        "Calculus AB/BC",
         "Physics 1",
         "Physics 2",
-        "Physics C (E and M)",
-        "Physics C (Mechanics)"
+        "Physics C E&M/Mechanics",
         "Biology",
         "Chemistry",
     ]
@@ -68,7 +66,7 @@ class app() :
     ]
 
     AP_T5 = [
-        "Art & Design (2D & 3D)", ## Actual joke of an AP here...
+        "Art & Design 2D/3D", ## Actual joke of an AP here...
         "Drawing"
 
     ]
@@ -171,9 +169,24 @@ class app() :
         intro_text.place(x=0, y = 150)
         self.all_screen_obj.append(intro_text)
 
-        intro_text_2 = CTk.CTkLabel(self.app, 600, 75, bg_color=self.bg_color, fg_color=self.bg_color, text="A free AI-based college counseling application!", font=self.text_font)
+        intro_text_2 = CTk.CTkLabel(self.app, 600, 75, bg_color=self.bg_color, fg_color=self.bg_color, text="A free AI-based college counseling application.", font=self.text_font)
         intro_text_2.place(x=0, y = 225)
         self.all_screen_obj.append(intro_text_2)
+
+        next_button = CTk.CTkButton(self.app, text="Next", font=self.text_font, fg_color=self.bg_color_light, bg_color=self.bg_color, hover_color=self.bg_color, border_width=0, command=self.intro_1st_slide_message, width=100, height=50)
+        next_button.place(x=350, y=450)
+        self.all_screen_obj.append(next_button)
+    
+    def intro_1st_slide_message(self,) :
+        self.clearScreen()
+
+        intro_text_1 = CTk.CTkLabel(self.app, 600, 75, bg_color=self.bg_color, fg_color=self.bg_color, text="CounselAI helps to recommend you\ncolleges using a \"hollistic\" review process\nlike how colleges evaluate your application.\nCounselAI takes into account your\nGPA, test scores, extracurriculars,\nand other information to recommend to\nyou the best colleges possible.", font=self.medium_font)
+        intro_text_1.place(x=0, y = 125)
+        self.all_screen_obj.append(intro_text_1)
+
+        back_button = CTk.CTkButton(self.app, text="Back", font=self.text_font, fg_color=self.bg_color_light, bg_color=self.bg_color, hover_color=self.bg_color, border_width=0, command = self.intro_1st_slide, width=100, height=50)
+        back_button.place(x=150, y=450)
+        self.all_screen_obj.append(back_button)
 
         next_button = CTk.CTkButton(self.app, text="Next", font=self.text_font, fg_color=self.bg_color_light, bg_color=self.bg_color, hover_color=self.bg_color, border_width=0, command=self.intro_2nd_slide, width=100, height=50)
         next_button.place(x=350, y=450)
@@ -190,7 +203,7 @@ class app() :
         self.name_tb.place(x=100, y=300)
         self.all_screen_obj.append(self.name_tb)
 
-        back_button = CTk.CTkButton(self.app, text="Back", font=self.text_font, fg_color=self.bg_color_light, bg_color=self.bg_color, hover_color=self.bg_color, border_width=0, command = self.intro_1st_slide, width=100, height=50)
+        back_button = CTk.CTkButton(self.app, text="Back", font=self.text_font, fg_color=self.bg_color_light, bg_color=self.bg_color, hover_color=self.bg_color, border_width=0, command = self.intro_1st_slide_message, width=100, height=50)
         back_button.place(x=150, y=450)
         self.all_screen_obj.append(back_button)
 
@@ -559,9 +572,9 @@ class app() :
             assert(club_purpose != "-" and club_role != "-")
             ## Janky but got no time to write clean solution
             if club_purpose == "Academic" :
-                club_purpose = 3
-            elif club_purpose == "Volunteering" : 
                 club_purpose = 2.5
+            elif club_purpose == "Volunteering" : 
+                club_purpose = 1.5
             else : ## Recreational counts as other as not realy boost
                 club_purpose = 1
 
@@ -570,7 +583,7 @@ class app() :
             elif club_role == "Vice-president" :
                 club_role = 2.5
             elif club_role == "Other leadership role" :
-                club_role = 2
+                club_role = 1.75
             else :
                 club_role = 1
 
@@ -814,11 +827,11 @@ class app() :
                 award_region = 6
             
             if award_level == "Top 3" :
-                award_level = 4
+                award_level = 3
             elif award_level == "Finalist" :
-                award_level = 2
+                award_level = 1.5
             else :
-                award_level = 1
+                award_level = 0.5
 
             self.clearScreen()
 
@@ -864,76 +877,60 @@ class app() :
         try :
             career_path = self.career_dd.get()
             assert (career_path != "-")
-
-            self.student_score = self.sat_score/60 + self.gpa*8
+            self.clearScreen()
+            ## Student score eval
+            self.student_score = self.sat_score/75 + self.gpa*8
             
             ## Very dumb but it works so :shrug:
-            tempTotal = 0
             for i in self.taken_APs :
-                tempTotal += i.apValue
+                self.student_score += i.apValue
 
             for i in self.taken_clubs :
-                tempTotal += i.clubValue
+                self.student_score += i.clubValue
             
             for i in self.taken_sports :
-                tempTotal += i.sportsValue
+                self.student_score += i.sportsValue
             
             for i in self.awarded_awards :
-                tempTotal += i.awardValue
+                self.student_score += i.awardValue
 
-            self.student_score += tempTotal
-            
-            print(self.student_score)
-                        
-            self.clearScreen()
             if career_path == "STEM" : ## TODO: Change this later into things for tech, chem, and other sciences
                 tag = "Tech"
             elif career_path == "Undecided" or career_path == "Other" :
-                tag = None
+                tag = ""
             else :
                 tag = career_path
             
             recommend_unis = []
-            if self.student_score >= 65 :
-                for i in self.T1_UNIS :
-                    if tag in i.tags :
-                        recommend_unis.append(i)
-                if tag == "" :
-                    for i in range(3) :
-                        recommend_unis.append(random.choice(self.T1_UNIS))
+            reach_unis = []
+            target_unis = []
+            safety_unis = []
 
-            if self.student_score >= 50 and self.student_score <= 80 :
-                for i in self.T2_UNIS :
-                    if tag in i.tags :
-                        recommend_unis.append(i)
-                if tag == "" :
-                    for i in range(3) :
-                        recommend_unis.append(random.choice(self.T2_UNIS))
-
-            if self.student_score >= 40 and self.student_score <= 70 :
-                for i in self.T3_UNIS :
-                    if tag in i.tags :
-                        recommend_unis.append(i)
-                if tag == "" :
-                    for i in range(3) :
-                        recommend_unis.append(random.choice(self.T3_UNIS))
-
-            if self.student_score >= 30 and self.student_score <= 50 :
-                for i in self.T4_UNIS :
-                    if tag in i.tags :
-                        recommend_unis.append(i)
-                if tag == "" :
-                    for i in range(3) :
-                        recommend_unis.append(random.choice(self.T4_UNIS))
-                        
-            if self.student_score <= 40 :
-                for i in self.T5_UNIS :
-                    if tag in i.tags :
-                        recommend_unis.append(i)
-                if tag == "" :
-                    for i in range(3) :
-                        recommend_unis.append(random.choice(self.T5_UNIS))
+            for i in self.ALL_UNIS : ## Ugly code
+                if self.student_score*1.25 > i.universityDifficulty and i.universityDifficulty <= self.student_score*1.1 :
+                    reach_unis.append(i)
+                elif self.student_score*1.1 > i.universityDifficulty and i.universityDifficulty <= self.student_score*0.8 :
+                    target_unis.append(i)
+                elif self.student_score*0.6 > i.universityDifficulty and i.universityDifficulty < self.student_score*0.3 :
+                    safety_unis.append(i)
             
+            temp_recommend = reach_unis + target_unis + safety_unis
+
+            recommend_unis = [uni for uni in temp_recommend if tag in uni.tags or tag == ""]
+            
+            if len(recommend_unis) < 6 :
+                for i in range(6-len(recommend_unis)) :
+                    randomVar = random.choice(temp_recommend)
+                    recommend_unis.append(randomVar)
+                    temp_recommend.remove(randomVar)
+
+            for uni in temp_recommend :
+                if len(recommend_unis) >= 6 :
+                    break
+                if uni not in recommend_unis :
+                    recommend_unis.append(uni)
+                recommend_unis = list(set(recommend_unis)) ## Remove duplicates, this is jank
+
             for i in recommend_unis :
                 print(i.name)
 
@@ -941,25 +938,25 @@ class app() :
             recommend_text.place(x=0, y=90)
             self.all_screen_obj.append(recommend_text)
 
-            y_pos = 80
-            for i in range(5 if 5 <= len(recommend_unis) else len(recommend_unis)) : 
+            y_pos = 140
+            for i in range(6 if 6 <= len(recommend_unis) else len(recommend_unis)) : 
                 uni = random.choice(recommend_unis)
                 recommend_unis.remove(uni)
 
-                layer = CTk.CTkFrame(self.app, 600, 65, 0, 0, self.bg_color_light, self.bg_color_light)
-                layer.place(x=0, y=y_pos*i+140)
+                layer = CTk.CTkFrame(self.app, 600, 50, 0, 0, self.bg_color_light, self.bg_color_light)
+                layer.place(x=0, y=y_pos + i*60)
 
                 uni_text = CTk.CTkLabel(layer, bg_color=self.bg_color_light, fg_color=self.bg_color_light, text=uni.name, font=self.button_font)
-                uni_text.place(x=15, y=20)
+                uni_text.place(x=15, y=12)
                 self.all_screen_obj.append(uni_text)
 
                 uni_button = CTk.CTkButton(layer, 75, border_width=0, command=lambda university = uni.name: self.spawn_university_information_window(university), text="More info", font=self.small_font)
-                uni_button.place(x=485, y=20)
-
+                uni_button.place(x=500, y=12)
 
                 self.all_screen_obj.append(layer)
+            print(self.student_score)
 
-        except :
+        except AssertionError:
             messagebox.showerror("Invalid Career Field", "Invalid Career Field!")
             self.intro_11th_slide()
     
@@ -990,7 +987,7 @@ class app() :
             for i in tier1s :
                 ## Ugly but works
                 self.T1_UNIS.append(universities.university(i, tier1s[i]["acc_rate"], 5, tier1s[i]["75_sat"], tier1s[i]["50_sat"], tier1s[i]["25_sat"], tier1s[i]["tags"]))
-                print(self.T1_UNIS[len(self.T1_UNIS)-1].universityDifficulty)
+                #print(self.T1_UNIS[len(self.T1_UNIS)-1].universityDifficulty)
 
         with open("tier2.json", 'r') as t2 :
             tier2s = json.load(t2)
@@ -1015,7 +1012,7 @@ class app() :
 
             for i in tier5s :
                 self.T5_UNIS.append(universities.university(i, tier5s[i]["acc_rate"], 1, tier5s[i]["75_sat"], tier5s[i]["50_sat"], tier5s[i]["25_sat"], tier5s[i]["tags"]))
-                print(self.T5_UNIS[len(self.T5_UNIS)-1].universityDifficulty)
+                #print(self.T5_UNIS[len(self.T5_UNIS)-1].universityDifficulty)
 
         ## Also a bit janky but also works
         self.ALL_UNIS = self.T1_UNIS + self.T2_UNIS + self.T3_UNIS + self.T4_UNIS + self.T5_UNIS
@@ -1054,7 +1051,7 @@ class app() :
                 max_tokens=300,
                 n=1,
                 stop=None,
-                temperature=0.7
+                temperature=0.75
             )
 
             return response.choices[0].message.content

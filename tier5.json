@@ -54,5 +54,33 @@
         "50_sat" : 1250,
         "25_sat" : 1160,
         "tags" : ["Large", "Engineering"]
+    },
+    "University of Alabama" : {
+        "acc_rate" : 0.76,
+        "75_sat" : 1370,
+        "50_sat" : 1230,
+        "25_sat" : 1120,
+        "tags" : ["Large", "Sports"]
+    },
+    "University of Southern Mississippi" : {
+        "acc_rate" : 0.99,
+        "75_sat" : 1190,
+        "50_sat" : 1070,
+        "25_sat" : 990,
+        "tags" : ["Medium", "Business"]
+    },
+    "Art Academy of Cincinnati" : {
+        "acc_rate" : 1,
+        "75_sat" : 1110,
+        "50_sat" : 1000,
+        "25_sat" : 880,
+        "tags" : ["Small", "Art"]
+    },
+    "San Francisco State University" : {
+        "acc_rate" : 0.91,
+        "75_sat" : 1160,
+        "50_sat" : 1060,
+        "25_sat" : 950,
+        "tags" : ["Large", "Business", "Art", "CSU System"]
     }
 }

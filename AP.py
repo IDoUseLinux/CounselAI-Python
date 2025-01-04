@@ -9,4 +9,4 @@ class apClass :
         self.tier = tier
         self.apgrade = apgrade
         self.score = score
-        self.apValue = (score*0.25+apgrade*0.75)*tier/20
+        self.apValue = (score*0.25+apgrade*0.75)*tier/5

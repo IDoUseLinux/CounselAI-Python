@@ -9,9 +9,8 @@ class university :
         self.sat25 = sat25
         self.tags = tags
 
-        self.universityDifficulty = (1-self.acc_rate)*7*tier + sat75/40
+        self.universityDifficulty = (1+(1-self.acc_rate))**tier + sat75/40
         if (self.tier <= 3 ) :
             self.universityDifficulty -= (5*(2-self.tier))
         else :
             self.universityDifficulty += (2*self.tier)
-            

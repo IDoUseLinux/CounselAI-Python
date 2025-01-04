@@ -1,5 +1,5 @@
 {
-    "Date Generated": "2025-01-03 14:12:54 Hawaiian Standard Time",
+    "Date Generated": "2025-01-04 02:09:56 Hawaiian Standard Time",
     "Harvard University": {
         "acc_rate": 0.032,
         "75_sat": 1580,
@@ -7,7 +7,7 @@
         "25_sat": 1490,
         "tags": [
             "Ivy",
-            "LaRge",
+            "Large",
             "Law",
             "Business",
             "Medicine"
@@ -86,7 +86,7 @@
         ]
     },
     "Dartmouth College": {
-        "acc_rate": 0.062,
+        "acc_rate": 0.064,
         "75_sat": 1560,
         "50_sat": 1500,
         "25_sat": 1440,
@@ -173,7 +173,8 @@
         "tags": [
             "Ivy-Adjacent",
             "Medium",
-            "Music"
+            "Music",
+            "Medicine"
         ]
     },
     "Rice University": {
@@ -234,7 +235,8 @@
             "Ivy-Adjacent",
             "Large",
             "Business",
-            "Medicine"
+            "Medicine",
+            "Engineering"
         ]
     },
     "University of California, Los Angeles": {
@@ -593,6 +595,29 @@
             "Small"
         ]
     },
+    "University of South Florida": {
+        "acc_rate": 0.41,
+        "75_sat": 1370,
+        "50_sat": 1300,
+        "25_sat": 1240,
+        "tags": [
+            "Large",
+            "Medicine",
+            "Tech",
+            "Engineering"
+        ]
+    },
+    "San Diego State University": {
+        "acc_rate": 0.39,
+        "75_sat": 1340,
+        "50_sat": 1220,
+        "25_sat": 1130,
+        "tags": [
+            "Large",
+            "CSU System",
+            "Sports"
+        ]
+    },
     "Purdue University": {
         "acc_rate": 0.53,
         "75_sat": 1450,
@@ -700,6 +725,27 @@
             "Christian"
         ]
     },
+    "University of San Francisco": {
+        "acc_rate": 0.51,
+        "75_sat": 1370,
+        "50_sat": 1300,
+        "25_sat": 1240,
+        "tags": [
+            "Medium",
+            "Sports"
+        ]
+    },
+    "University of South Carolina": {
+        "acc_rate": 0.64,
+        "75_sat": 1370,
+        "50_sat": 1280,
+        "25_sat": 1190,
+        "tags": [
+            "Large",
+            "Business",
+            "Tech"
+        ]
+    },
     "Arizona State University": {
         "acc_rate": 0.898,
         "75_sat": 1320,
@@ -765,6 +811,48 @@
         "tags": [
             "Large",
             "Engineering"
+        ]
+    },
+    "University of Alabama": {
+        "acc_rate": 0.76,
+        "75_sat": 1370,
+        "50_sat": 1230,
+        "25_sat": 1120,
+        "tags": [
+            "Large",
+            "Sports"
+        ]
+    },
+    "University of Southern Mississippi": {
+        "acc_rate": 0.99,
+        "75_sat": 1190,
+        "50_sat": 1070,
+        "25_sat": 990,
+        "tags": [
+            "Medium",
+            "Business"
+        ]
+    },
+    "Art Academy of Cincinnati": {
+        "acc_rate": 1,
+        "75_sat": 1110,
+        "50_sat": 1000,
+        "25_sat": 880,
+        "tags": [
+            "Small",
+            "Art"
+        ]
+    },
+    "San Francisco State University": {
+        "acc_rate": 0.91,
+        "75_sat": 1160,
+        "50_sat": 1060,
+        "25_sat": 950,
+        "tags": [
+            "Large",
+            "Business",
+            "Art",
+            "CSU System"
         ]
     }
 }
