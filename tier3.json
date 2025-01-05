@@ -46,7 +46,7 @@
         "75_sat" : 1520,
         "50_sat" : 1470,
         "25_sat" : 1410,
-        "tags" : ["Medium", "Medicine"]
+        "tags" : ["Medium", "Medical"]
     },
     "Florida State University" : {
         "acc_rate" : 0.25,
@@ -95,7 +95,7 @@
         "75_sat" : 1450,
         "50_sat" : 1360,
         "25_sat" : 1270,
-        "tags" : ["Large", "Medicine", "Engineering"]
+        "tags" : ["Large", "Medical", "Engineering"]
     },
     "Landmark College" : {
         "acc_rate" : 0.45,
@@ -109,7 +109,7 @@
         "75_sat" : 1370,
         "50_sat" : 1300,
         "25_sat" : 1240,
-        "tags" : ["Large", "Medicine", "Tech", "Engineering"]
+        "tags" : ["Large", "Medical", "Tech", "Engineering"]
     },
     "San Diego State University" : {
         "acc_rate" : 0.39,

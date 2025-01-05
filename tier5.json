@@ -82,5 +82,19 @@
         "50_sat" : 1060,
         "25_sat" : 950,
         "tags" : ["Large", "Business", "Art", "CSU System"]
+    },
+    "University of Nebraska, Lincoln" : {
+        "acc_rate" : 0.79,
+        "75_sat" : 1310,
+        "50_sat" : 1220,
+        "25_sat" : 1090,
+        "tags" : ["Large", "Sports"]
+    },
+    "Washington State University" : {
+        "acc_rate" : 0.83,
+        "75_sat" : 1250,
+        "50_sat" : 1130,
+        "25_sat" : 1000,
+        "tags" : ["Large", "Medical"]
     }
 }

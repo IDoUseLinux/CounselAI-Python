@@ -18,7 +18,7 @@ is_dev_version = True
 build_tag = "Alpha-1234"
 
 class app() :
-    CAREER_PATHS = ["Undecided", "Tech", "Engineering", "Art", "Music", "Business", "Law", "Medicine", "Sports", "Other"]
+    CAREER_PATHS = ["Undecided", "Tech", "Engineering", "Art", "Music", "Business", "Law", "Medical", "Sports", "Other"]
 
     AP_T1 = [
         "Calculus AB/BC",
@@ -114,6 +114,7 @@ class app() :
     medium_font = ("Segoe UI", 30)
     text_font = ("Segoe UI", 25)
     button_font = ("Segoe UI", 20)
+    sm_font = ("Segoe UI", 17)
     small_font = ("Segoe UI", 15)
 
     def __init__(self, app:CTk.CTk) :
@@ -696,66 +697,10 @@ class app() :
             back_button.place(x=150, y=450)
             self.all_screen_obj.append(back_button)
 
-        #except Exception as err:
-            #print(err) 
-            #messagebox.showerror("Invalid Sports Entry", "Invalid Sports Entry!")
-            #self.intro_8th_slide_sports_entry()
-
-    ## Too complicated to implement for hackathon, will implement for CAC instead
-    # def intro_9th_slide(self,) :
-    #     self.clearScreen()
-
-    #     challenge_text = CTk.CTkLabel(self.app, 600, 80, bg_color=self.bg_color, fg_color=self.bg_color, text="Have you participated in\nany challenges?", font=self.header_font)
-    #     challenge_text.place(x=0, y = 150)
-    #     self.all_screen_obj.append(challenge_text)
-
-    #     yes_challenges = CTk.CTkButton(self.app, 75, 30, font=self.text_font, text="Yes", command=self.intro_9th_slide_challenges_entry, border_width=0, border_color=self.bg_color, bg_color=self.bg_color, fg_color=self.bg_color_light)
-    #     yes_challenges.place(x=150, y=400)
-    #     self.all_screen_obj.append(yes_challenges)
-
-    #     no_challenges = CTk.CTkButton(self.app, 75, 30, font=self.text_font, text="No", command=self.intro_10th_slide, border_width=0, border_color=self.bg_color, bg_color=self.bg_color, fg_color=self.bg_color_light)
-    #     no_challenges.place(x=375, y=400)
-    #     self.all_screen_obj.append(no_challenges)
-
-    #     back_button = CTk.CTkButton(self.app, text="Back", font=self.text_font, fg_color=self.bg_color_light, bg_color=self.bg_color, hover_color=self.bg_color, border_width=0, command=self.intro_8th_slide, width=100, height=50)
-    #     back_button.place(x=150, y=450)
-    #     self.all_screen_obj.append(back_button)
-
-    # def intro_9th_slide_challenges_entry(self,) :
-    #     self.clearScreen()
-
-    #     challenge_text = CTk.CTkLabel(self.app, bg_color=self.bg_color, fg_color=self.bg_color, text="The challenge's name: ", font=self.text_font)
-    #     challenge_text.place(x=50, y=150)
-    #     self.all_screen_obj.append(challenge_text)
-
-    #     self.challenge_tb = CTk.CTkEntry(self.app, placeholder_text="Challenge name", width=300, height=60, font=self.text_font, text_color=self.app_text_color, bg_color=self.bg_color, fg_color=self.app_text_box_color, border_width=0)
-    #     self.challenge_tb.place(x=250, y=150)
-    #     self.all_screen_obj.append(self.challenge_tb)
-
-    #     challenge_level = CTk.CTkLabel(self.app, bg_color=self.bg_color, fg_color=self.bg_color, text="Challenge Level", font=self.text_font)
-    #     challenge_level.place(x=50, y=250)
-    #     self.all_screen_obj.append(challenge_level)
-
-    #     self.challenge_level_dd = CTk.CTkOptionMenu(self.app, bg_color=self.bg_color, fg_color=self.bg_color, values=self.regions, font=self.text_font)
-    #     self.challenge_level_dd.place(x=300, y=250)
-    #     self.all_screen_obj.append(self.challenge_level_dd)
-
-    #     back_button = CTk.CTkButton(self.app, text="Back", font=self.text_font, fg_color=self.bg_color_light, bg_color=self.bg_color, hover_color=self.bg_color, border_width=0, command=self.intro_9th_slide, width=100, height=50)
-    #     back_button.place(x=150, y=450)
-    #     self.all_screen_obj.append(back_button)
-
-    #     next_button = CTk.CTkButton(self.app, text="Next", font=self.text_font, fg_color=self.bg_color_light, bg_color=self.bg_color, hover_color=self.bg_color, border_width=0, command=self.intro_9th_slide_challenges_entry_validator, width=100, height=50)
-    #     next_button.place(x=350, y=450)
-    #     self.all_screen_obj.append(next_button)
-
-    
-    # def intro_9th_slide_challenges_entry_validator(self,) :
-    #     self.clearScreen()
-
     def intro_10th_slide(self,) :
         self.clearScreen()
 
-        awards_text = CTk.CTkLabel(self.app, 600, 80, bg_color=self.bg_color, fg_color=self.bg_color, text="Have you recieved any awards?", font=self.header_font)
+        awards_text = CTk.CTkLabel(self.app, 600, 80, bg_color=self.bg_color, fg_color=self.bg_color, text="Have you won any awards/challenges?", font=self.header_font)
         awards_text.place(x=0, y = 150)
         self.all_screen_obj.append(awards_text)
 
@@ -877,7 +822,6 @@ class app() :
         try :
             career_path = self.career_dd.get()
             assert (career_path != "-")
-            self.clearScreen()
             ## Student score eval
             self.student_score = self.sat_score/75 + self.gpa*8
             
@@ -895,71 +839,90 @@ class app() :
                 self.student_score += i.awardValue
 
             if career_path == "STEM" : ## TODO: Change this later into things for tech, chem, and other sciences
-                tag = "Tech"
+                self.tag = "Tech"
             elif career_path == "Undecided" or career_path == "Other" :
-                tag = ""
+                self.tag = ""
             else :
-                tag = career_path
+                self.tag = career_path
             
-            recommend_unis = []
-            reach_unis = []
-            target_unis = []
-            safety_unis = []
+            self.recommend_unis = []
+            self.reach_unis = []
+            self.target_unis = []
+            self.safety_unis = []
 
             for i in self.ALL_UNIS : ## Ugly code
-                if self.student_score*1.25 > i.universityDifficulty and i.universityDifficulty <= self.student_score*1.1 :
-                    reach_unis.append(i)
-                elif self.student_score*1.1 > i.universityDifficulty and i.universityDifficulty <= self.student_score*0.8 :
-                    target_unis.append(i)
-                elif self.student_score*0.6 > i.universityDifficulty and i.universityDifficulty < self.student_score*0.3 :
-                    safety_unis.append(i)
+                if self.student_score*1.3 > i.universityDifficulty and i.universityDifficulty <= self.student_score*1.15 :
+                    self.reach_unis.append(i)
+                elif self.student_score*1.15 > i.universityDifficulty and i.universityDifficulty <= self.student_score*0.8 :
+                    self.target_unis.append(i)
+                elif self.student_score*0.6 > i.universityDifficulty and i.universityDifficulty < self.student_score*0.4 :
+                    self.safety_unis.append(i)
             
-            temp_recommend = reach_unis + target_unis + safety_unis
+            temp_recommend = self.reach_unis + self.target_unis + self.safety_unis
 
-            recommend_unis = [uni for uni in temp_recommend if tag in uni.tags or tag == ""]
+            self.recommend_unis = [uni for uni in temp_recommend if self.tag in uni.tags or self.tag == ""]
             
-            if len(recommend_unis) < 6 :
-                for i in range(6-len(recommend_unis)) :
-                    randomVar = random.choice(temp_recommend)
-                    recommend_unis.append(randomVar)
-                    temp_recommend.remove(randomVar)
+            try :
+                if len(self.recommend_unis) < 6 :
+                    for i in range(6-len(self.recommend_unis)) :
+                        randomVar = random.choice(temp_recommend)
+                        self.recommend_unis.append(randomVar)
+                        temp_recommend.remove(randomVar)
 
-            for uni in temp_recommend :
-                if len(recommend_unis) >= 6 :
-                    break
-                if uni not in recommend_unis :
-                    recommend_unis.append(uni)
-                recommend_unis = list(set(recommend_unis)) ## Remove duplicates, this is jank
+                for uni in temp_recommend :
+                    if len(self.recommend_unis) >= 6 :
+                        break
+                    if uni not in self.recommend_unis :
+                        self.recommend_unis.append(uni)
+                    self.recommend_unis = list(set(self.recommend_unis)) ## Remove duplicates, this is jank
 
-            for i in recommend_unis :
+            except IndexError : ## This is for when the user has a comically low eval score...
+                tempT5_UNIS = self.T5_UNIS.copy()
+                for i in range(3) : 
+                    randomUni = random.choice(tempT5_UNIS)
+                    tempT5_UNIS.remove(randomUni)
+                    self.recommend_unis.append(randomUni)
+
+            for i in self.recommend_unis :
                 print(i.name)
 
-            recommend_text = CTk.CTkLabel(self.app, bg_color=self.bg_color, fg_color=self.bg_color, text="Recommended Universities: ", font=self.text_font, width=600)
-            recommend_text.place(x=0, y=90)
-            self.all_screen_obj.append(recommend_text)
-
-            y_pos = 140
-            for i in range(6 if 6 <= len(recommend_unis) else len(recommend_unis)) : 
-                uni = random.choice(recommend_unis)
-                recommend_unis.remove(uni)
-
-                layer = CTk.CTkFrame(self.app, 600, 50, 0, 0, self.bg_color_light, self.bg_color_light)
-                layer.place(x=0, y=y_pos + i*60)
-
-                uni_text = CTk.CTkLabel(layer, bg_color=self.bg_color_light, fg_color=self.bg_color_light, text=uni.name, font=self.button_font)
-                uni_text.place(x=15, y=12)
-                self.all_screen_obj.append(uni_text)
-
-                uni_button = CTk.CTkButton(layer, 75, border_width=0, command=lambda university = uni.name: self.spawn_university_information_window(university), text="More info", font=self.small_font)
-                uni_button.place(x=500, y=12)
-
-                self.all_screen_obj.append(layer)
             print(self.student_score)
+            uni_cp = self.recommend_unis.copy()
+            self.temp_recommend_unis = []
+
+            for i in range(6 if 6 <= len(uni_cp) else len(uni_cp)) :
+                randomUni = random.choice(uni_cp)
+                uni_cp.remove(randomUni)
+                self.temp_recommend_unis.append(randomUni)
+
+            self.report_slide_1()
 
         except AssertionError:
             messagebox.showerror("Invalid Career Field", "Invalid Career Field!")
             self.intro_11th_slide()
     
+    def report_slide_1(self,) :
+        self.clearScreen()
+        recommend_text = CTk.CTkLabel(self.app, bg_color=self.bg_color, fg_color=self.bg_color, text="Recommended Universities: ", font=self.text_font, width=600)
+        recommend_text.place(x=0, y=90)
+        self.all_screen_obj.append(recommend_text)
+
+        y_pos = 140
+        for i in range(6 if 6 <= len(self.temp_recommend_unis) else len(self.temp_recommend_unis)) : 
+            uni = self.temp_recommend_unis[i]
+
+            layer = CTk.CTkFrame(self.app, 600, 50, 0, 0, self.bg_color_light, self.bg_color_light)
+            layer.place(x=0, y=y_pos + i*60)
+
+            uni_text = CTk.CTkLabel(layer, bg_color=self.bg_color_light, fg_color=self.bg_color_light, text=uni.name, font=self.button_font)
+            uni_text.place(x=15, y=12)
+            self.all_screen_obj.append(uni_text)
+
+            uni_button = CTk.CTkButton(layer, 75, border_width=0, command=lambda university = uni.name: self.spawn_university_information_window(university), text="More info", font=self.small_font)
+            uni_button.place(x=500, y=12)
+
+            self.all_screen_obj.append(layer)    
+
     def chat_with_ai(self,) :
         self.clearScreen()
         self.ai_chat_button.destroy()
@@ -1058,9 +1021,11 @@ class app() :
         except Exception as e :
             return f"An error occurred: {str(e)}"
     
-    def spawn_university_information_window(self, university_name) :
-        temp_chat = [{"role" : "system", "content" : systemPrompt + ". Please do not use lists and keep the reponse in a paragraph."}] ## Janky but works
-        temp_chat.append({"role" : "user", "content" : "Generate a short description of " + university_name + ". But be sure to include some tips for how to get in."})
+    def spawn_university_information_window(self, university_name) : ## TODO: Cache the response from OpenAI to save some API billing
+        self.clearScreen()
+
+        temp_chat = [{"role" : "system", "content" : systemPrompt + ". Please do not use lists and keep the reponse in a paragraph. Refer the user as 'you'."}] ## Janky but works
+        temp_chat.append({"role" : "user", "content" : f"Generate a short description of  {university_name} and include some tips for on to get accepted for {self.tag}. The user currently has a SAT (or SAT equivalent) score of {self.sat_score} and a highschool GPA of {self.gpa}."})
         
         try :
             response = openai.chat.completions.create(
@@ -1070,6 +1035,7 @@ class app() :
                 n=1,
                 stop=None,
                 temperature=0.75, ## Using higher temperatures leads to more predictable results, but it does help it remain more consistent
+                ## We are also not trying to bypass AI-detectors here. But if we needed we can use https://github.com/IDoUseLinux/aint.
             )
 
             uni_description = response.choices[0].message.content
@@ -1077,31 +1043,35 @@ class app() :
         except Exception as e :
             messagebox.showerror("Error!", f"An error occurred: {str(e)}")
 
-        ## Programming crimes
         uni_description = list(uni_description)
 
         space_count = 0
-    
-        for i in range(len(uni_description)):
+        last_space = 0
+        i = 0  # Use manual index control
+
+        while i < len(uni_description):
+            last_space += 1
+            print(last_space)
             if uni_description[i] == " ":
                 space_count += 1
-                if space_count % 6 == 0:
-                    uni_description[i] = "\n" ## Very janky method of line seperation. 
-                    i = i-1 ## to deal with the fact that we technically added an additional character.
+                # Check conditions for inserting '\n'
+                if (space_count % 10 == 0 and last_space >= 50) or last_space >= 60 :
+                    uni_description[i] = "\n"  # Replace the space with a newline
+                    last_space = 0  # Reset distance since last space/newline
+            i += 1  # Manually increment index
+
         uni_description = "".join(uni_description)
+        
+        recommend_text = CTk.CTkLabel(self.app, bg_color=self.bg_color, fg_color=self.bg_color, text=university_name, font=self.button_font, width=600)
+        recommend_text.place(x=0, y=80)
+        self.all_screen_obj.append(recommend_text)
 
-        uni_description_window = CTk.CTkToplevel(self.app,)
-        uni_description_window.config(bg=self.bg_color)
-        uni_description_window.geometry("600x600")
-        uni_description_window.title("About " + university_name)
+        uni_description_text = CTk.CTkLabel(self.app, 600, 75, bg_color=self.bg_color, fg_color=self.bg_color, text=uni_description, font=self.sm_font)
+        uni_description_text.place(x=0, y=110)
+        self.all_screen_obj.append(uni_description_text)
 
-        header = CTk.CTkFrame(uni_description_window, 600, 75, 0, 0, self.bg_color_light, self.bg_color_light, )
-        header.place(x=0, y=0)
-
-        uni_name_header = CTk.CTkLabel(header, text=university_name, width=360, height=50, font=self.medium_font, text_color=self.app_text_color, bg_color=self.bg_color_light, fg_color=self.bg_color_light, )
-        uni_name_header.place(x=20, y=15)
-
-        uni_text = CTk.CTkLabel(uni_description_window, 600, 80, bg_color=self.bg_color, fg_color=self.bg_color, text=uni_description, font=self.button_font)
-        uni_text.place(x=0, y = 100)
+        back_button = CTk.CTkButton(self.app, text="<", font=self.medium_font, fg_color=self.bg_color_light, bg_color=self.bg_color, hover_color=self.bg_color, border_width=0, command = self.report_slide_1, width=50, height=50)
+        back_button.place(x=50, y=500)
+        self.all_screen_obj.append(back_button)
 
 var = app(CTk.CTk())

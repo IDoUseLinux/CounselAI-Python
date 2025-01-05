@@ -14,3 +14,6 @@ class university :
             self.universityDifficulty -= (5*(2-self.tier))
         else :
             self.universityDifficulty += (2*self.tier)
+
+    def __eq__(self, universityName):
+        return universityName.name == self.name 
