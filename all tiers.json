@@ -1,5 +1,5 @@
 {
-    "Date Generated": "2025-01-04 02:09:56 Hawaiian Standard Time",
+    "Date Generated": "2025-01-06 00:43:49 Hawaiian Standard Time",
     "Harvard University": {
         "acc_rate": 0.032,
         "75_sat": 1580,
@@ -10,7 +10,7 @@
             "Large",
             "Law",
             "Business",
-            "Medicine"
+            "Medical"
         ]
     },
     "Princeton University": {
@@ -151,7 +151,7 @@
         "tags": [
             "Ivy-Adjacent",
             "Medium",
-            "Medicine"
+            "Medical"
         ]
     },
     "University of Chicago": {
@@ -174,7 +174,7 @@
             "Ivy-Adjacent",
             "Medium",
             "Music",
-            "Medicine"
+            "Medical"
         ]
     },
     "Rice University": {
@@ -227,7 +227,7 @@
         ]
     },
     "New York University": {
-        "acc_rate": 0.09,
+        "acc_rate": 0.08,
         "75_sat": 1570,
         "50_sat": 1520,
         "25_sat": 1470,
@@ -235,7 +235,7 @@
             "Ivy-Adjacent",
             "Large",
             "Business",
-            "Medicine",
+            "Medical",
             "Engineering"
         ]
     },
@@ -252,7 +252,7 @@
             "Art",
             "Music",
             "Tech",
-            "Medicine",
+            "Medical",
             "Sports",
             "Law"
         ]
@@ -265,7 +265,7 @@
         "tags": [
             "Medium",
             "Law",
-            "Medicine"
+            "Medical"
         ]
     },
     "University of Southern California": {
@@ -278,7 +278,7 @@
             "Sports",
             "Tech",
             "Engineering",
-            "Medicine"
+            "Medical"
         ]
     },
     "Carnegie Mellon University": {
@@ -337,7 +337,7 @@
         "25_sat": 1470,
         "tags": [
             "Medium",
-            "Medicine"
+            "Medical"
         ]
     },
     "University of Virgina": {
@@ -357,7 +357,7 @@
         "25_sat": 1500,
         "tags": [
             "Medium",
-            "Medicine"
+            "Medical"
         ]
     },
     "University of Florida": {
@@ -517,7 +517,7 @@
         "25_sat": 1410,
         "tags": [
             "Medium",
-            "Medicine"
+            "Medical"
         ]
     },
     "Florida State University": {
@@ -582,7 +582,7 @@
         "25_sat": 1270,
         "tags": [
             "Large",
-            "Medicine",
+            "Medical",
             "Engineering"
         ]
     },
@@ -602,7 +602,7 @@
         "25_sat": 1240,
         "tags": [
             "Large",
-            "Medicine",
+            "Medical",
             "Tech",
             "Engineering"
         ]
@@ -702,7 +702,7 @@
         "25_sat": 1270,
         "tags": [
             "Large",
-            "Medicine",
+            "Medical",
             "Sports"
         ]
     },
@@ -853,6 +853,26 @@
             "Business",
             "Art",
             "CSU System"
+        ]
+    },
+    "University of Nebraska, Lincoln": {
+        "acc_rate": 0.79,
+        "75_sat": 1310,
+        "50_sat": 1220,
+        "25_sat": 1090,
+        "tags": [
+            "Large",
+            "Sports"
+        ]
+    },
+    "Washington State University": {
+        "acc_rate": 0.83,
+        "75_sat": 1250,
+        "50_sat": 1130,
+        "25_sat": 1000,
+        "tags": [
+            "Large",
+            "Medical"
         ]
     }
 }

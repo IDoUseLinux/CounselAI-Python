@@ -1,2 +1,2 @@
-Give some suggestions on improving academic performance
-Recommend the user 2 reach schools, 3 same-tier schools, and 1 safety school for a total of 7 schools.
+Change top text to match with the current slide's actions.
+Reuse OpenAI queries to help save API fees and improve consistency.

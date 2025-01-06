@@ -80,7 +80,7 @@ class app() :
     taken_clubs = []
     taken_sports = []
     awarded_awards = []
-    sat_score = 1050 ## Assume Nat. Avg. if no test
+    sat_score = 0 
 
     ## All screen objects, used for screen changing
     all_screen_obj = [] ## This is preparing me for memory management and screen management-- if an item isn't added to this list, it stays on the screen for ever.
@@ -499,14 +499,18 @@ class app() :
     
     def intro_6th_slide_act_score_validator(self,) :
         try :
-            act_score = int(self.act_tb.get())
-            assert(act_score >= 1 and act_score <= 36)
+            self.act_score = int(self.act_tb.get())
+            assert(self.act_score >= 1 and self.act_score <= 36)
 
             ## I came up with this algorithm myself, it is relatively accurate for score conversions
-            act_score = 35*act_score + 340
+            self.act_score = 35*self.act_score + 340
 
             ## Janky but works
-            self.sat_score = act_score if act_score > self.sat_score else self.sat_score
+            if self.act_score > self.sat_score :
+                self.sat_score = self.act_score 
+                self.used_act = True
+            else :
+                self.used_act = False
 
             self.intro_7th_slide()
         except : 
@@ -822,6 +826,8 @@ class app() :
         try :
             career_path = self.career_dd.get()
             assert (career_path != "-")
+            if self.sat_score == 0 :
+                self.sat_score = "no test"
             ## Student score eval
             self.student_score = self.sat_score/75 + self.gpa*8
             
@@ -838,9 +844,7 @@ class app() :
             for i in self.awarded_awards :
                 self.student_score += i.awardValue
 
-            if career_path == "STEM" : ## TODO: Change this later into things for tech, chem, and other sciences
-                self.tag = "Tech"
-            elif career_path == "Undecided" or career_path == "Other" :
+            if career_path == "Undecided" or career_path == "Other" :
                 self.tag = ""
             else :
                 self.tag = career_path
@@ -906,9 +910,11 @@ class app() :
         recommend_text = CTk.CTkLabel(self.app, bg_color=self.bg_color, fg_color=self.bg_color, text="Recommended Universities: ", font=self.text_font, width=600)
         recommend_text.place(x=0, y=90)
         self.all_screen_obj.append(recommend_text)
+        
+        self.temp_recommend_unis = self.temp_recommend_unis[:6] ## Truncates the total unis to 6 or less
 
         y_pos = 140
-        for i in range(6 if 6 <= len(self.temp_recommend_unis) else len(self.temp_recommend_unis)) : 
+        for i in range(len(self.temp_recommend_unis)) : 
             uni = self.temp_recommend_unis[i]
 
             layer = CTk.CTkFrame(self.app, 600, 50, 0, 0, self.bg_color_light, self.bg_color_light)
@@ -918,10 +924,121 @@ class app() :
             uni_text.place(x=15, y=12)
             self.all_screen_obj.append(uni_text)
 
-            uni_button = CTk.CTkButton(layer, 75, border_width=0, command=lambda university = uni.name: self.spawn_university_information_window(university), text="More info", font=self.small_font)
+            uni_button = CTk.CTkButton(layer, 75, border_width=0, command=lambda university = uni.name: self.report_slide_2(university), text="More info", font=self.small_font)
             uni_button.place(x=500, y=12)
 
-            self.all_screen_obj.append(layer)    
+            self.all_screen_obj.append(layer)
+
+    def report_slide_2(self, university_name) : ## TODO: Cache the response from OpenAI to save some API billing
+        self.clearScreen()
+
+        self.temp_chat = [{"role" : "system", "content" : systemPrompt + ". Please do not use lists and keep the reponse in a paragraph. Refer to the user as 'you'."}] ## Janky but works
+        self.temp_chat.append({"role" : "user", "content" : f"Generate a short description of  {university_name}. Include key details such as location, good programs, etc."})
+        #  and include some tips for on to get accepted for {self.tag}. The user currently has a SAT (or SAT equivalent) score of {self.sat_score} and a highschool GPA of {self.gpa}.
+
+        try :
+            response = openai.chat.completions.create(
+                model="gpt-4o",
+                messages=self.temp_chat,
+                max_tokens=250,
+                n=1,
+                stop=None,
+                temperature=0.75, ## Using higher temperatures leads to more predictable results, but it does help it remain more consistent
+                ## We are also not trying to bypass AI-detectors here. But if we needed we can use https://github.com/IDoUseLinux/aint.
+            )
+
+            uni_description = response.choices[0].message.content
+            print(uni_description)
+        except Exception as e :
+            messagebox.showerror("Error!", f"An error occurred: {str(e)}")
+
+        uni_description = list(uni_description)
+
+        space_count = 0
+        last_space = 0
+        i = 0  # Use manual index control
+
+        while i < len(uni_description):
+            last_space += 1
+            if uni_description[i] == " ":
+                space_count += 1
+                # Check conditions for inserting '\n'
+                if (space_count % 10 == 0 and last_space >= 50) or last_space >= 60 :
+                    uni_description[i] = "\n"  # Replace the space with a newline
+                    last_space = 0  # Reset distance since last space/newline
+            i += 1  # Manually increment index
+
+        uni_description = "".join(uni_description)
+        
+        uni_name = CTk.CTkLabel(self.app, bg_color=self.bg_color, fg_color=self.bg_color, text=university_name + " :", font=self.button_font, width=600)
+        uni_name.place(x=0, y=80)
+        self.all_screen_obj.append(uni_name)
+
+        uni_description_text = CTk.CTkLabel(self.app, 600, 75, bg_color=self.bg_color, fg_color=self.bg_color, text=uni_description, font=self.sm_font)
+        uni_description_text.place(x=0, y=110)
+        self.all_screen_obj.append(uni_description_text)
+
+        back_button = CTk.CTkButton(self.app, text="<", font=self.medium_font, fg_color=self.bg_color_light, bg_color=self.bg_color, hover_color=self.bg_color, border_width=0, command = self.report_slide_1, width=50, height=50)
+        back_button.place(x=50, y=500)
+        self.all_screen_obj.append(back_button)
+
+        next_button = CTk.CTkButton(self.app, text=">", font=self.medium_font, fg_color=self.bg_color_light, bg_color=self.bg_color, hover_color=self.bg_color, border_width=0, command = lambda temp_un = university_name : self.report_slide_3(temp_un), width=50, height=50)
+        next_button.place(x=500, y=500)
+        self.all_screen_obj.append(next_button)
+
+
+    def report_slide_3(self, university_name) :
+        self.clearScreen()
+        
+        self.temp_chat.append({"role" : "user", "content" : f"Give some advice for the user to on to get accepted at {university_name} for {self.tag}. The user currently has a {"ACT" if self.used_act else "SAT"} score of {self.act_score if self.used_act else self.sat_score} and a highschool GPA of {self.gpa}."})
+
+        try :
+            response = openai.chat.completions.create(
+                model="gpt-4o",
+                messages=self.temp_chat,
+                max_tokens=250,
+                n=1,
+                stop=None,
+                temperature=0.75,
+            )
+
+            uni_advice = response.choices[0].message.content
+        except Exception as e :
+            messagebox.showerror("Error!", f"An error occurred: {str(e)}")
+
+        uni_advice = list(uni_advice)
+
+        space_count = 0
+        last_space = 0
+        i = 0  # Use manual index control
+
+        while i < len(uni_advice):
+            last_space += 1
+            if uni_advice[i] == " ":
+                space_count += 1
+                # Check conditions for inserting '\n'
+                if (space_count % 10 == 0 and last_space >= 50) or last_space >= 60 :
+                    uni_advice[i] = "\n"  # Replace the space with a newline
+                    last_space = 0  # Reset distance since last space/newline
+            i += 1  # Manually increment index
+
+        uni_advice = "".join(uni_advice)
+
+        uni_advice_head = CTk.CTkLabel(self.app, bg_color=self.bg_color, fg_color=self.bg_color, text=f"Advice for {university_name} :", font=self.button_font, width=600)
+        uni_advice_head.place(x=0, y=80)
+        self.all_screen_obj.append(uni_advice_head)
+
+        uni_description_text = CTk.CTkLabel(self.app, 600, 75, bg_color=self.bg_color, fg_color=self.bg_color, text=uni_advice, font=self.sm_font)
+        uni_description_text.place(x=0, y=110)
+        self.all_screen_obj.append(uni_description_text)
+
+        back_button = CTk.CTkButton(self.app, text="<", font=self.medium_font, fg_color=self.bg_color_light, bg_color=self.bg_color, hover_color=self.bg_color, border_width=0, command = lambda temp_un = university_name : self.report_slide_2(temp_un), width=50, height=50)
+        back_button.place(x=50, y=500)
+        self.all_screen_obj.append(back_button)
+
+        next_button = CTk.CTkButton(self.app, text=">", font=self.medium_font, fg_color=self.bg_color_light, bg_color=self.bg_color, hover_color=self.bg_color, border_width=0, command = lambda temp_un = university_name : print("TODO: Add more report!"), width=50, height=50)
+        next_button.place(x=500, y=500)
+        self.all_screen_obj.append(next_button)
 
     def chat_with_ai(self,) :
         self.clearScreen()
@@ -1018,60 +1135,7 @@ class app() :
             )
 
             return response.choices[0].message.content
-        except Exception as e :
+        except Exception as e : 
             return f"An error occurred: {str(e)}"
     
-    def spawn_university_information_window(self, university_name) : ## TODO: Cache the response from OpenAI to save some API billing
-        self.clearScreen()
-
-        temp_chat = [{"role" : "system", "content" : systemPrompt + ". Please do not use lists and keep the reponse in a paragraph. Refer the user as 'you'."}] ## Janky but works
-        temp_chat.append({"role" : "user", "content" : f"Generate a short description of  {university_name} and include some tips for on to get accepted for {self.tag}. The user currently has a SAT (or SAT equivalent) score of {self.sat_score} and a highschool GPA of {self.gpa}."})
-        
-        try :
-            response = openai.chat.completions.create(
-                model="gpt-4o",
-                messages=temp_chat,
-                max_tokens=250,
-                n=1,
-                stop=None,
-                temperature=0.75, ## Using higher temperatures leads to more predictable results, but it does help it remain more consistent
-                ## We are also not trying to bypass AI-detectors here. But if we needed we can use https://github.com/IDoUseLinux/aint.
-            )
-
-            uni_description = response.choices[0].message.content
-            print(uni_description)
-        except Exception as e :
-            messagebox.showerror("Error!", f"An error occurred: {str(e)}")
-
-        uni_description = list(uni_description)
-
-        space_count = 0
-        last_space = 0
-        i = 0  # Use manual index control
-
-        while i < len(uni_description):
-            last_space += 1
-            print(last_space)
-            if uni_description[i] == " ":
-                space_count += 1
-                # Check conditions for inserting '\n'
-                if (space_count % 10 == 0 and last_space >= 50) or last_space >= 60 :
-                    uni_description[i] = "\n"  # Replace the space with a newline
-                    last_space = 0  # Reset distance since last space/newline
-            i += 1  # Manually increment index
-
-        uni_description = "".join(uni_description)
-        
-        recommend_text = CTk.CTkLabel(self.app, bg_color=self.bg_color, fg_color=self.bg_color, text=university_name, font=self.button_font, width=600)
-        recommend_text.place(x=0, y=80)
-        self.all_screen_obj.append(recommend_text)
-
-        uni_description_text = CTk.CTkLabel(self.app, 600, 75, bg_color=self.bg_color, fg_color=self.bg_color, text=uni_description, font=self.sm_font)
-        uni_description_text.place(x=0, y=110)
-        self.all_screen_obj.append(uni_description_text)
-
-        back_button = CTk.CTkButton(self.app, text="<", font=self.medium_font, fg_color=self.bg_color_light, bg_color=self.bg_color, hover_color=self.bg_color, border_width=0, command = self.report_slide_1, width=50, height=50)
-        back_button.place(x=50, y=500)
-        self.all_screen_obj.append(back_button)
-
 var = app(CTk.CTk())
