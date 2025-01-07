@@ -1,3 +1,2 @@
-- Change top text to match with the current slide's actions.
-- Reuse OpenAI queries to help save API fees and improve consistency.
-- Improve GUI to help consistency and easy of use.
+- Make final improvements and finishing touches!
+- Improve slide 3 of report to be more specific and more depth.

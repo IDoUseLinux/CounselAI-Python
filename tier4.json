@@ -89,5 +89,12 @@
         "50_sat" : 1280,
         "25_sat" : 1190,
         "tags" : ["Large", "Business", "Tech"]
+    },
+    "Lewis & Clark College" : {
+        "acc_rate" : 68.6,
+        "75_sat" : 1390,
+        "50_sat" : 1330,
+        "25_sat" : 1230,
+        "tags" : ["Large", "Tech", "Art"]
     }
 }

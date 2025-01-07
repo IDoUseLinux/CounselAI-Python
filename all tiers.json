@@ -1,5 +1,5 @@
 {
-    "Date Generated": "2025-01-06 00:43:49 Hawaiian Standard Time",
+    "Date Generated": "2025-01-06 23:44:27 Hawaiian Standard Time",
     "Harvard University": {
         "acc_rate": 0.032,
         "75_sat": 1580,
@@ -744,6 +744,17 @@
             "Large",
             "Business",
             "Tech"
+        ]
+    },
+    "Lewis & Clark College": {
+        "acc_rate": 68.6,
+        "75_sat": 1390,
+        "50_sat": 1330,
+        "25_sat": 1230,
+        "tags": [
+            "Large",
+            "Tech",
+            "Art"
         ]
     },
     "Arizona State University": {

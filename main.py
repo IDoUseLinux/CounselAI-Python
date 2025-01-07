@@ -1,7 +1,9 @@
-import customtkinter as CTk, requests, os
-import openai, json, requests, random, webbrowser
-import score, clubs, awards, sports, AP, universities
+import customtkinter as CTk
+import openai, json
+import clubs, awards, sports, AP, universities
 from tkinter import messagebox
+from random import SystemRandom
+random = SystemRandom() ## Habit of mine to use SystemRandom when possible. 
 
 ## First expand, write in as many features into the code as possible
 ## Then re-org, making the code-base actually readable and consolidating
@@ -18,7 +20,7 @@ is_dev_version = True
 build_tag = "Alpha-1234"
 
 class app() :
-    CAREER_PATHS = ["Undecided", "Tech", "Engineering", "Art", "Music", "Business", "Law", "Medical", "Sports", "Other"]
+    career_path = ["Undecided", "Tech", "Engineering", "Art", "Music", "Business", "Law", "Medical", "Sports", "Other"]
 
     AP_T1 = [
         "Calculus AB/BC",
@@ -94,6 +96,7 @@ class app() :
 
     app_green = "#44AD4D"
     app_green_dark = "#28482B"
+
     app_light_blue = "#294D73"
 
     app_text_color = "#FFFFFF"
@@ -134,13 +137,14 @@ class app() :
         ]
 
         ## Spawns screen constants...
-        header = CTk.CTkFrame(self.app, width=600, height=75, fg_color=self.bg_color_light, bg_color=self.bg_color, corner_radius=0)
-        header.place(x=0, y=0)
+        self.header = CTk.CTkFrame(self.app, width=600, height=75, fg_color=self.bg_color_light, bg_color=self.bg_color, corner_radius=0)
+        self.header.place(x=0, y=0)
 
-        app_name = CTk.CTkLabel(header, text="CounselAI", fg_color=self.bg_color_light, bg_color=self.bg_color_light, font=self.header_font)
+        app_name = CTk.CTkLabel(self.header, text="CounselAI", fg_color=self.bg_color_light, bg_color=self.bg_color_light, font=self.header_font)
         app_name.place(x=20, y=12) ## This places the text 50 px below the top and 51 px above the header border... >:-(
+        self.all_screen_obj.append(app_name)
 
-        settings_button = CTk.CTkButton(header, text="⚙️", font=self.header_font, fg_color=self.bg_color_light, hover_color=self.bg_color, border_width=0, command = lambda : self.director("SettingButton"), width=60, height=50)
+        settings_button = CTk.CTkButton(self.header, text="⚙️", font=self.header_font, fg_color=self.bg_color_light, hover_color=self.bg_color, border_width=0, command = lambda : self.director("SettingButton"), width=60, height=50)
         settings_button.place(x=525, y=12)
 
         self.ai_chat_button = CTk.CTkButton(self.app, 100, border_width=0, command=self.chat_with_ai, bg_color=self.bg_color_light, fg_color=self.bg_color_light, text="Chat with AI!", font=self.header_font)
@@ -166,6 +170,11 @@ class app() :
     ## Questionaire code
     def intro_1st_slide(self,) : 
         self.clearScreen()
+
+        app_name = CTk.CTkLabel(self.header, text="CounselAI: Introduction", fg_color=self.bg_color_light, bg_color=self.bg_color_light, font=self.header_font)
+        app_name.place(x=20, y=12)
+        self.all_screen_obj.append(app_name)
+
         intro_text = CTk.CTkLabel(self.app, 600, 80, bg_color=self.bg_color, fg_color=self.bg_color, text="Welcome to CounselAI!", font=self.header_font)
         intro_text.place(x=0, y = 150)
         self.all_screen_obj.append(intro_text)
@@ -181,6 +190,10 @@ class app() :
     def intro_1st_slide_message(self,) :
         self.clearScreen()
 
+        app_name = CTk.CTkLabel(self.header, text="CounselAI: Introduction", fg_color=self.bg_color_light, bg_color=self.bg_color_light, font=self.header_font)
+        app_name.place(x=20, y=12)
+        self.all_screen_obj.append(app_name)
+
         intro_text_1 = CTk.CTkLabel(self.app, 600, 75, bg_color=self.bg_color, fg_color=self.bg_color, text="CounselAI helps to recommend you\ncolleges using a \"hollistic\" review process\nlike how colleges evaluate your application.\nCounselAI takes into account your\nGPA, test scores, extracurriculars,\nand other information to recommend to\nyou the best colleges possible.", font=self.medium_font)
         intro_text_1.place(x=0, y = 125)
         self.all_screen_obj.append(intro_text_1)
@@ -195,6 +208,10 @@ class app() :
 
     def intro_2nd_slide(self,) :
         self.clearScreen()
+
+        app_name = CTk.CTkLabel(self.header, text="CounselAI: Introduction", fg_color=self.bg_color_light, bg_color=self.bg_color_light, font=self.header_font)
+        app_name.place(x=20, y=12)
+        self.all_screen_obj.append(app_name)
 
         name_text = CTk.CTkLabel(self.app, 600, 80, bg_color=self.bg_color, fg_color=self.bg_color, text="Enter your name", font=self.header_font)
         name_text.place(x=0, y = 150)
@@ -219,6 +236,10 @@ class app() :
 
         self.clearScreen()
         
+        app_name = CTk.CTkLabel(self.header, text="CounselAI: Grades", fg_color=self.bg_color_light, bg_color=self.bg_color_light, font=self.header_font)
+        app_name.place(x=20, y=12)
+        self.all_screen_obj.append(app_name)
+
         gpa_text = CTk.CTkLabel(self.app, 600, 80, bg_color=self.bg_color, fg_color=self.bg_color, text="What is your current GPA?", font=self.header_font)
         gpa_text.place(x=0, y = 150)
         self.all_screen_obj.append(gpa_text)
@@ -238,20 +259,23 @@ class app() :
     def intro_4th_slide(self,) :
         try :
             is_valid = False
-            self.gpa = self.gpa_tb.get()
-            self.gpa = float(self.gpa)
+            self.gpa = float(self.gpa_tb.get())
             assert(self.gpa >= 0 and self.gpa <= 5)
             is_valid = True
-        except (ValueError, AssertionError) :
+        except (ValueError) :
             messagebox.showerror("Invalid GPA", "The GPA entered was invalid!")
-            self.intro_3rd_slide()
-        except Exception : 
-            is_valid = True
+            #self.intro_3rd_slide()
+        except AssertionError : 
+            messagebox.showerror("Invalid GPA", "Valid GPA range, 1-5.")
         
         if is_valid :
             self.clearScreen()
 
-            ap_text = CTk.CTkLabel(self.app, 600, 80, bg_color=self.bg_color, fg_color=self.bg_color, text="Have you taken any APs?", font=self.header_font)
+            app_name = CTk.CTkLabel(self.header, text="CounselAI: AP Courses", fg_color=self.bg_color_light, bg_color=self.bg_color_light, font=self.header_font)
+            app_name.place(x=20, y=12)
+            self.all_screen_obj.append(app_name)
+
+            ap_text = CTk.CTkLabel(self.app, 600, 80, bg_color=self.bg_color, fg_color=self.bg_color, text="Have you taken any AP Courses?", font=self.header_font)
             ap_text.place(x=0, y = 150)
             self.all_screen_obj.append(ap_text)
 
@@ -269,6 +293,11 @@ class app() :
 
     def intro_4th_slide_ap_selector(self) :
         self.clearScreen()
+
+        app_name = CTk.CTkLabel(self.header, text="CounselAI: AP Courses", fg_color=self.bg_color_light, bg_color=self.bg_color_light, font=self.header_font)
+        app_name.place(x=20, y=12)
+        self.all_screen_obj.append(app_name)
+
         ap_text = CTk.CTkLabel(self.app, bg_color=self.bg_color, fg_color=self.bg_color, text="Select your AP: ", font=self.text_font)
         ap_text.place(x=25, y=150)
         self.all_screen_obj.append(ap_text)
@@ -319,10 +348,8 @@ class app() :
                 ap_grade = 4
             elif ap_grade == "C" :
                 ap_grade = 3
-            elif ap_grade == "D/F" :
-                ap_grade = 2
             else :
-                ap_grade = 3
+                ap_grade = 0.5
 
             if ap_course in self.AP_T1 :
                 self.taken_APs.append(AP.apClass(ap_course, 5, ap_grade, ap_score))
@@ -337,6 +364,10 @@ class app() :
 
             self.clearScreen()
 
+            app_name = CTk.CTkLabel(self.header, text="CounselAI: AP Courses", fg_color=self.bg_color_light, bg_color=self.bg_color_light, font=self.header_font)
+            app_name.place(x=20, y=12)
+            self.all_screen_obj.append(app_name)
+
             ap_text = CTk.CTkLabel(self.app, 600, 80, bg_color=self.bg_color, fg_color=self.bg_color, text="Have you taken any other APs?", font=self.header_font)
             ap_text.place(x=0, y = 150)
             self.all_screen_obj.append(ap_text)
@@ -348,12 +379,19 @@ class app() :
             no_ap = CTk.CTkButton(self.app, 75, 30, font=self.text_font, text="No", command=self.intro_5th_slide, border_width=0, border_color=self.bg_color, bg_color=self.bg_color, fg_color=self.bg_color_light)
             no_ap.place(x=375, y=450)
             self.all_screen_obj.append(no_ap)
+        except ValueError :
+            messagebox.showerror("Invalid AP Course", "Please fill out all the information for the AP Course.")
 
         except Exception as err:
             print(err)
 
     def intro_5th_slide(self,) :
         self.clearScreen()
+
+        app_name = CTk.CTkLabel(self.header, text="CounselAI: Standardized Tests", fg_color=self.bg_color_light, bg_color=self.bg_color_light, font=self.header_font)
+        app_name.place(x=20, y=12)
+        self.all_screen_obj.append(app_name)
+
         sat_text = CTk.CTkLabel(self.app, 600, 80, bg_color=self.bg_color, fg_color=self.bg_color, text="Have you taken the SAT yet?", font=self.header_font)
         sat_text.place(x=0, y = 150)
         self.all_screen_obj.append(sat_text)
@@ -372,6 +410,11 @@ class app() :
 
     def intro_5th_slide_sat_score(self,) :
         self.clearScreen()
+
+        app_name = CTk.CTkLabel(self.header, text="CounselAI: Standardized Tests", fg_color=self.bg_color_light, bg_color=self.bg_color_light, font=self.header_font)
+        app_name.place(x=20, y=12)
+        self.all_screen_obj.append(app_name)
+
         sat_text = CTk.CTkLabel(self.app, 600, 80, bg_color=self.bg_color, fg_color=self.bg_color, text="What is your highest SAT score?", font=self.header_font)
         sat_text.place(x=0, y = 150)
         self.all_screen_obj.append(sat_text)
@@ -400,6 +443,11 @@ class app() :
     
     def intro_5th_slide_psat(self,) :
         self.clearScreen()
+
+        app_name = CTk.CTkLabel(self.header, text="CounselAI: Standardized Tests", fg_color=self.bg_color_light, bg_color=self.bg_color_light, font=self.header_font)
+        app_name.place(x=20, y=12)
+        self.all_screen_obj.append(app_name)
+
         psat_text = CTk.CTkLabel(self.app, 600, 80, bg_color=self.bg_color, fg_color=self.bg_color, text="Have you taken a PSAT yet?", font=self.header_font)
         psat_text.place(x=0, y = 150)
         self.all_screen_obj.append(psat_text)
@@ -418,6 +466,11 @@ class app() :
 
     def intro_5th_slide_psat_score(self,) :
         self.clearScreen()
+
+        app_name = CTk.CTkLabel(self.header, text="CounselAI: Standardized Tests", fg_color=self.bg_color_light, bg_color=self.bg_color_light, font=self.header_font)
+        app_name.place(x=20, y=12)
+        self.all_screen_obj.append(app_name)
+
         psat_text = CTk.CTkLabel(self.app, 600, 80, bg_color=self.bg_color, fg_color=self.bg_color, text="What is your most\nrecent PSAT score?", font=self.text_font)
         psat_text.place(x=0, y = 150)
         self.all_screen_obj.append(psat_text)
@@ -462,6 +515,11 @@ class app() :
 
     def intro_6th_slide(self,) :
         self.clearScreen()
+
+        app_name = CTk.CTkLabel(self.header, text="CounselAI: Standardized Tests", fg_color=self.bg_color_light, bg_color=self.bg_color_light, font=self.header_font)
+        app_name.place(x=20, y=12)
+        self.all_screen_obj.append(app_name)
+
         act_text = CTk.CTkLabel(self.app, 600, 80, bg_color=self.bg_color, fg_color=self.bg_color, text="Have you taken the ACT yet?", font=self.header_font)
         act_text.place(x=0, y = 150)
         self.all_screen_obj.append(act_text)
@@ -480,6 +538,10 @@ class app() :
     
     def intro_6th_slide_act_score(self,) :
         self.clearScreen()
+
+        app_name = CTk.CTkLabel(self.header, text="CounselAI: Standardized Tests", fg_color=self.bg_color_light, bg_color=self.bg_color_light, font=self.header_font)
+        app_name.place(x=20, y=12)
+        self.all_screen_obj.append(app_name)
 
         act_text = CTk.CTkLabel(self.app, 600, 80, bg_color=self.bg_color, fg_color=self.bg_color, text="What is your highest ACT score?", font=self.header_font)
         act_text.place(x=0, y = 150)
@@ -518,6 +580,11 @@ class app() :
     
     def intro_7th_slide(self,) :
         self.clearScreen()
+
+        app_name = CTk.CTkLabel(self.header, text="CounselAI: Clubs", fg_color=self.bg_color_light, bg_color=self.bg_color_light, font=self.header_font)
+        app_name.place(x=20, y=12)
+        self.all_screen_obj.append(app_name)
+
         clubs_text = CTk.CTkLabel(self.app, 600, 80, bg_color=self.bg_color, fg_color=self.bg_color, text="Were you a part of any clubs?", font=self.header_font)
         clubs_text.place(x=0, y = 150)
         self.all_screen_obj.append(clubs_text)
@@ -536,6 +603,11 @@ class app() :
 
     def intro_7th_slide_club_entry(self,) :
         self.clearScreen()
+
+        app_name = CTk.CTkLabel(self.header, text="CounselAI: Clubs", fg_color=self.bg_color_light, bg_color=self.bg_color_light, font=self.header_font)
+        app_name.place(x=20, y=12)
+        self.all_screen_obj.append(app_name)
+
         club_text = CTk.CTkLabel(self.app, bg_color=self.bg_color, fg_color=self.bg_color, text="Your Club name: ", font=self.text_font)
         club_text.place(x=50, y=150)
         self.all_screen_obj.append(club_text)
@@ -596,6 +668,10 @@ class app() :
 
             self.clearScreen()
 
+            app_name = CTk.CTkLabel(self.header, text="CounselAI: Clubs", fg_color=self.bg_color_light, bg_color=self.bg_color_light, font=self.header_font)
+            app_name.place(x=20, y=12)
+            self.all_screen_obj.append(app_name)
+
             clubs_text = CTk.CTkLabel(self.app, 600, 80, bg_color=self.bg_color, fg_color=self.bg_color, text="Were you a part of any other clubs?", font=self.header_font)
             clubs_text.place(x=0, y = 150)
             self.all_screen_obj.append(clubs_text)
@@ -614,6 +690,11 @@ class app() :
 
     def intro_8th_slide(self,) :
         self.clearScreen()
+
+        app_name = CTk.CTkLabel(self.header, text="CounselAI: Sports", fg_color=self.bg_color_light, bg_color=self.bg_color_light, font=self.header_font)
+        app_name.place(x=20, y=12)
+        self.all_screen_obj.append(app_name)
+
         sports_text = CTk.CTkLabel(self.app, 600, 80, bg_color=self.bg_color, fg_color=self.bg_color, text="Did you participate in any sports?", font=self.header_font)
         sports_text.place(x=0, y = 150)
         self.all_screen_obj.append(sports_text)
@@ -633,6 +714,10 @@ class app() :
     
     def intro_8th_slide_sports_entry(self,) :
         self.clearScreen()
+
+        app_name = CTk.CTkLabel(self.header, text="CounselAI: Sports", fg_color=self.bg_color_light, bg_color=self.bg_color_light, font=self.header_font)
+        app_name.place(x=20, y=12)
+        self.all_screen_obj.append(app_name)
 
         sports_text = CTk.CTkLabel(self.app, bg_color=self.bg_color, fg_color=self.bg_color, text="The Sports name: ", font=self.text_font)
         sports_text.place(x=50, y=150)
@@ -684,6 +769,10 @@ class app() :
 
             self.clearScreen()
 
+            app_name = CTk.CTkLabel(self.header, text="CounselAI: Sports", fg_color=self.bg_color_light, bg_color=self.bg_color_light, font=self.header_font)
+            app_name.place(x=20, y=12)
+            self.all_screen_obj.append(app_name)
+
             clubs_text = CTk.CTkLabel(self.app, 600, 80, bg_color=self.bg_color, fg_color=self.bg_color, text="Did you part take in\nany other sports?", font=self.header_font)
             clubs_text.place(x=0, y = 150)
             self.all_screen_obj.append(clubs_text)
@@ -704,7 +793,11 @@ class app() :
     def intro_10th_slide(self,) :
         self.clearScreen()
 
-        awards_text = CTk.CTkLabel(self.app, 600, 80, bg_color=self.bg_color, fg_color=self.bg_color, text="Have you won any awards/challenges?", font=self.header_font)
+        app_name = CTk.CTkLabel(self.header, text="CounselAI: Awards & Challenges", fg_color=self.bg_color_light, bg_color=self.bg_color_light, font=self.header_font)
+        app_name.place(x=20, y=12)
+        self.all_screen_obj.append(app_name)
+
+        awards_text = CTk.CTkLabel(self.app, 600, 80, bg_color=self.bg_color, fg_color=self.bg_color, text="Have you won any\nawards/challenges?", font=self.header_font)
         awards_text.place(x=0, y = 150)
         self.all_screen_obj.append(awards_text)
 
@@ -723,6 +816,10 @@ class app() :
 
     def intro_10th_slide_award_entry(self,) :
         self.clearScreen()
+
+        app_name = CTk.CTkLabel(self.header, text="CounselAI: Awards & Challenges", fg_color=self.bg_color_light, bg_color=self.bg_color_light, font=self.header_font)
+        app_name.place(x=20, y=12)
+        self.all_screen_obj.append(app_name)
 
         award_text = CTk.CTkLabel(self.app, bg_color=self.bg_color, fg_color=self.bg_color, text="The award's name: ", font=self.text_font)
         award_text.place(x=50, y=150)
@@ -784,9 +881,13 @@ class app() :
 
             self.clearScreen()
 
+            app_name = CTk.CTkLabel(self.header, text="CounselAI: Awards & Challenges", fg_color=self.bg_color_light, bg_color=self.bg_color_light, font=self.header_font)
+            app_name.place(x=20, y=12)
+            self.all_screen_obj.append(app_name)
+
             self.awarded_awards.append(awards.awards(award_name, award_level, award_region))
 
-            clubs_text = CTk.CTkLabel(self.app, 600, 80, bg_color=self.bg_color, fg_color=self.bg_color, text="Have you recieved any\nother awards?", font=self.header_font)
+            clubs_text = CTk.CTkLabel(self.app, 600, 80, bg_color=self.bg_color, fg_color=self.bg_color, text="Have you won any\nother awards or challenges?", font=self.header_font)
             clubs_text.place(x=0, y = 150)
             self.all_screen_obj.append(clubs_text)
 
@@ -806,11 +907,15 @@ class app() :
     def intro_11th_slide(self,) :
         self.clearScreen()
 
-        career_text = CTk.CTkLabel(self.app, 600, 80, bg_color=self.bg_color, fg_color=self.bg_color, text="What career field would\nyou like to pursue", font=self.header_font)
+        app_name = CTk.CTkLabel(self.header, text="CounselAI: Carreer", fg_color=self.bg_color_light, bg_color=self.bg_color_light, font=self.header_font)
+        app_name.place(x=20, y=12)
+        self.all_screen_obj.append(app_name)
+
+        career_text = CTk.CTkLabel(self.app, 600, 80, bg_color=self.bg_color, fg_color=self.bg_color, text="What career field would\nyou like to pursue?", font=self.header_font)
         career_text.place(x=0, y = 150)
         self.all_screen_obj.append(career_text)
 
-        self.career_dd = CTk.CTkOptionMenu(self.app, bg_color=self.bg_color, fg_color=self.bg_color, values= ["-"] + self.CAREER_PATHS , font=self.header_font, width = 300)
+        self.career_dd = CTk.CTkOptionMenu(self.app, bg_color=self.bg_color, fg_color=self.bg_color, values= ["-"] + self.career_path , font=self.header_font, width = 300)
         self.career_dd.place(x=150, y=250)
         self.all_screen_obj.append(self.career_dd)
 
@@ -824,8 +929,8 @@ class app() :
 
     def generate_report(self,) :
         try :
-            career_path = self.career_dd.get()
-            assert (career_path != "-")
+            self.career_path_entered = self.career_dd.get()
+            assert (self.career_path_entered != "-")
             if self.sat_score == 0 :
                 self.sat_score = "no test"
             ## Student score eval
@@ -844,10 +949,10 @@ class app() :
             for i in self.awarded_awards :
                 self.student_score += i.awardValue
 
-            if career_path == "Undecided" or career_path == "Other" :
+            if self.career_path_entered == "Undecided" or self.career_path_entered == "Other" :
                 self.tag = ""
             else :
-                self.tag = career_path
+                self.tag = self.career_path_entered
             
             self.recommend_unis = []
             self.reach_unis = []
@@ -907,6 +1012,11 @@ class app() :
     
     def report_slide_1(self,) :
         self.clearScreen()
+
+        app_name = CTk.CTkLabel(self.header, text="CounselAI: Report (1/4)", fg_color=self.bg_color_light, bg_color=self.bg_color_light, font=self.header_font)
+        app_name.place(x=20, y=12)
+        self.all_screen_obj.append(app_name)
+
         recommend_text = CTk.CTkLabel(self.app, bg_color=self.bg_color, fg_color=self.bg_color, text="Recommended Universities: ", font=self.text_font, width=600)
         recommend_text.place(x=0, y=90)
         self.all_screen_obj.append(recommend_text)
@@ -932,9 +1042,12 @@ class app() :
     def report_slide_2(self, university_name) : ## TODO: Cache the response from OpenAI to save some API billing
         self.clearScreen()
 
+        app_name = CTk.CTkLabel(self.header, text="CounselAI: 2/4", fg_color=self.bg_color_light, bg_color=self.bg_color_light, font=self.header_font)
+        app_name.place(x=20, y=12)
+        self.all_screen_obj.append(app_name)
+
         self.temp_chat = [{"role" : "system", "content" : systemPrompt + ". Please do not use lists and keep the reponse in a paragraph. Refer to the user as 'you'."}] ## Janky but works
         self.temp_chat.append({"role" : "user", "content" : f"Generate a short description of  {university_name}. Include key details such as location, good programs, etc."})
-        #  and include some tips for on to get accepted for {self.tag}. The user currently has a SAT (or SAT equivalent) score of {self.sat_score} and a highschool GPA of {self.gpa}.
 
         try :
             response = openai.chat.completions.create(
@@ -952,23 +1065,7 @@ class app() :
         except Exception as e :
             messagebox.showerror("Error!", f"An error occurred: {str(e)}")
 
-        uni_description = list(uni_description)
-
-        space_count = 0
-        last_space = 0
-        i = 0  # Use manual index control
-
-        while i < len(uni_description):
-            last_space += 1
-            if uni_description[i] == " ":
-                space_count += 1
-                # Check conditions for inserting '\n'
-                if (space_count % 10 == 0 and last_space >= 50) or last_space >= 60 :
-                    uni_description[i] = "\n"  # Replace the space with a newline
-                    last_space = 0  # Reset distance since last space/newline
-            i += 1  # Manually increment index
-
-        uni_description = "".join(uni_description)
+        uni_description = self.format_text(uni_description, self.sm_font)
         
         uni_name = CTk.CTkLabel(self.app, bg_color=self.bg_color, fg_color=self.bg_color, text=university_name + " :", font=self.button_font, width=600)
         uni_name.place(x=0, y=80)
@@ -986,11 +1083,52 @@ class app() :
         next_button.place(x=500, y=500)
         self.all_screen_obj.append(next_button)
 
-
     def report_slide_3(self, university_name) :
         self.clearScreen()
+
+        app_name = CTk.CTkLabel(self.header, text="CounselAI: 3/4", fg_color=self.bg_color_light, bg_color=self.bg_color_light, font=self.header_font)
+        app_name.place(x=20, y=12)
+        self.all_screen_obj.append(app_name)
+
+        for i in range(len(self.ALL_UNIS)) :
+            if self.ALL_UNIS[i].name == university_name :
+                university_obj = self.ALL_UNIS[i]
+                break
         
-        self.temp_chat.append({"role" : "user", "content" : f"Give some advice for the user to on to get accepted at {university_name} for {self.tag}. The user currently has a {"ACT" if self.used_act else "SAT"} score of {self.act_score if self.used_act else self.sat_score} and a highschool GPA of {self.gpa}."})
+        if self.student_score*1.3 > university_obj.universityDifficulty and university_obj.universityDifficulty <= self.student_score*1.15 :
+            uni_type = "reach"
+            type_message = f"This means that you have a chance at getting for {self.tag}."
+        elif self.student_score*1.15 > university_obj.universityDifficulty and university_obj.universityDifficulty <= self.student_score*0.8 :
+            uni_type = "target"
+            type_message = f"This means that you have a decent chance at getting accepted."
+        else :
+            uni_type = "safety"
+            type_message = f"This means that you have a high chance at getting accepted."
+
+        uni_explanier = self.format_text(f"{university_name} is a {uni_type} university for you. {type_message} It has a 75th percentile SAT score of {university_obj.sat75}, 50th percentile of {university_obj.sat50}, and 25th percentile of {university_obj.sat25}.", self.sm_font)
+
+        uni_description_text = CTk.CTkLabel(self.app, 600, 75, bg_color=self.bg_color, fg_color=self.bg_color, text=uni_explanier, font=self.sm_font)
+        uni_description_text.place(x=0, y=110)
+        self.all_screen_obj.append(uni_description_text)
+        
+
+        back_button = CTk.CTkButton(self.app, text="<", font=self.medium_font, fg_color=self.bg_color_light, bg_color=self.bg_color, hover_color=self.bg_color, border_width=0, command = lambda temp_un = university_name: self.report_slide_2(temp_un), width=50, height=50)
+        back_button.place(x=50, y=500)
+        self.all_screen_obj.append(back_button)
+
+        next_button = CTk.CTkButton(self.app, text=">", font=self.medium_font, fg_color=self.bg_color_light, bg_color=self.bg_color, hover_color=self.bg_color, border_width=0, command = lambda temp_un = university_name : self.report_slide_4(temp_un), width=50, height=50)
+        next_button.place(x=500, y=500)
+        self.all_screen_obj.append(next_button)
+
+
+    def report_slide_4(self, university_name) :
+        self.clearScreen()
+        
+        app_name = CTk.CTkLabel(self.header, text="CounselAI: 4/4", fg_color=self.bg_color_light, bg_color=self.bg_color_light, font=self.header_font)
+        app_name.place(x=20, y=12)
+        self.all_screen_obj.append(app_name)
+
+        self.temp_chat.append({"role" : "user", "content" : f"Give some advice for the user to on to get accepted at {university_name} for {self.career_path_entered}. The user currently has a {"ACT" if self.used_act else "SAT"} score of {self.act_score if self.used_act else self.sat_score} and a highschool GPA of {self.gpa}."})
 
         try :
             response = openai.chat.completions.create(
@@ -1006,23 +1144,7 @@ class app() :
         except Exception as e :
             messagebox.showerror("Error!", f"An error occurred: {str(e)}")
 
-        uni_advice = list(uni_advice)
-
-        space_count = 0
-        last_space = 0
-        i = 0  # Use manual index control
-
-        while i < len(uni_advice):
-            last_space += 1
-            if uni_advice[i] == " ":
-                space_count += 1
-                # Check conditions for inserting '\n'
-                if (space_count % 10 == 0 and last_space >= 50) or last_space >= 60 :
-                    uni_advice[i] = "\n"  # Replace the space with a newline
-                    last_space = 0  # Reset distance since last space/newline
-            i += 1  # Manually increment index
-
-        uni_advice = "".join(uni_advice)
+        uni_advice = self.format_text(uni_advice, self.sm_font)
 
         uni_advice_head = CTk.CTkLabel(self.app, bg_color=self.bg_color, fg_color=self.bg_color, text=f"Advice for {university_name} :", font=self.button_font, width=600)
         uni_advice_head.place(x=0, y=80)
@@ -1036,12 +1158,17 @@ class app() :
         back_button.place(x=50, y=500)
         self.all_screen_obj.append(back_button)
 
-        next_button = CTk.CTkButton(self.app, text=">", font=self.medium_font, fg_color=self.bg_color_light, bg_color=self.bg_color, hover_color=self.bg_color, border_width=0, command = lambda temp_un = university_name : print("TODO: Add more report!"), width=50, height=50)
+        next_button = CTk.CTkButton(self.app, text=">", font=self.medium_font, fg_color=self.bg_color_light, bg_color=self.bg_color, hover_color=self.bg_color, border_width=0, command = self.report_slide_1, width=50, height=50)
         next_button.place(x=500, y=500)
         self.all_screen_obj.append(next_button)
 
     def chat_with_ai(self,) :
         self.clearScreen()
+
+        app_name = CTk.CTkLabel(self.header, text="CounselAI: AI Chat", fg_color=self.bg_color_light, bg_color=self.bg_color_light, font=self.header_font)
+        app_name.place(x=20, y=12)
+        self.all_screen_obj.append(app_name)
+
         self.ai_chat_button.destroy()
 
         self.ai_entry = CTk.CTkEntry(self.app, 400, 50, 0, 0, self.app_text_box_color, self.app_text_box_color, placeholder_text="Hello, World!", font=self.medium_font)
@@ -1102,20 +1229,7 @@ class app() :
         self.ai_entry.delete(0, CTk.END)
         print(user_input)
 
-        ai_response = self.sendOPENAIMessage(user_input)
-
-        ## Programming crimes
-        ai_response = list(ai_response)
-
-        space_count = 0
-    
-        for i in range(len(ai_response)):
-            if ai_response[i] == " ":
-                space_count += 1
-                if space_count % 6 == 0:
-                    ai_response[i] = "\n" ## Very janky method of line seperation. 
-                    i = i-1 ## to deal with the fact that we technically added an additional character.
-        ai_response = "".join(ai_response)
+        ai_response = self.format_text(self.sendOPENAIMessage(user_input))
 
         print(ai_response)
         ai_message = CTk.CTkLabel(self.app, 500, 400, bg_color=self.bg_color, fg_color=self.bg_color, text=ai_response, font=self.text_font)
@@ -1137,5 +1251,34 @@ class app() :
             return response.choices[0].message.content
         except Exception as e : 
             return f"An error occurred: {str(e)}"
+    
+    def format_text(self, text:str, type) :
+        formatted_text = list(text)
+
+        space_count = 0
+        last_space = 0
+        i = 0  # Use manual index control
+
+        if type == self.sm_font :
+            mod1 = 10
+            mod2 = 50
+            mod3 = 60
+        elif type == self.text_font :
+            mod1 = 6 
+            mod2 = 30
+            mod3 = 36
+
+        while i < len(formatted_text):
+            last_space += 1
+            if formatted_text[i] == " ":
+                space_count += 1
+                # Check conditions for inserting '\n'
+                if (space_count % mod1 == 0 and last_space >= mod2) or last_space >= mod3 :
+                    formatted_text[i] = "\n"  # Replace the space with a newline
+                    last_space = 0  # Reset distance since last space/newline
+            i += 1  # Manually increment index
+
+        return "".join(formatted_text)
+        
     
 var = app(CTk.CTk())
