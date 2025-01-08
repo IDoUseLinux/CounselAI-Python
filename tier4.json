@@ -91,7 +91,7 @@
         "tags" : ["Large", "Business", "Tech"]
     },
     "Lewis & Clark College" : {
-        "acc_rate" : 68.6,
+        "acc_rate" : 0.686,
         "75_sat" : 1390,
         "50_sat" : 1330,
         "25_sat" : 1230,

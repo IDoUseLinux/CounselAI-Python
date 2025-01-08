@@ -120,6 +120,8 @@ class app() :
     sm_font = ("Segoe UI", 17)
     small_font = ("Segoe UI", 15)
 
+    used_act = False
+
     def __init__(self, app:CTk.CTk) :
         self.app = app
         self.app.title("CounselAI") 
@@ -264,9 +266,11 @@ class app() :
             is_valid = True
         except (ValueError) :
             messagebox.showerror("Invalid GPA", "The GPA entered was invalid!")
-            #self.intro_3rd_slide()
         except AssertionError : 
             messagebox.showerror("Invalid GPA", "Valid GPA range, 1-5.")
+        
+        except Exception :
+            is_valid = True
         
         if is_valid :
             self.clearScreen()
@@ -571,8 +575,6 @@ class app() :
             if self.act_score > self.sat_score :
                 self.sat_score = self.act_score 
                 self.used_act = True
-            else :
-                self.used_act = False
 
             self.intro_7th_slide()
         except : 
@@ -773,7 +775,7 @@ class app() :
             app_name.place(x=20, y=12)
             self.all_screen_obj.append(app_name)
 
-            clubs_text = CTk.CTkLabel(self.app, 600, 80, bg_color=self.bg_color, fg_color=self.bg_color, text="Did you part take in\nany other sports?", font=self.header_font)
+            clubs_text = CTk.CTkLabel(self.app, 600, 80, bg_color=self.bg_color, fg_color=self.bg_color, text="Did you participate in\nany other sports?", font=self.header_font)
             clubs_text.place(x=0, y = 150)
             self.all_screen_obj.append(clubs_text)
 
@@ -933,8 +935,9 @@ class app() :
             assert (self.career_path_entered != "-")
             if self.sat_score == 0 :
                 self.sat_score = "no test"
+                self.student_score = self.gpa*12 ## If no SAT, GPA takes more of SAT's weight, but not all as GPA != SAT
             ## Student score eval
-            self.student_score = self.sat_score/75 + self.gpa*8
+            else : self.student_score = self.sat_score/75 + self.gpa*8
             
             ## Very dumb but it works so :shrug:
             for i in self.taken_APs :
@@ -960,13 +963,13 @@ class app() :
             self.safety_unis = []
 
             for i in self.ALL_UNIS : ## Ugly code
-                if self.student_score*1.3 > i.universityDifficulty and i.universityDifficulty <= self.student_score*1.15 :
+                if self.student_score*1.3 > i.universityDifficulty and self.student_score*1.15 <= i.universityDifficulty :
                     self.reach_unis.append(i)
-                elif self.student_score*1.15 > i.universityDifficulty and i.universityDifficulty <= self.student_score*0.8 :
+                elif self.student_score*1.15 > i.universityDifficulty and  self.student_score*0.8 <= i.universityDifficulty :
                     self.target_unis.append(i)
-                elif self.student_score*0.6 > i.universityDifficulty and i.universityDifficulty < self.student_score*0.4 :
+                elif self.student_score*0.6 > i.universityDifficulty and self.student_score*0.4 <= i.universityDifficulty :
                     self.safety_unis.append(i)
-            
+
             temp_recommend = self.reach_unis + self.target_unis + self.safety_unis
 
             self.recommend_unis = [uni for uni in temp_recommend if self.tag in uni.tags or self.tag == ""]
@@ -995,7 +998,6 @@ class app() :
             for i in self.recommend_unis :
                 print(i.name)
 
-            print(self.student_score)
             uni_cp = self.recommend_unis.copy()
             self.temp_recommend_unis = []
 
@@ -1072,7 +1074,7 @@ class app() :
         self.all_screen_obj.append(uni_name)
 
         uni_description_text = CTk.CTkLabel(self.app, 600, 75, bg_color=self.bg_color, fg_color=self.bg_color, text=uni_description, font=self.sm_font)
-        uni_description_text.place(x=0, y=110)
+        uni_description_text.place(x=0, y=125)
         self.all_screen_obj.append(uni_description_text)
 
         back_button = CTk.CTkButton(self.app, text="<", font=self.medium_font, fg_color=self.bg_color_light, bg_color=self.bg_color, hover_color=self.bg_color, border_width=0, command = self.report_slide_1, width=50, height=50)
