@@ -948,6 +948,8 @@ class app() :
             
             for i in self.taken_sports :
                 self.student_score += i.sportsValue
+                if self.career_path == "sports" : 
+                    self.student_score *= 2
             
             for i in self.awarded_awards :
                 self.student_score += i.awardValue
