@@ -1227,15 +1227,18 @@ class app() :
         self.ALL_UNIS = self.T1_UNIS + self.T2_UNIS + self.T3_UNIS + self.T4_UNIS + self.T5_UNIS
 
     def sendMessage(self) :
+        try :
+            self.ai_message.destroy()
+        except : 
+            pass
         user_input = self.ai_entry.get()
         self.ai_entry.delete(0, CTk.END)
-        print(user_input)
 
         ai_response = self.format_text(self.sendOPENAIMessage(user_input), self.text_font)
 
-        print(ai_response)
-        ai_message = CTk.CTkLabel(self.app, 500, 400, bg_color=self.bg_color, fg_color=self.bg_color, text=ai_response, font=self.text_font)
-        ai_message.place(x=25, y=100)
+        self.ai_message = CTk.CTkLabel(self.app, 500, 400, bg_color=self.bg_color, fg_color=self.bg_color, text=ai_response, font=self.text_font)
+        self.ai_message.place(x=25, y=100)
+
 
     def sendOPENAIMessage(self, user_input) -> str :
         try :
