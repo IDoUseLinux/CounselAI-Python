@@ -937,7 +937,7 @@ class app() :
                 self.sat_score = "no test"
                 self.student_score = self.gpa*12 ## If no SAT, GPA takes more of SAT's weight, but not all as GPA != SAT
             ## Student score eval
-            else : self.student_score = self.sat_score/75 + self.gpa*8
+            else : self.student_score = self.sat_score/75 + self.gpa*8 - 10
             
             ## Very dumb but it works so :shrug:
             for i in self.taken_APs :
