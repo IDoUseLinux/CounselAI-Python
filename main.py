@@ -1231,7 +1231,7 @@ class app() :
         self.ai_entry.delete(0, CTk.END)
         print(user_input)
 
-        ai_response = self.format_text(self.sendOPENAIMessage(user_input))
+        ai_response = self.format_text(self.sendOPENAIMessage(user_input), self.text_font)
 
         print(ai_response)
         ai_message = CTk.CTkLabel(self.app, 500, 400, bg_color=self.bg_color, fg_color=self.bg_color, text=ai_response, font=self.text_font)
