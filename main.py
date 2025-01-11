@@ -1109,9 +1109,9 @@ class app() :
             uni_type = "safety"
             type_message = f"This means that you have a high chance at getting accepted."
 
-        uni_explanier = self.format_text(f"{university_name} is a {uni_type} university for you. {type_message} It has a 75th percentile SAT score of {university_obj.sat75}, 50th percentile of {university_obj.sat50}, and 25th percentile of {university_obj.sat25}.", self.sm_font)
+        uni_explanier = self.format_text(f"{university_name} is a {uni_type} university for you. {type_message} It has a 75th percentile SAT score of {university_obj.sat75}, 50th percentile of {university_obj.sat50}, and 25th percentile of {university_obj.sat25}.", self.text_font)
 
-        uni_description_text = CTk.CTkLabel(self.app, 600, 75, bg_color=self.bg_color, fg_color=self.bg_color, text=uni_explanier, font=self.sm_font)
+        uni_description_text = CTk.CTkLabel(self.app, 600, 75, bg_color=self.bg_color, fg_color=self.bg_color, text=uni_explanier, font=self.text_font)
         uni_description_text.place(x=0, y=110)
         self.all_screen_obj.append(uni_description_text)
         
