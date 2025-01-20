@@ -138,5 +138,12 @@
         "50_sat" : 1410,
         "25_sat" : 1300,
         "tags" : ["UC System", "Large", "Public Ivy", "Engineering"] 
+    },
+    "Boston University" : {
+        "acc_rate" : 0.14,
+        "75_sat" : 1500,
+        "50_sat" : 1420,
+        "25_sat" : 1410,
+        "tags" : ["Large", "Music", "Art", "Medical"]
     }
 }

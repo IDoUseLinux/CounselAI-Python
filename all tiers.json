@@ -1,5 +1,5 @@
 {
-    "Date Generated": "2025-01-06 23:44:27 Hawaiian Standard Time",
+    "Date Generated": "2025-01-20 10:50:07 Hawaiian Standard Time",
     "Harvard University": {
         "acc_rate": 0.032,
         "75_sat": 1580,
@@ -452,6 +452,18 @@
             "Engineering"
         ]
     },
+    "Boston University": {
+        "acc_rate": 0.14,
+        "75_sat": 1500,
+        "50_sat": 1420,
+        "25_sat": 1410,
+        "tags": [
+            "Large",
+            "Music",
+            "Art",
+            "Medical"
+        ]
+    },
     "University of California, Davis": {
         "acc_rate": 0.37,
         "75_sat": 1410,
@@ -490,7 +502,7 @@
             "Medium"
         ]
     },
-    "California Polytechnic State University, San Louis Obispo": {
+    "CalPoly State University, San Louis Obispo": {
         "acc_rate": 0.3,
         "75_sat": 1450,
         "50_sat": 1340,
@@ -747,7 +759,7 @@
         ]
     },
     "Lewis & Clark College": {
-        "acc_rate": 68.6,
+        "acc_rate": 0.686,
         "75_sat": 1390,
         "50_sat": 1330,
         "25_sat": 1230,
@@ -884,6 +896,38 @@
         "tags": [
             "Large",
             "Medical"
+        ]
+    },
+    "University of Denver": {
+        "acc_rate": 0.78,
+        "75_sat": 1370,
+        "50_sat": 1290,
+        "25_sat": 1220,
+        "tags": [
+            "Medium",
+            "Music",
+            "Business"
+        ]
+    },
+    "University of Colorado Denver": {
+        "acc_rate": 0.75,
+        "75_sat": 1260,
+        "50_sat": 1140,
+        "25_sat": 1040,
+        "tags": [
+            "Large",
+            "Engineering",
+            "Business"
+        ]
+    },
+    "Metropolitan State University of Denver": {
+        "acc_rate": 0.98,
+        "75_sat": 1130,
+        "50_sat": 1020,
+        "25_sat": 920,
+        "tags": [
+            "Large",
+            "Business"
         ]
     }
 }

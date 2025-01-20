@@ -96,5 +96,26 @@
         "50_sat" : 1130,
         "25_sat" : 1000,
         "tags" : ["Large", "Medical"]
+    },
+    "University of Denver" : {
+        "acc_rate" : 0.78,
+        "75_sat" : 1370,
+        "50_sat" : 1290,
+        "25_sat" : 1220,
+        "tags" : ["Medium", "Music", "Business"]
+    },
+    "University of Colorado Denver" : {
+        "acc_rate" : 0.75,
+        "75_sat" : 1260,
+        "50_sat" : 1140,
+        "25_sat" : 1040,
+        "tags" : ["Large", "Engineering", "Business"]
+    },
+    "Metropolitan State University of Denver" : {
+        "acc_rate" : 0.98,
+        "75_sat" : 1130,
+        "50_sat" : 1020,
+        "25_sat" : 920,
+        "tags" : ["Large", "Business"]
     }
 }
