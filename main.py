@@ -149,7 +149,7 @@ class app() :
         settings_button = CTk.CTkButton(self.header, text="⚙️", font=self.header_font, fg_color=self.bg_color_light, hover_color=self.bg_color, border_width=0, command = lambda : self.director("SettingButton"), width=60, height=50)
         settings_button.place(x=525, y=12)
 
-        self.ai_chat_button = CTk.CTkButton(self.app, 100, border_width=0, command=self.chat_with_ai, bg_color=self.bg_color_light, fg_color=self.bg_color_light, text="Chat with AI!", font=self.header_font)
+        self.ai_chat_button = CTk.CTkButton(self.app, 100, 50, border_width=0, command=self.chat_with_ai, bg_color=self.bg_color, fg_color=self.bg_color_light, text="Ask an AI!", font=self.header_font)
         self.ai_chat_button.place(x=200, y=550)
 
         self.parse_unis()
