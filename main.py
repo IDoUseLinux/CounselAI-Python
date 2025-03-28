@@ -502,20 +502,20 @@ class app() :
     def intro_5th_slide_psat_score_validator(self,) :
         try :
             psat_score = int(self.psat_tb.get())
-            assert(isinstance(psat_score/10, int) or (psat_score/10).is_integer())
+            assert((psat_score/10).is_integer())
             psat_version = self.psat_dd.get()
             if psat_version == "-" :
                 raise AssertionError
             elif psat_version == "8/9" :
-                psat_score += 160 ## Aprox for SAT conversion
+                psat_score += 120 ## Aprox for SAT conversion
                 assert(psat_score >= 400 and psat_score <= 1440)
             else :
-                psat_score += 80 ## Aprox for SAT conversion
-                assert(psat_score >= 400 and psat_score <= 1440)
+                psat_score += 60 ## Aprox for SAT conversion
+                assert(psat_score >= 400 and psat_score <= 1520)
             self.sat_score = psat_score
             self.intro_6th_slide()
         except : 
-            messagebox.showerror("Invalid SAT Score", "Invalid SAT Score, SAT score range is from 400 to 1600.")
+            messagebox.showerror("Invalid PSAT Score", "Invalid PSAT Score.")
 
     def intro_6th_slide(self,) :
         self.clearScreen()
@@ -937,7 +937,8 @@ class app() :
                 self.sat_score = "no test"
                 self.student_score = self.gpa*12 ## If no SAT, GPA takes more of SAT's weight, but not all as GPA != SAT
             ## Student score eval
-            else : self.student_score = self.sat_score/75 + self.gpa*8 - 10
+            else : 
+                self.student_score = self.sat_score**(1/2)/1.5 + self.gpa*8 - 10
             
             ## Very dumb but it works so :shrug:
             for i in self.taken_APs :
